@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Modeling</title>
+  
+  <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+
+</head>
+
+<body>
+	<script src="../../js/threejs/build/three.min.js"></script>
+	<script src="../../js/threejs/examples/js/loaders/STLLoader.js"></script>
+	<script src="../../js/threejs/examples/js/controls/OrbitControls.js"></script>
+	<script src="../../js/threejs/STLViewer.js"></script>
+  <div id="model" style="width:100%; height: 100vh;"> 
+  	<p id="loading" align="middle">loading model...</p>
+  </div>
+</body>
+<script type="text/javascript">
+var w = window.innerWidth;
+var h = window.innerHeight;
+function parseParam()
+{
+  var parameters = location.search.substring(1).split("=");
+  //alert(parameters[1]);
+  return parameters[1];
+}
+var model = parseParam();
+document.getElementById("model").height = h;
+document.getElementById("model").width = w;
+window.onload = loadstl(model, 'loading');
+</script>
+</html>

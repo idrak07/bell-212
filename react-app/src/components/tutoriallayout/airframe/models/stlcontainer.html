@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Modeling</title>
+  
+  <link rel="stylesheet" href="../../semantic/semantic.min.css">
+  <script type="text/javascript" src="../../js/jquery/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="../../semantic/semantic.min.js"></script>
+
+
+</head>
+
+<body>
+<div class="ui basic center aligned container">
+    Select a 3D model:
+  <select class="ui dropdown" id="modelList" onchange="changeStl()">
+  
+  <option value="0" selected>hook1</option>
+  <option value="1">hook2</option>
+  <option value="2">hook3</option>
+  <option value="3">h3</option>
+  <option value="4">h4</option>
+  <option value="5">h5</option>
+  <option value="6">h6</option>
+  </select>
+  <br>
+  [Mouse Click to rotate, Scroll to zoom in and out, Shift + Click to move the model]<br>
+  <div>  
+<iframe id="canvas" src="viewstl.html?model=hook.stl" style="height: 80vh; width: 70vw; border: 1px lightgray solid;" scrolling="no">
+</iframe>
+</div>
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+  function changeStl()
+  {
+    var idx = document.getElementById('modelList').selectedIndex;
+    setURL(idx);
+  }
+function setURL(idx){
+    var stls = [
+    "hook.stl", 
+    "hook2.stl", 
+    "hook3.stl", 
+    "h3.stl", 
+    "h4.stl", 
+    "h5.stl", 
+    "h6.stl"];
+    document.getElementById('canvas').src = "viewstl.html?model="+stls[idx];
+  }
+
+$('.ui.dropdown')
+  .dropdown()
+;
+</script>
+</html>

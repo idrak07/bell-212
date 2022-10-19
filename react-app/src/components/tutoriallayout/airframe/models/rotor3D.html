@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Rotor 3D Models</title>
+  
+  <link rel="stylesheet" href="../../semantic/semantic.min.css">
+  <script type="text/javascript" src="../../js/jquery/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="../../semantic/semantic.min.js"></script>
+
+
+</head>
+
+<body>
+<div class="ui basic center aligned container">
+    Select a 3D model:
+  <select class="ui dropdown" id="modelList" onchange="changeStl()">
+  
+  <option value="0" selected>Hub Assembly</option>
+  <option value="1">Pylon Assembly</option>
+  <option value="2">Stabilizer Bar Assembly</option>
+  <option value="3">Swash Plate Assembly</option>
+  </select>
+  <br>
+  [Mouse Click to rotate, Scroll to zoom in and out, Shift + Click to move the model]<br><br>
+  <div>  
+<iframe id="canvas" src="viewstl.html?model=rotor0.stl" style="height: 80vh; width: 70vw; border: 1px lightgray solid;" scrolling="no">
+</iframe>
+</div>
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+  function changeStl()
+  {
+    var idx = document.getElementById('modelList').selectedIndex;
+    setURL(idx);
+  }
+function setURL(idx){
+    var stls = [
+    "rotor0.stl", 
+    "rotor1.stl", 
+    "rotor2.stl", 
+    "rotor3.stl", 
+    ];
+    document.getElementById('canvas').src = "viewstl.html?model="+stls[idx];
+  }
+
+$('.ui.dropdown')
+  .dropdown()
+;
+</script>
+</html>
