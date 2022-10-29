@@ -47,7 +47,7 @@ public class QuestionService {
         List<Question> questions = questionRepository.findAllByTopicAndQuestionType(topic, questionType);
         if(!questions.isEmpty()) {
             Collections.shuffle(questions);
-            return questions.subList(0,questions.size() > limit ? (limit.intValue() - 1): (questions.size()-1));
+            return questions.subList(0,questions.size() > limit ? limit.intValue()  : questions.size());
         }
         return new ArrayList<>();
     }
