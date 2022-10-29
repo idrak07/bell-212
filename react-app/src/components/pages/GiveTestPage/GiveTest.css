@@ -1,0 +1,59 @@
+.d-container {
+  max-width: 856px;
+  margin: 0 auto;
+}
+
+
+.question-list {
+ display: flex;
+ flex-direction: column;
+ gap: 1.2rem;
+}
+
+.question_item_cont {
+  background: #E7E8EB;
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+.d-container .radio {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* countdown */
+.countdown {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f2f2f2;
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.countdown .timer {
+  display: flex;
+  align-items: center;
+  gap: '5px';
+  flex-direction: column;
+  background: #2128ef;
+  padding: 8px 18px;
+  border-radius: 8px
+}
+.countdown .timer .times {
+  display: flex;
+  align-items: center;
+  gap: '5px';
+}
+.countdown .timer  span {
+  font-size: 1.5rem;
+  color:white;
+}
+.countdown .timer  p {
+  color: white;
+  margin: 0
+}

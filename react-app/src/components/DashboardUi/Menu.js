@@ -1,6 +1,15 @@
-import React, {useEffect, useState} from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+export const quizTopics = [
+  'Engine',
+  'Air Frame',
+  'Electronic Components',
+  'Instruments',
+  'Radio'
+]
 
 const Menu = () => {
   const user = firebase.auth().currentUser;
@@ -43,7 +52,6 @@ const Menu = () => {
             <i className="nav-icon fas fa-tachometer-alt" />
             <p>
               Dashboard
-             
             </p>
           </a>
         
@@ -66,7 +74,21 @@ const Menu = () => {
             </p>
           </a>
           <ul className="nav nav-treeview">
-            <li className="nav-item">
+            {
+              quizTopics.map(item => {
+                return (
+                  <li className="nav-item" key={item}>
+                    <Link to={'/tutorial/'+item}>
+                    <a className="nav-link">
+                      <i className="far fa-circle nav-icon" />
+                      <p>{item}</p>
+                    </a>
+                    </Link>
+                  </li>
+                )
+              })
+            }
+            {/* <li className="nav-item">
               <a href="pages/forms/general.html" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Engine</p>
@@ -95,19 +117,34 @@ const Menu = () => {
                 <i className="far fa-circle nav-icon" />
                 <p>Radio</p>
               </a>
-            </li>
+            </li> */}
           </ul>
         </li>
         <li className="nav-item has-treeview">
           <a href="#" className="nav-link">
             <i className="nav-icon fas fa-table" />
             <p>
-              Take a Quiz
+              Set Quiz Questions
               <i className="fas fa-angle-left right" />
             </p>
           </a>
           <ul className="nav nav-treeview">
-            <li className="nav-item">
+            {
+              quizTopics.map(item => {
+                return (
+                  <li className="nav-item" key={item}>
+                    <Link to={'/quiz/'+item}>
+                    <a className="nav-link">
+                      <i className="far fa-circle nav-icon" />
+                      <p>{item}</p>
+                    </a>
+                    </Link>
+                  </li>
+                )
+              })
+            }
+            {/* <li className="nav-item">
+
               <a href="/eq" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Engine</p>
@@ -136,7 +173,7 @@ const Menu = () => {
                 <i className="far fa-circle nav-icon" />
                 <p>Radio</p>
               </a>
-            </li>
+            </li> */}
           </ul>
         </li>
        
@@ -149,7 +186,21 @@ const Menu = () => {
             </p>
           </a>
           <ul className="nav nav-treeview">
-            <li className="nav-item">
+            {
+                quizTopics.map(item => {
+                  return (
+                    <li className="nav-item" key={item}>
+                      <Link to={'/leaderboard/'+item}>
+                      <a className="nav-link">
+                        <i className="far fa-circle nav-icon" />
+                        <p>{item}</p>
+                      </a>
+                      </Link>
+                    </li>
+                  )
+                })
+              }
+            {/* <li className="nav-item">
               <a href="pages/forms/general.html" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Engine</p>
@@ -178,7 +229,7 @@ const Menu = () => {
                 <i className="far fa-circle nav-icon" />
                 <p>Radio</p>
               </a>
-            </li>
+            </li> */}
           </ul>
         </li>
         <li className="nav-item has-treeview">
@@ -265,7 +316,14 @@ const Menu = () => {
           </ul>
         </li>
         
-        
+        <li className="nav-item">
+          <a href="/quiz-list" className="nav-link">
+            <i className="nav-icon fas fa-th" />
+            <p>
+              Take a Quiz
+            </p>
+          </a>
+        </li>
         
             
              

@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+}
+table th {
+  font-weight: 600;
+  
+}
+
+table tr  {
+  border-bottom: 1px solid lightgray;
+}
+table tr td, table tr th {
+  padding: 5px 10px;
+}
+
+
+@media (max-width: 500px) {
+  .remove-on-small {
+    display: none
+  }
+}

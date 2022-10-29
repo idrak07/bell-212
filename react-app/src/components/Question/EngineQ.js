@@ -40,7 +40,7 @@ const EngineQ = () => {
     // .catch((error) => {
     //     console.log("Error getting documents: ", error);
     // });
-    axios.get(`${SERVER_URL}/questions?topic=ENGINE`)
+    axios.get(`${SERVER_URL}/questions`)
         .then(response => {
             // console.log(response);
             setQuestions(response.data);

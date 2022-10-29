@@ -1,0 +1,69 @@
+.tutorial .content {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .tutorial .content {
+    flex-direction: column;
+  }
+  .tutorial .left-side {
+    max-width: inherit;
+  }
+}
+
+.tutorial .left-side {
+  width: 100%;
+  max-width: 260px;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tutorial .left-side button {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid lightgrey;
+  padding: 10px;
+  background: #f4f6f9;
+  cursor: pointer;
+}
+
+.tutorial .left-side button.active-btn {
+  background: #80b3d6;
+  color: white;
+}
+
+.tutorial .right-side {
+  padding: 12px;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tutorialForm div {
+  display: flex;
+  flex-direction: column;
+}
+
+.tutorialForm div label {
+  font-weight: 500 !important;
+  margin-bottom: 4px;
+}
+
+.tutorialForm div input,
+.tutorialForm div select {
+  padding: 4px 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid grey;
+}
+.tutorialForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
