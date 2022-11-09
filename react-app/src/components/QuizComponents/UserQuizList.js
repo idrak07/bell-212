@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
+import useLocalStorage from '../../hooks/useLocalStorage'
 import CustomButton from '../../ui/CustomButton'
 
 import './Quiz.css'
 import styles from './UserQuiz.module.css'
+
+
 
 const quizLists = [
   {
@@ -37,13 +40,21 @@ const quizLists = [
 const UserQuizList = () => {
   const [selectedType, setSelectedType] = useState('ORIGINAL');
   const navigate = useNavigate()
-
+  
+  
   const handleStartExam = (topic) => {
+
     if(selectedType) {
-      if(JSON.stringify(localStorage.getItem(`/test/${selectedType}/${topic}`))) {
+      const time = JSON.parse(JSON.stringify(localStorage.getItem(`/test/${selectedType}/${topic}`)))
+      
+      if(time) {
+        console.log('inside if')
       } else {
+        console.log('inside else')
+
         const currentDate = new Date();
         const twentyMinutesLater = new Date(currentDate.getTime() + (20 * 60 * 1000));
+        console.log(selectedType, topic)
         localStorage.setItem(`/test/${selectedType}/${topic}`, twentyMinutesLater)
       }
       

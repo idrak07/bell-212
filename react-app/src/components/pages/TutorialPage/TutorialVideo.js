@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { SERVER_URL } from '../../../constants'
 import useFetch from '../../../hooks/useFetch'
+import useLocalStorage from '../../../hooks/useLocalStorage'
 import CustomButton from '../../../ui/CustomButton'
 import AddTutorialPage from './AddTutorialPage'
 import EditTutorialPage from './EditTutorialPage'
@@ -45,6 +46,7 @@ const rightSideContent = [
 ]
 
 const TutorialVideo = () => {
+  const [userRole, setUserRole] = useLocalStorage('userRole');
   const params = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [isCreate, setIsCreate] = useState(false);
@@ -88,11 +90,15 @@ const TutorialVideo = () => {
                 fontSize: '1.5rem'
               }}>Chapters</h2>
               
-              <CustomButton onClick={() => setIsCreate(true)} style={{
-                padding: '5px 14px'
-              }}>
-                  Add Subject/Link
-              </CustomButton>
+              {
+                userRole === 'admin' && (
+                  <CustomButton onClick={() => setIsCreate(true)} style={{
+                    padding: '5px 14px'
+                  }}>
+                      Add Subject/Link
+                  </CustomButton>
+                )
+              }
             </div>
 
             <div className='content'>
@@ -128,23 +134,27 @@ const TutorialVideo = () => {
                                 alignItems: 'center',
                                 gap: '1rem'
                               }}>Subject: {item.subject} 
-                                <span>
-                                  <button style={{
-                                      borderRadius: 4,
-                                      background: 'black',
-                                      color: 'white',
-                                      border: 'none',
-                                      outline: 'none',
-                                      cursor: 'pointer'
-                                    }}
-                                    onClick={() => {
-                                      setSelectedTutorialItem(item);
-                                      setIsEdit(true);
-                                    }} 
-                                  >
-                                    Edit
-                                  </button>
-                                </span>
+                                {
+                                  userRole === 'admin' && (
+                                    <span>
+                                      <button style={{
+                                          borderRadius: 4,
+                                          background: 'black',
+                                          color: 'white',
+                                          border: 'none',
+                                          outline: 'none',
+                                          cursor: 'pointer'
+                                        }}
+                                        onClick={() => {
+                                          setSelectedTutorialItem(item);
+                                          setIsEdit(true);
+                                        }} 
+                                      >
+                                        Edit
+                                      </button>
+                                    </span>
+                                  )
+                                }
                               </h3>
                             <p>Tutorial Link: 
                               <button style={{

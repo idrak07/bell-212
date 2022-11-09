@@ -20,6 +20,8 @@ const questionInitialValue = {
     correctChoice: ""
 }
 
+export const capitalizedFirstLetter = (str) => str[0].toUpperCase() + str.slice(1)
+
 const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
   const params = useParams();
   const navigate = useNavigate()
@@ -37,9 +39,26 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
   const [{ response, error, isLoading }, doFetch] = useFetch(`${SERVER_URL}/questions`);
   const [{ response:editRes, error:editErr, isLoading:editIsLoading }, editQ] = useFetch(`${SERVER_URL}/questions`);
 
-
+  const isQuizFieldValid = (question) => {
+    const errors = []
+    Object.keys(question).forEach((key) => {
+      if(!question[key]) {
+        errors.push(`${capitalizedFirstLetter(key)} cannot be empty`)
+      } 
+    })
+    
+    if(errors.length) {
+      alert(errors.join(' \n'));
+      return false
+    }
+    return true
+  }
 
   const handleCreateQuestion = () => {
+    if(!isQuizFieldValid(questionState)) {
+      return;
+    }
+
     console.log({questionState})
 
     if(isEdit) {

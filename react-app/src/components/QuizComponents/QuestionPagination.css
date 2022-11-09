@@ -1,28 +1,33 @@
-.pagination {
-  margin: 15px auto;
+
+.pagination-wrapper {
   display: flex;
-  list-style: none;
-  outline: none;
+  flex-direction: column;
+  justify-content: center;
+	align-items: center;
+	padding-top: 10px!important;
 }
-.pagination > .active > a{
-  background-color: #47ccde ;
-  border-color: #47ccde ;
-  color: #fff;
+
+/* Override some Bootstrap pagination styles */
+ul.pagination {
+	margin-top: 0;
+	margin-bottom: 0;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
-.pagination > li > a{
-  border: 1px solid #47ccde ;
-  padding: 5px 10px;
-  outline: none;
-  cursor: pointer;
+ul.pagination li.page-item.active a.page-link {
+	color: #445565 !important;
+	background-color: #e3e7eb !important;
+	border-color: #ced4da !important;
 }
-.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-  background-color: #47ccde ;
-  border-color: #47ccde;
-  outline: none ;
+ul.pagination a.page-link {
+	padding: 0.75rem 1rem;
+	min-width: 3.5rem;
+	text-align: center;
+	box-shadow: none !important;
+	border-color: #ced4da !important;
+	color: #6b88a4;
+	font-weight: 900;
+	font-size: 1rem;
 }
-.pagination > li > a, .pagination > li > span{
-  color: #47ccde
-}
-.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
-  border-radius: unset
+ul.pagination a.page-link:hover {
+	background-color: #f4f4f4;
 }

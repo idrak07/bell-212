@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { SERVER_URL } from '../../constants';
 import useFetch from '../../hooks/useFetch';
@@ -27,22 +27,6 @@ const ShowAdminQuiz = () => {
             },
         });
     }
-     
-
-    // paginations
-    
-    const [offset, setOffset] = useState(0);
-    const [perPage] = useState(10);
-    const [pageCount, setPageCount] = useState(0)
-
-
-    const setPaginate = () => {
-        const sliceData = questionData?.slice(Number(`${offset}0`), Number(`${offset}0`) + perPage);
-        console.log({sliceData})
-        setQuestions(sliceData)
-        setPageCount(Math.ceil(questionData?.length / perPage))
-    }
-    
 
     useEffect(() => {
         doFetch({
@@ -51,18 +35,25 @@ const ShowAdminQuiz = () => {
                 topic: params?.topic.toUpperCase()?.replace(' ', '_'),
             },
         })
-    }, [params?.topic, offset, deleteLoading])
+    }, [params?.topic, deleteLoading])
 
-    useEffect(() => {
-        setPaginate()
-    }, [questionData])
-    
 
-    const handlePageClick = (e) => {
-      const selectedPage = e.selected;
-      setOffset(selectedPage + 1)
-    };
+    // new pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    let NUM_OF_RECORDS = questionData?.length;
+    let LIMIT = 5;
 
+    const onPageChanged = useCallback(
+        (event, page) => {
+        event.preventDefault();
+        setCurrentPage(page);
+        },
+        [setCurrentPage]
+    );
+    const currentData = questionData?.slice(
+        (currentPage - 1) * LIMIT,
+        (currentPage - 1) * LIMIT + LIMIT
+    );
 
     useEffect(() => {
         window.scrollTo(0,0)
@@ -108,7 +99,7 @@ const ShowAdminQuiz = () => {
                     <div>
                         <p>No Question found</p>
                     </div>
-                ) : questions?.map(ques => (
+                ) : currentData?.map(ques => (
                     <ShowQuestionWithAns key={ques.id} question={ques} handleDeleteQuestion={handleDeleteQuestion}/>
                 ))}
                 
@@ -122,8 +113,11 @@ const ShowAdminQuiz = () => {
             <div>
                 {!!questionData?.length && (
                     <QuestionPaginate
-                        pageCount={pageCount}
-                        onPageChange={handlePageClick}
+                        totalRecords={NUM_OF_RECORDS}
+                        pageLimit={LIMIT}
+                        pageNeighbours={2}
+                        onPageChanged={onPageChanged}
+                        currentPage={currentPage}
                     />
                 )}
             </div>

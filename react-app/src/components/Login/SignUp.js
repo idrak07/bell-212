@@ -7,10 +7,17 @@ import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import fire from './firebase.init';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-
+// import { FormControlLabel, FormLabel } from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const SignUp = (props) => {
     const classes = useStyles();
+    const [selectedRole, setSelectedRole] = useLocalStorage('userRole')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -113,6 +120,24 @@ const SignUp = (props) => {
                                 value={confirmPassword}
                                 autoComplete="off"
                             />
+                            <br />
+                            <div>
+                            <FormControl>
+                                <FormLabel id="demo-controlled-radio-buttons-group">Select Role</FormLabel>
+                                <RadioGroup
+                                    aria-labelledby="demo-controlled-radio-buttons-group"
+                                    name="controlled-radio-buttons-group"
+                                    value={selectedRole}
+                                    onChange={(e) => setSelectedRole(e.target.value)}
+                                    aria-required='true'
+                                >
+                                    <div>
+                                        <FormControlLabel value="admin"  control={<Radio required/>} label="Admin" />
+                                        <FormControlLabel value="user" control={<Radio required />} label="User" />
+                                    </div>
+                                </RadioGroup>
+                                </FormControl>
+                            </div>
                              <Button
                                 type="submit"
                                 fullWidth
@@ -154,10 +179,11 @@ const useStyles = makeStyles((theme) => ({
       submit: {
           background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
           margin: theme.spacing(3, 0, 2),
-          color: '#fff'
+          color: '#fff',
+          marginTop: '5px'
       },
       card: {
-          marginTop: '60px',
+          marginTop: '20px',
           paddingLeft: '20px',
           paddingRight: '20px',
           paddingBottom: '20px',

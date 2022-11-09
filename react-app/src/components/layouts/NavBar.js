@@ -17,6 +17,7 @@ const NavBar = (props) => {
         localStorage.removeItem('user');
         props.setUserState();
         setAnchorEl(null);
+        window.location.href = '/auth'
     }
 
     const handleMenu = (event) => {
@@ -33,35 +34,34 @@ const NavBar = (props) => {
                     {auth && (
                     <div>
                         <IconButton
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleMenu}
-                        color="inherit"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
                         >
-                        <AccountCircle />
+                            <AccountCircle />
                         </IconButton>
-                        <Menu
-                        id="menu-appbar"
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        open={open}
-                        onClose={handleClose}
-                        >
-                        
-                        <Link href="/dashboard" underline="none"> Dashboard
-</Link>
-                  
-                        <MenuItem>Profile</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={() => setAnchorEl(null)}
+                            >
+                            
+                            <Link href="/dashboard" underline="none"> Dashboard</Link>
+                    
+                            <MenuItem>Profile</MenuItem>
+                            <MenuItem onClick={handleClose}>Logout</MenuItem>
                         </Menu>
                     </div>
                     )}

@@ -2,14 +2,21 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { SERVER_URL } from '../../../constants';
 import useFetch from '../../../hooks/useFetch';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 import GiveTestDetail from './GiveTestDetail';
+
+export function getDateDiff(date1, date2) {
+  return date1.getTime() - date2.getTime();
+}
 
 const GiveTestPage = () => {
   const params = useParams();
   const {type, topic} = params;
+  const time = localStorage.getItem(`/test/${params?.type}/${params?.topic}`)
 
- 
+  
   const [{response, error, isLoading}, doFetch] = useFetch(`${SERVER_URL}/quiz`)
+
  
   useEffect(() => {
     doFetch({
@@ -21,6 +28,7 @@ const GiveTestPage = () => {
       },
     });
   }, [])
+
 
   return (
     <div style={{

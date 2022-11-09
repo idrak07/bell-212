@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { getDateDiff } from '.'
 import { useCountdown } from '../../../hooks/useCountDown'
 import CustomButton from '../../../ui/CustomButton'
 import './GiveTest.css'
@@ -129,6 +130,17 @@ const GiveTestDetail = ({allQuestion}) => {
   // console.log({time})
   const [days, hours, minutes, seconds] = useCountdown(time);
 
+
+  useEffect(() => {
+    if(!time) {
+      window.location.href = '/quiz-list'
+    }
+    if(getDateDiff(new Date(time), new Date()) <= 0) {
+      
+      window.localStorage.removeItem(`/test/${params?.type}/${params?.topic}`)
+      window.location.href = '/quiz-list'
+    }
+  },[seconds])
 
   return (
     <div className='d-container'>
