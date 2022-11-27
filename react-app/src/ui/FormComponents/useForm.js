@@ -30,7 +30,6 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
         setErrors,
         handleInputChange,
         resetForm
-
     }
 }
 

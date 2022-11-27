@@ -331,6 +331,24 @@ const Menu = () => {
         </li>
         
         <li className="nav-item">
+          <a href="/quiz-settings" className="nav-link">
+            <i className="nav-icon fas fa-th" />
+            <p>
+              Quiz Settings
+            </p>
+          </a>
+        </li>
+        <li className="nav-item">
+          <a href="/users" className="nav-link">
+            <i className="nav-icon fas fa-th" />
+            <p>
+              Users
+            </p>
+          </a>
+        </li>
+        
+
+        <li className="nav-item">
           <a href="/quiz-list" className="nav-link">
             <i className="nav-icon fas fa-th" />
             <p>

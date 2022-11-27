@@ -18,6 +18,7 @@ export default function Button(props) {
 
     return (
         <MuiButton
+            style={{margin: 0}}
             variant={variant || "contained"}
             size={size || "large"}
             color={color || "primary"}

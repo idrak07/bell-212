@@ -1,10 +1,9 @@
 import React from 'react'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
 
+import './DatePicker.css'
 export default function DatePicker(props) {
 
-    const { name, label, value, onChange } = props
+    const { name, label, value,error=null, onChange } = props
 
 
     const convertToDefEventPara = (name, value) => ({
@@ -14,15 +13,19 @@ export default function DatePicker(props) {
     })
 
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker disableToolbar variant="inline" inputVariant="outlined"
-                label={label}
-                format="MMM/dd/yyyy"
-                name={name}
-                value={value}
-                onChange={date =>onChange(convertToDefEventPara(name,date))}
-
-            />
-        </MuiPickersUtilsProvider>
+        <>
+            <div className="material-textfield">
+                <input
+                    label={label}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    placeholder=" " 
+                    type="date" 
+                />
+                <label>{label}</label>
+            </div>
+            {error && <p>{error}</p>}
+        </>
     )
 }

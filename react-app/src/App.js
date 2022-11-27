@@ -80,6 +80,10 @@ import LeaderBoardPage from './components/pages/LeaderBoardPage';
 import ShowAdminQuizPage from './components/pages/ShowAdminQuizPage';
 import TutorialPage from './components/pages/TutorialPage';
 import UserQuizLisPage from './components/pages/UserQuizListPage';
+import QuizSettings from "./components/pages/QuizSettings";
+import UsersPage from "./components/pages/UsersPage";
+import AddUserPage from "./components/pages/UsersPage/AddUserPage";
+import EditUserPage from "./components/pages/UsersPage/EditUserPage";
 
 
 
@@ -163,6 +167,12 @@ function App() {
           <Route path="/test/:type/:topic" element={<GiveTestPage />}/> 
           <Route path="/leaderboard/:topic" element={<LeaderBoardPage />} />
           <Route path="/tutorial/:topic" element={<TutorialPage />} />
+          <Route path="/quiz-settings" element={<QuizSettings />}/> 
+          
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/users/add" element={<AddUserPage />} />
+          <Route path="/users/:id" element={<EditUserPage />} />
+
 
           {/* <Route path="/try" element={<Try/>}/>  */}
         </Routes>

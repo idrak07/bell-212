@@ -52,7 +52,8 @@ const AuthSetting = () => {
                 toggle={() => formMode()}/>
               ) 
               : ( 
-              <SignupForm />
+              <SignupForm loggedIn={(user) => setUser(user)} 
+              toggle={() => formMode()}/>
               )
             }
          </>

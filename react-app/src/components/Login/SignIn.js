@@ -8,6 +8,7 @@ import fire from './firebase.init';
 import {ToastContainer, toast} from 'react-toastify';
 import {ScaleLoader} from 'react-spinners';
 import bell from '../image/logo.png';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 
 const SignIn = (props) => {
@@ -32,7 +33,24 @@ const SignIn = (props) => {
     const handleCheck = (event) => {
         setRememberMe(event.target.checked);
     }
-    const handlerLogin = () => {
+    const [selectedRole, setSelectedRole] = useLocalStorage('userRole')
+
+    const handlerLogin =() => {
+        if(email == 'admin@gmail.com' && password == 'admin123') {
+            const data = {
+                userId: 'rrandomuuid55533331aa',
+                email: email
+            }
+            setSelectedRole('admin')
+            localStorage.setItem('user', JSON.stringify(data));
+            const storage = localStorage.getItem('user');
+            const loggedInUser = storage !== null ? JSON.parse(storage) : null;
+            props.loggedIn(loggedInUser);
+            setLoading(false);
+            return;
+        }
+        setSelectedRole('user')
+        
         setLoading(true);
         fire.auth()
             .signInWithEmailAndPassword(email, password)

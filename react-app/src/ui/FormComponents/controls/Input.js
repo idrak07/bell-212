@@ -1,17 +1,26 @@
 import React from 'react'
-import { TextField } from '@material-ui/core';
-
+import './DatePicker.css'
 export default function Input(props) {
 
-    const { name, label, value,error=null, onChange } = props;
+    const { name, type, label, value,error=null, onChange, placeholder } = props;
     return (
-        <TextField
-            variant="outlined"
-            label={label}
-            name={name}
-            value={value}
-            onChange={onChange}
-            {...(error && {error:true,helperText:error})}
-        />
+        <div>
+            <div className="material-textfield">
+                <input
+                    label={label}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    type={type}
+										placeholder=" "
+                />
+                <label>{label}</label>
+            </div>
+            {error && <p style={{
+							color: '#ff6666',
+							paddingBottom: '2px',
+							marginBottom: 0
+						}}>{error}</p>}
+        </div>
     )
 }

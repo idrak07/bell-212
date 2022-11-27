@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, } from '@material-ui/core';
+import { Grid, Typography, Link, Container} from '@material-ui/core';
 import Controls from "../../ui/FormComponents/controls/Controls";
 import { useForm, Form } from '../../ui/FormComponents/useForm';
-
+import fire from './firebase.init';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 export const allBloodGroups = [
   {id: '1', title: 'A-positive (A+)'},
@@ -31,7 +33,7 @@ const genderItems = [
     { id: 'other', title: 'Other' },
 ]
 
-const initialFValues = {
+export const userInitialFormValues = {
     bd_no: '',
     svc_id: '',
     first_name: '',
@@ -42,23 +44,36 @@ const initialFValues = {
     blood_group: '',
     mobile: '',
     email: '',
-    password: ''
+    password: '',
+    photo: ''
 }
 
-export default function SignupForm() {
+export default function SignupForm(props) {
 
     const validate = (fieldValues = values) => {
+        console.log(fieldValues)
         let temp = { ...errors }
         // check validation for all input fileds
-        if ('first_name' in fieldValues)
-            temp.first_name = fieldValues.first_name ? "" : "This field is required."
-        if ('email' in fieldValues)
-            temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
-        if ('mobile' in fieldValues)
-            temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+        Object.keys(fieldValues).forEach(key => {
+            if(fieldValues[key]) {
+                temp[key] = ''
+            } else {
+                temp[key] = 'This field is required'
+            }
+        })
         
+        if ('email' in fieldValues)
+            temp.email = fieldValues.email && (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
+        if ('mobile' in fieldValues)
+            temp.mobile = fieldValues.mobile.length > 11 ? "" : "Minimum 11 numbers required."
+        
+        
+        setErrors({
+            ...temp
+        })
         if (fieldValues == values)
             return Object.values(temp).every(x => x == "")
+
     }
 
     const {
@@ -68,17 +83,47 @@ export default function SignupForm() {
         setErrors,
         handleInputChange,
         resetForm
-    } = useForm(initialFValues, true, validate);
+    } = useForm(userInitialFormValues, true, validate);
 
     const handleSubmit = e => {
         e.preventDefault()
+        console.log(values)
         if (validate()){
+            const {email, password} = values
+            handleSignUp(email, password)
             resetForm()
         }
     }
 
+    const handleSignUp = (email, password) => {
+        fire.auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(response => {
+                if(response) {
+                    props.toggle();
+                    toast.success('User Registered Successfully');
+                
+                }
+            }).catch((error) => {
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        toast.error(error.message);
+                        break;
+                    case 'auth/invalid-email': 
+                        toast.error(error.message);                    
+                        break;
+                    case 'auth/weak-password':
+                        toast.error(error.message);
+                        break;
+                }
+            });
+    }
+
     return (
+        <>
         <Form onSubmit={handleSubmit}>
+            <ToastContainer/>
+
           <Typography variant="h4" gutterBottom>
               Signup Here
             </Typography>
@@ -133,10 +178,18 @@ export default function SignupForm() {
                     
                     <div>
                         <label>
-                            Date of Birth
+                            Date of Birth {JSON.stringify(values.date_of_birth)}
                         </label>
                         <br />
-                        <input type={'date'}></input>
+                        {/* <input type={'date'}></input>
+                         */}
+                         <Controls.DatePicker 
+                            name='date_of_birth' 
+                            label="Date of Birth" 
+                            value={values.date_of_birth}
+                            onChange={handleInputChange}
+                            error={errors.date_of_birth}
+                         />
                     </div>
                     <Controls.Select
                         name="blood_group"
@@ -171,7 +224,7 @@ export default function SignupForm() {
                     <div>
                         <label>Upload Photo</label>
                         <br />
-                        <input type={'image'} />
+                        <input type={'file'} accept={'image'} />
                     </div>
                     <div>
                         <Controls.Button
@@ -185,5 +238,14 @@ export default function SignupForm() {
                 </Grid>
             </Grid>
         </Form>
+
+        <Grid container>
+        <Grid item>
+        <Link onClick={props.toggle}  variant="body2">
+            {"Already have an account? Sign In"}
+        </Link>
+        </Grid>
+        </Grid>
+        </>
     )
 }
