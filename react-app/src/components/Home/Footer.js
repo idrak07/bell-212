@@ -3,10 +3,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function Footer() {
-    return (
-        <div class="container">
-  <footer class="py-5">
-    <div class="row">
+  return (
+    <div class="container">
+      <footer class="py-3">
+        {/* <div class="row">
       <div class="col-2">
         <h5>Section</h5>
         <ul class="nav flex-column">
@@ -51,19 +51,19 @@ function Footer() {
           </div>
         </form>
       </div>
-    </div>
+    </div> */}
 
-    <div class="d-flex justify-content-between py-4 my-4 border-top">
-      <p>© 2021 Company, Inc. All rights reserved.</p>
-      <ul class="list-unstyled d-flex">
+        <div class="d-flex justify-content-between py-4 my-4 border-top">
+          <p>© 2022 Bel-212. All Rights Reserved.</p>
+          {/* <ul class="list-unstyled d-flex">
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"></svg></a></li>
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"></svg></a></li>
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"></svg></a></li>
-      </ul>
+      </ul> */}
+        </div>
+      </footer>
     </div>
-  </footer>
-</div>
-    );
+  );
 }
 
 export default Footer;
