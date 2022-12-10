@@ -54,7 +54,7 @@
   display: flex;
   gap: 8px;
   width: 100%;
-  align-items: center;
+  align-items:self-end;
 }
 .choiceInput{
   border: none;

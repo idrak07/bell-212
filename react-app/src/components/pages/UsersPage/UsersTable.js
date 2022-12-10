@@ -23,7 +23,7 @@ import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router';
 
-function createData(
+export function createData(
   bd_no,
   svc_id,
   first_name,
@@ -49,7 +49,7 @@ function createData(
   };
 }
 
-const rows = [
+export const allStudents = [
   createData(1, 26, 'Jisan', 'Mia', 'Somewhere at army', 'BAF BAse Basar', '02/02/2002/', 'AB+', '013018229434', 'jisan@gmail.com'),
   createData(2, 256, 'Rakib', 'Ulla', 'ANywhere at army', 'BAF BAse Basar', '02/02/2002/', 'B', '013018229434', 'jisan@gmail.com'),
   createData(3, 54, 'Porag', 'Dewan', 'Somewhere at army', 'BAF BAse Basar', '02/02/2002/', 'B+', '013018229434', 'jisan@gmail.com'),
@@ -74,7 +74,6 @@ const rows = [
   createData(23, 34, 'Jisan', 'Mia', 'Somewhere at army', 'BAF BAse Basar', '02/02/2002/', 'AB+', '013018229434', 'jisan@gmail.com'),
   createData(24, 34, 'Jisan', 'Mia', 'Somewhere at army', 'BAF BAse Basar', '02/02/2002/', 'AB+', '013018229434', 'jisan@gmail.com'),
   createData(26, 34, 'Jisan', 'Mia', 'Somewhere at army', 'BAF BAse Basar', '02/02/2002/', 'AB+', '013018229434', 'jisan@gmail.com'),
-
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -323,7 +322,7 @@ export default function UsersTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = allStudents.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -367,7 +366,7 @@ export default function UsersTable() {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - allStudents.length) : 0;
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -385,12 +384,12 @@ export default function UsersTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={allStudents.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.sort(getComparator(order, orderBy)).slice() */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(allStudents, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -461,7 +460,7 @@ export default function UsersTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={allStudents.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

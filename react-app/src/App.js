@@ -84,6 +84,9 @@ import QuizSettings from "./components/pages/QuizSettings";
 import UsersPage from "./components/pages/UsersPage";
 import AddUserPage from "./components/pages/UsersPage/AddUserPage";
 import EditUserPage from "./components/pages/UsersPage/EditUserPage";
+import ProfilePage from "./components/pages/ProfilePage";
+import CreateQuizSettings from "./components/pages/QuizSettings/CreateQuizSettings";
+import EditQuizSettings from "./components/pages/QuizSettings/EditQuizSettings";
 
 
 
@@ -162,12 +165,16 @@ function App() {
           <Route path="/quiz/:topic" element={<ShowAdminQuizPage/>}/>
           <Route path="/quiz/:topic/create" element={<CreateQuizPage/>}/>
           <Route path="/quiz/:topic/:id" element={<EditQuizPage/>}/>
-          <Route path="/profile" element={<Profile/>}/> 
+          <Route path="/profile" element={<ProfilePage/>}/> 
           <Route path="/quiz-list" element={<UserQuizLisPage/>}/> 
           <Route path="/test/:type/:topic" element={<GiveTestPage />}/> 
           <Route path="/leaderboard/:topic" element={<LeaderBoardPage />} />
           <Route path="/tutorial/:topic" element={<TutorialPage />} />
           <Route path="/quiz-settings" element={<QuizSettings />}/> 
+          <Route path="/quiz-settings/create" element={<CreateQuizSettings />}/> 
+          <Route path="/quiz-settings/:id" element={<EditQuizSettings />}/> 
+
+
           
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/add" element={<AddUserPage />} />

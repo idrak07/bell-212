@@ -23,7 +23,7 @@ export default function DatePicker(props) {
                     placeholder=" " 
                     type="date" 
                 />
-                <label>{label}</label>
+                <label className='label'>{label}</label>
             </div>
             {error && <p>{error}</p>}
         </>

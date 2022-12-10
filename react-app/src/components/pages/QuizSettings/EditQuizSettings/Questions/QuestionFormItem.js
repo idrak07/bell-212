@@ -1,36 +1,70 @@
+
 import React, { useState } from 'react'
-import CustomButton from '../../ui/CustomButton'
 import Input from '@mui/material/Input';
 import Radio from '@mui/material/Radio';
-import styles from './CreateQuiz.module.css'
+import styles from '../../../../QuizComponents/CreateQuiz.module.css'
 
-const QuestionComp = ({ questionState, setQuestionState }) => {
-  const [questionChoices, setQuestionChoices] = useState([
-    questionState.choice1,
-    questionState.choice2,
-    questionState.choice3,
-    questionState.choice4
-  ])
+const QuestionFormItem = ({ question,idx, allQuestions, setAllQuestions }) => {
+
 
   const handleChoiceChange = (e) => {
-    setQuestionState({
-      ...questionState,
-      [e.target.name]: e.target.value
+    const updatedQuestions = [...allQuestions].map(ques => {
+      if (ques.id == question.id) {
+        return {
+          ...ques,
+          [e.target.name]: e.target.value
+        }
+      } return ques
     })
+    setAllQuestions([
+      ...updatedQuestions,
+    ])
+  }
+
+  const handleCorrectChoice = (value) => {
+    const updatedQuestions = [...allQuestions].map(ques => {
+      if (ques.id == question.id) {
+        return {
+          ...ques,
+          correctChoice: value
+        }
+      } return ques
+    })
+    setAllQuestions([
+      ...updatedQuestions,
+    ])
+  }
+
+  const handleQuestionName = (e) => {
+    const updatedQuestions = [...allQuestions].map(ques => {
+      if (ques.id == question.id) {
+        return {
+          ...ques,
+          description: e.target.value
+        }
+      } return ques
+    })
+    setAllQuestions([
+      ...updatedQuestions,
+    ])
+  }
+
+  const deleteQuestion = () => {
+    setAllQuestions(allQuestions.filter(ques => ques.id !== question.id))
   }
 
   return (
     <div class={styles.question__inner}>
 
       <div class={styles.question}>
-        <p className={styles.question_para}>Question:</p>
+        <p className={styles.question_para} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <strong>Question: {idx}</strong>
+          {allQuestions.length > 1 && (
+            <button onClick={deleteQuestion} type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+          )}
+        </p>
         <div class="qBottom w-full">
-          <textarea onChange={(e) => {
-            setQuestionState({
-              ...questionState,
-              description: e.target.value
-            })
-          }} value={questionState.description} class={styles.text_area} name="question desc" id="" placeholder='Write Question'></textarea>
+          <textarea onChange={handleQuestionName} value={question.description} class={styles.text_area} name="question desc" id="" placeholder='Write Question'></textarea>
         </div>
       </div>
 
@@ -48,12 +82,7 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
           <li className={styles.choiceItem}>
 
             <label>
-              <input checked={questionState.correctChoice === questionState.choice1} onChange={(e) => {
-                setQuestionState({
-                  ...questionState,
-                  correctChoice: questionState.choice1
-                })
-              }} className={styles.radio} type="radio" name="mcq" id="" />
+              <input checked={question.correctChoice === question.choice1} onChange={() => handleCorrectChoice(question.choice1)} className={styles.radio} type="radio" name={`mcq-${question.id}`} id="" />
 
               {/* <Radio
                   checked={questionState.correctChoice === questionState.choice1} 
@@ -64,7 +93,7 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
                     })
                   }}  className={styles.radio} 
                   // type="radio" 
-                  name="mcq" 
+                  name={`mcq-${question.id}`} 
                   id=""
                   // inputProps={{ 'aria-label': `${questionState.choice1}` }}
                 /> */}
@@ -73,7 +102,7 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
             <span className={styles.input_el}>
               <Input style={{
                 width: '100%',
-              }} placeholder="Choice 1" onChange={handleChoiceChange} name='choice1' type="text" value={questionState.choice1} />
+              }} placeholder="Choice 1" onChange={handleChoiceChange} name='choice1' type="text" value={question.choice1} />
 
               {/* <input style={{
                   width: '100%',
@@ -83,12 +112,7 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
 
           <li className={styles.choiceItem}>
             <label>
-              <input checked={questionState.correctChoice === questionState.choice2} onChange={(e) => {
-                setQuestionState({
-                  ...questionState,
-                  correctChoice: questionState.choice2
-                })
-              }} className={styles.radio} type="radio" name="mcq" id="" />
+              <input checked={question.correctChoice === question.choice2} onChange={() => handleCorrectChoice(question.choice2)} className={styles.radio} type="radio" name={`mcq-${question.id}`} id="" />
             </label>
 
             <span className={styles.input_el}>
@@ -98,19 +122,14 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
               <Input
                 style={{
                   width: '100%',
-                }} placeholder="Choice 2" onChange={handleChoiceChange} name='choice2' type="text" value={questionState.choice2}
+                }} placeholder="Choice 2" onChange={handleChoiceChange} name='choice2' type="text" value={question.choice2}
               />
             </span>
           </li>
 
           <li className={styles.choiceItem}>
             <label>
-              <input checked={questionState.correctChoice === questionState.choice3} onChange={(e) => {
-                setQuestionState({
-                  ...questionState,
-                  correctChoice: questionState.choice3
-                })
-              }} className={styles.radio} type="radio" name="mcq" id="" />
+              <input checked={question.correctChoice === question.choice3} onChange={() => handleCorrectChoice(question.choice3)} className={styles.radio} type="radio" name={`mcq-${question.id}`} id="" />
             </label>
 
             <span className={styles.input_el}>
@@ -120,19 +139,14 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
               <Input
                 style={{
                   width: '100%',
-                }} placeholder="Choice 3" onChange={handleChoiceChange} name='choice3' type="text" value={questionState.choice3}
+                }} placeholder="Choice 3" onChange={handleChoiceChange} name='choice3' type="text" value={question.choice3}
               />
             </span>
           </li>
 
           <li className={styles.choiceItem}>
             <label>
-              <input checked={questionState.correctChoice === questionState.choice4} onChange={(e) => {
-                setQuestionState({
-                  ...questionState,
-                  correctChoice: questionState.choice4
-                })
-              }} className={styles.radio} type="radio" name="mcq" id="" />
+              <input checked={question.correctChoice === question.choice4} onChange={() => handleCorrectChoice(question.choice4)} className={styles.radio} type="radio" name={`mcq-${question.id}`} id="" />
             </label>
 
             <span className={styles.input_el}>
@@ -142,7 +156,7 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
               <Input
                 style={{
                   width: '100%',
-                }}  placeholder="Choice 4" onChange={handleChoiceChange} name='choice4' type="text" value={questionState.choice4}
+                }} placeholder="Choice 4" onChange={handleChoiceChange} name='choice4' type="text" value={question.choice4}
               />
             </span>
           </li>
@@ -153,4 +167,4 @@ const QuestionComp = ({ questionState, setQuestionState }) => {
   )
 }
 
-export default QuestionComp
+export default QuestionFormItem

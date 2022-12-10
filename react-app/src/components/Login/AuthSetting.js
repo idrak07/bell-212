@@ -4,8 +4,8 @@ import Login from './SignIn';
 import SignUp from './SignUp';
 import Customer from '../screens/Customer';
 import Ui from '../DashboardUi/Ui';
-import SignupForm from './SignupForm';
 import { Paper,makeStyles } from '@material-ui/core';
+import LoginForm from './LoginForm';
 
 const useStyles = makeStyles(theme => ({
     pageContent: {
@@ -43,21 +43,20 @@ const AuthSetting = () => {
         <Ui />
         </>
       ) : (
-        <Paper className={classes.pageContent}>
          <>
-          {
+         <LoginForm loggedIn={(user) => setUser(user)}  />
+          {/* {
             toggleForm ? 
               (<Login 
                 loggedIn={(user) => setUser(user)} 
                 toggle={() => formMode()}/>
               ) 
               : ( 
-              <SignupForm loggedIn={(user) => setUser(user)} 
+              <SignUp loggedIn={(user) => setUser(user)} 
               toggle={() => formMode()}/>
               )
-            }
+            } */}
          </>
-        </Paper>
       )}  
         </div>
     );

@@ -1,11 +1,12 @@
+
 import { Typography } from "@mui/material";
 import React from "react";
-import AdminLayout from "../../layouts/AdminLayout";
-import QuizSettingsList from "./QuizSettingsList";
-import CustomButton from '../../../ui/CustomButton'
+import CustomButton from '../../../../ui/CustomButton'
 import { useNavigate } from "react-router";
+import AdminLayout from "../../../layouts/AdminLayout";
+import EditQuizSettingsView from "./EditQuizSettingsView";
 
-const QuizSettings = () => {
+const EditQuizSettings = () => {
   const navigate = useNavigate();
   return (
     <AdminLayout>
@@ -25,14 +26,14 @@ const QuizSettings = () => {
             id="tableTitle"
             component="div"
           >
-            Quiz Settings
+            Edit Quiz
           </Typography>
-
           <div>
-          <CustomButton onClick={() => {navigate('/quiz-settings/create')}} style={{
+
+          <CustomButton onClick={() => {navigate(-1)}} style={{
             padding: '8px 22px'
           }}>
-              Create Quiz
+              Go Back
           </CustomButton>
         </div>
         </div>
@@ -45,11 +46,10 @@ const QuizSettings = () => {
             paddingBottom: '8px',
             marginBottom: '10px',
           }}></div>
-
-        <QuizSettingsList />
+        <EditQuizSettingsView />
       </div>
     </AdminLayout>
   )
 };
 
-export default QuizSettings;
+export default EditQuizSettings;

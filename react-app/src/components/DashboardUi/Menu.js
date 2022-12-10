@@ -35,9 +35,16 @@ const Menu = () => {
         <div>
 <aside className="main-sidebar sidebar-dark-primary elevation-4">
   {/* Brand Logo */}
-  <a href="/" className="brand-link">
-    <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{opacity: '.8'}} />
-    <span className="brand-text font-weight-light">Admin</span>
+  <a href="/auth" className="brand-link" style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }}>
+    <img src="/bell-logo2.jpg" alt="AdminLTE Logo" style={{
+      width: '60px',
+      objectFit: 'cover'
+    }} />
+    {/* <span className="brand-text font-weight-light">Admin</span> */}
   </a>
   {/* Sidebar */}
   <div className="sidebar">
