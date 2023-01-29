@@ -1,6 +1,5 @@
 package com.genuinecoder.springserver.web.rest;
 
-import com.genuinecoder.springserver.domain.Tutorial;
 import com.genuinecoder.springserver.domain.User;
 import com.genuinecoder.springserver.service.UserService;
 import org.slf4j.Logger;
@@ -9,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -41,4 +42,19 @@ public class UserResource {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @PostMapping("/authenticate")
+    public ResponseEntity<Void> authenticate(User user) {
+        boolean authenticated = userService.authenticate(user.getEmail(), user.getPassword());
+        if (authenticated) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<Optional<User>> authenticate(@PathVariable Long id) {
+        Optional<User> user  = userService.findById(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
 }
