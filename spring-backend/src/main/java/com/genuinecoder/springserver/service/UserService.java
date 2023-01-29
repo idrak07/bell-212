@@ -23,6 +23,7 @@ public class UserService {
     }
 
     public User create(User user) {
+        user.setEmail(user.getEmail().toLowerCase());
         return userRepository.save(user);
     }
 

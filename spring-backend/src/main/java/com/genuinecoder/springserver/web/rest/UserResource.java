@@ -44,7 +44,7 @@ public class UserResource {
 
     @PostMapping("/authenticate")
     public ResponseEntity<User> authenticate(User user) {
-        boolean authenticated = userService.authenticate(user.getEmail(), user.getPassword());
+        boolean authenticated = userService.authenticate(user.getEmail().toLowerCase(), user.getPassword());
         if (authenticated) {
             user = userService.findByEmail(user.getEmail());
             return new ResponseEntity<>(user, HttpStatus.OK);
