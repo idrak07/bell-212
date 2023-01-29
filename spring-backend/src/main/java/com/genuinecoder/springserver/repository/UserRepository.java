@@ -9,4 +9,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Long countAllByEmailAndPassword(String email, String password);
 
+    User findUserByEmail(String email);
+
 }

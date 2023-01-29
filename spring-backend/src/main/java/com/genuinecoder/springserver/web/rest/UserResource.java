@@ -43,12 +43,13 @@ public class UserResource {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<Void> authenticate(User user) {
+    public ResponseEntity<User> authenticate(User user) {
         boolean authenticated = userService.authenticate(user.getEmail(), user.getPassword());
         if (authenticated) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            user = userService.findByEmail(user.getEmail());
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
     }
 
