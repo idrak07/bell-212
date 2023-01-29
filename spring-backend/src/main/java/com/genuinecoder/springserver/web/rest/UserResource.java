@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -25,6 +22,12 @@ public class UserResource {
 
     @PostMapping("/users")
     public ResponseEntity<User> create(@RequestBody User user) {
+        user = userService.create(user);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/users")
+    public ResponseEntity<User> update(@RequestBody User user) {
         user = userService.create(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
