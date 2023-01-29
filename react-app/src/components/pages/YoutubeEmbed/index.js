@@ -6,7 +6,7 @@ import './YoutubeEmbed.css'
 const YoutubeEmbed = ({ url }) => {
   let videoCode = url;
   if (url && url.includes('https://www.youtube.com/')) {
-    videoCode = url.split("v=")[1].split("&")[0];
+    videoCode = url?.split("v=")?.[1]?.split("&")?.[0];
   }
   return (
     <div className="video-responsive">

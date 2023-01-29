@@ -12,16 +12,18 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router';
+import { convertMsToDate } from '../../../util';
+import { allBloodGroups, allUnitList } from './AddUserPage/AddEditUserForm';
+import { useAxiosFetch } from '../../../hooks/useAxiosFetch';
+import axios from 'axios';
+import { SERVER_URL } from '../../../constants';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 export function createData(
   bd_no,
@@ -76,6 +78,7 @@ export const allStudents = [
   createData(26, 34, 'Jisan', 'Mia', 'Somewhere at army', 'BAF BAse Basar', '02/02/2002/', 'AB+', '013018229434', 'jisan@gmail.com'),
 ];
 
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -99,6 +102,7 @@ function getComparator(
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
 function stableSort(array, comparator) {
+  console.log('stable', array)
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -113,25 +117,25 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'bd_no',
+    id: 'bdNo',
     numeric: false,
     disablePadding: true,
     label: 'BD No.',
   },
   {
-    id: 'svc_id',
+    id: 'svcNo',
     numeric: true,
     disablePadding: false,
     label: 'SVC ID No.',
   },
   {
-    id: 'first_name',
+    id: 'firstName',
     numeric: true,
     disablePadding: false,
     label: 'First Name',
   },
   {
-    id: 'second_name',
+    id: 'lastName',
     numeric: true,
     disablePadding: false,
     label: 'Second Name',
@@ -149,22 +153,22 @@ const headCells = [
     label: 'Unit',
   },
   {
-    id: 'date_of_birth',
+    id: 'dob',
     numeric: true,
     disablePadding: false,
     label: 'Date of Birth',
   },
   {
-    id: 'blood_group',
+    id: 'bloodGroup',
     numeric: true,
     disablePadding: false,
     label: 'Blood Group',
   },
   {
-    id: 'mobile',
+    id: 'phoneNo',
     numeric: true,
     disablePadding: false,
-    label: 'Mobile No.',
+    label: 'Phone No.',
   },
   {
     id: 'email',
@@ -302,7 +306,8 @@ function EnhancedTableToolbar(props) {
   );
 }
 
-export default function UsersTable() {
+export default function UsersTable({allUsers, setShouldRefetchUser}) {
+  console.log(allUsers)
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
@@ -322,7 +327,7 @@ export default function UsersTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = allStudents.map((n) => n.name);
+      const newSelected = allUsers.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -362,14 +367,35 @@ export default function UsersTable() {
     setDense(event.target.checked);
   };
 
+  
+  const handleDeleteUser = async (id) => {
+    const shouldDelete = window.confirm('Are your sure, you want to delete the user')
+
+    if(!shouldDelete) {
+      return;
+    }
+
+    try {
+      const res = await axios.delete(`${SERVER_URL}/users/${id}`);
+      console.log(res)
+      toast.success('User Successfully Deleted')
+      setShouldRefetchUser(true)
+    } catch(e) {
+      console.log(e)
+      toast.error('Something went wrong')
+    }
+  }
+
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - allStudents.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - allUsers.length) : 0;
 
   return (
     <Box sx={{ width: '100%' }}>
+        <ToastContainer />
+
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
@@ -384,15 +410,15 @@ export default function UsersTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={allStudents.length}
+              rowCount={allUsers?.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
               rows.sort(getComparator(order, orderBy)).slice() */}
-              {stableSort(allStudents, getComparator(order, orderBy))
+              {stableSort(allUsers, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.firstName);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
@@ -402,7 +428,7 @@ export default function UsersTable() {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.firstName}
                       // selected={isItemSelected}
                     >
                       {/* <TableCell padding="checkbox">
@@ -425,22 +451,22 @@ export default function UsersTable() {
                           pr: { xs: 1, sm: 1 }
                         }}
                       >
-                        {row.bd_no}
+                        {row.bdNo}
                       </TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.svc_id}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.first_name}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.second_name}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.svcNo}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.firstName}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.lastName}</TableCell>
 
                       <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.branch}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.unit}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.date_of_birth}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.blood_group}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.mobile}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{allUnitList.find(u => u.id == row.unit).title}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{convertMsToDate(row.dob)}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{allBloodGroups.find(g => g.id == row.bloodGroup)?.title}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.phoneNo}</TableCell>
                       <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.email}</TableCell>
 
                       <TableCell style={{whiteSpace: 'nowrap', display: 'flex', gap: '6px', alignItems: 'center'}} align="left">
-                        <button onClick={() => navigate(`/users/${row.bd_no}`)} type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        <button onClick={() => navigate(`/users/${row.id}`)} type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                        <button onClick={() => handleDeleteUser(row.id)} type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                       </TableCell>
                     </TableRow>
                   );
@@ -460,7 +486,7 @@ export default function UsersTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={allStudents.length}
+          count={allUsers.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

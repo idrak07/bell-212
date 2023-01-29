@@ -46,7 +46,8 @@ const rightSideContent = [
 ]
 
 const TutorialVideo = () => {
-  const [userRole, setUserRole] = useLocalStorage('userRole');
+   const [authenticatedUser, setAuthenticatedUser] = useLocalStorage("user");
+
   const params = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const [isCreate, setIsCreate] = useState(false);
@@ -91,7 +92,7 @@ const TutorialVideo = () => {
               }}>Chapters</h2>
               
               {
-                userRole === 'admin' && (
+                authenticatedUser.authority === 'ROLE_ADMIN' && (
                   <CustomButton onClick={() => setIsCreate(true)} style={{
                     padding: '5px 14px'
                   }}>
@@ -135,7 +136,7 @@ const TutorialVideo = () => {
                                 gap: '1rem'
                               }}>Subject: {item.subject} 
                                 {
-                                  userRole === 'admin' && (
+                                  authenticatedUser.authority === 'ROLE_ADMIN' && (
                                     <span>
                                       <button style={{
                                           borderRadius: 4,

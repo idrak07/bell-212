@@ -1,167 +1,129 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import RedirectComp from "../../ui/RedirectComp";
 
 export const quizTopics = [
-  'Engine',
-  'Air Frame',
-  'Electronic Components',
-  'Instruments',
-  'Radio'
-]
+  "Engine",
+  "Air Frame",
+  "Electronic Components",
+  "Instruments",
+  "Radio",
+];
 
 const Menu = () => {
-  const [userRole, setUserRole] = useLocalStorage('userRole')
+  const [authenticatedUser, setAuthenticatedUser] = useLocalStorage("user");
 
-  const user = firebase.auth().currentUser;
-  const [name, setName] = useState('');
-  const [photo, setPhoto] = useState('');
-    useEffect(() => {
-        
-    if (user !== null) {
-      const displayName = user.email;
-      setName(displayName)
-    }
-    
-    },[])
-
-    if(!user) {
-      <RedirectComp to='/auth' />
-    }
-    return (
-        <div>
-<aside className="main-sidebar sidebar-dark-primary elevation-4">
-  {/* Brand Logo */}
-  <a href="/auth" className="brand-link" style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  }}>
-    <img src="/bell-logo2.jpg" alt="AdminLTE Logo" style={{
-      width: '60px',
-      objectFit: 'cover'
-    }} />
-    {/* <span className="brand-text font-weight-light">Admin</span> */}
-  </a>
-  {/* Sidebar */}
-  <div className="sidebar">
-    {/* Sidebar user panel (optional) */}
-    <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-      <div className="image">
-        <img src='' className="img-circle elevation-2" alt='' />
-      </div>
-      <div className="info">
-        <a href="#" className="d-block"> {name}</a>
-      </div>
-    </div>
-    {/* Sidebar Menu */}
-    <nav className="mt-2">
-      <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        {/* Add icons to the links using the .nav-icon class
+  if (!authenticatedUser) {
+    <RedirectComp to="/auth" />;
+  }
+  
+  return (
+    <div>
+      <aside className="main-sidebar sidebar-dark-primary elevation-4">
+        {/* Brand Logo */}
+        <a
+          href="/auth"
+          className="brand-link"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img
+            src="/bell-logo2.jpg"
+            alt="AdminLTE Logo"
+            style={{
+              width: "60px",
+              objectFit: "cover",
+            }}
+          />
+        </a>
+        {/* Sidebar */}
+        <div className="sidebar">
+          {/* Sidebar user panel (optional) */}
+          <div className="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div className="image">
+              <img src="" className="img-circle elevation-2" alt="" />
+            </div>
+            <div className="info">
+              <a href="#" className="d-block">
+                {authenticatedUser?.firstName + " " + authenticatedUser?.lastName}
+              </a>
+            </div>
+          </div>
+          {/* Sidebar Menu */}
+          <nav className="mt-2">
+            <ul
+              className="nav nav-pills nav-sidebar flex-column"
+              data-widget="treeview"
+              role="menu"
+              data-accordion="false"
+            >
+              {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
-        <li className="nav-item has-treeview menu-open">
-          <a href="#" className="nav-link active">
-            <i className="nav-icon fas fa-tachometer-alt" />
-            <p>
-              Dashboard
-            </p>
-          </a>
-        
-        </li>
-        <li className="nav-item">
-          <a href="/profile" className="nav-link">
-            <i className="nav-icon fas fa-th" />
-            <p>
-              My profile
-            
-            </p>
-          </a>
-        </li>
-        <li className="nav-item has-treeview">
-          <a href="#" className="nav-link">
-            <i className="nav-icon fas fa-edit" />
-            <p>
-              Start Tutorial
-              <i className="fas fa-angle-left right" />
-            </p>
-          </a>
-          <ul className="nav nav-treeview">
-            {
-              quizTopics.map(item => {
-                return (
-                  <li className="nav-item" key={item}>
-                    <Link to={'/tutorial/'+item}>
-                    <a className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>{item}</p>
-                    </a>
-                    </Link>
-                  </li>
-                )
-              })
-            }
-            {/* <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Engine</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>AirFrame</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Electric Components</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Instruments</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Radio</p>
-              </a>
-            </li> */}
-          </ul>
-        </li>
+              <li className="nav-item has-treeview menu-open">
+                <a href="#" className="nav-link active">
+                  <i className="nav-icon fas fa-tachometer-alt" />
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/profile" className="nav-link">
+                  <i className="nav-icon fas fa-th" />
+                  <p>My profile</p>
+                </a>
+              </li>
+              <li className="nav-item has-treeview">
+                <a href="#" className="nav-link">
+                  <i className="nav-icon fas fa-edit" />
+                  <p>
+                    Start Tutorial
+                    <i className="fas fa-angle-left right" />
+                  </p>
+                </a>
+                <ul className="nav nav-treeview">
+                  {quizTopics.map((item) => {
+                    return (
+                      <li className="nav-item" key={item}>
+                        <Link to={"/tutorial/" + item}>
+                          <a className="nav-link">
+                            <i className="far fa-circle nav-icon" />
+                            <p>{item}</p>
+                          </a>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
 
-        {
-          userRole === 'admin' && (
-            <li className="nav-item has-treeview">
-            <a href="#" className="nav-link">
-              <i className="nav-icon fas fa-table" />
-              <p>
-                Set Quiz Questions
-                <i className="fas fa-angle-left right" />
-              </p>
-            </a>
-            <ul className="nav nav-treeview">
-              {
-                quizTopics.map(item => {
-                  return (
-                    <li className="nav-item" key={item}>
-                      <Link to={'/quiz/'+item}>
-                      <a className="nav-link">
-                        <i className="far fa-circle nav-icon" />
-                        <p>{item}</p>
-                      </a>
-                      </Link>
-                    </li>
-                  )
-                })
-              }
-              {/* <li className="nav-item">
+              {authenticatedUser.authority === "ROLE_ADMIN" && (
+                <li className="nav-item has-treeview">
+                  <a href="#" className="nav-link">
+                    <i className="nav-icon fas fa-table" />
+                    <p>
+                      Set Quiz Questions
+                      <i className="fas fa-angle-left right" />
+                    </p>
+                  </a>
+                  <ul className="nav nav-treeview">
+                    {quizTopics.map((item) => {
+                      return (
+                        <li className="nav-item" key={item}>
+                          <Link to={"/quiz/" + item}>
+                            <a className="nav-link">
+                              <i className="far fa-circle nav-icon" />
+                              <p>{item}</p>
+                            </a>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                    {/* <li className="nav-item">
   
                 <a href="/eq" className="nav-link">
                   <i className="far fa-circle nav-icon" />
@@ -192,36 +154,32 @@ const Menu = () => {
                   <p>Radio</p>
                 </a>
               </li> */}
-            </ul>
-          </li>
-          )
-        }
-      
-       
-        <li className="nav-item has-treeview">
-          <a href="#" className="nav-link">
-            <i className="nav-icon fas fa-book" />
-            <p>
-              LeaderBoard
-              <i className="fas fa-angle-left right" />
-            </p>
-          </a>
-          <ul className="nav nav-treeview">
-            {
-                quizTopics.map(item => {
-                  return (
-                    <li className="nav-item" key={item}>
-                      <Link to={'/leaderboard/'+item}>
-                      <a className="nav-link">
-                        <i className="far fa-circle nav-icon" />
-                        <p>{item}</p>
-                      </a>
-                      </Link>
-                    </li>
-                  )
-                })
-              }
-            {/* <li className="nav-item">
+                  </ul>
+                </li>
+              )}
+
+              <li className="nav-item has-treeview">
+                <a href="#" className="nav-link">
+                  <i className="nav-icon fas fa-book" />
+                  <p>
+                    LeaderBoard
+                    <i className="fas fa-angle-left right" />
+                  </p>
+                </a>
+                <ul className="nav nav-treeview">
+                  {quizTopics.map((item) => {
+                    return (
+                      <li className="nav-item" key={item}>
+                        <Link to={"/leaderboard/" + item}>
+                          <a className="nav-link">
+                            <i className="far fa-circle nav-icon" />
+                            <p>{item}</p>
+                          </a>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                  {/* <li className="nav-item">
               <a href="pages/forms/general.html" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Engine</p>
@@ -251,24 +209,24 @@ const Menu = () => {
                 <p>Radio</p>
               </a>
             </li> */}
-          </ul>
-        </li>
-        <li className="nav-item has-treeview">
-          <a href="/" className="nav-link">
-            <i className="nav-icon far fa-plus-square" />
-            <p>
-              Extras
-              <i className="fas fa-angle-left right" />
-            </p>
-          </a>
-          <ul className="nav nav-treeview">
-            <li className="nav-item">
-              <a href="/qn" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Add question</p>
-              </a>
-            </li>
-            {/* <li className="nav-item">
+                </ul>
+              </li>
+              <li className="nav-item has-treeview">
+                <a href="/" className="nav-link">
+                  <i className="nav-icon far fa-plus-square" />
+                  <p>
+                    Extras
+                    <i className="fas fa-angle-left right" />
+                  </p>
+                </a>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <a href="/qn" className="nav-link">
+                      <i className="far fa-circle nav-icon" />
+                      <p>Add question</p>
+                    </a>
+                  </li>
+                  {/* <li className="nav-item">
               <a href="pages/examples/register.html" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Register</p>
@@ -310,7 +268,7 @@ const Menu = () => {
                 <p>Error 404</p>
               </a>
             </li> */}
-            {/* <li className="nav-item">
+                  {/* <li className="nav-item">
               <a href="pages/examples/500.html" className="nav-link">
                 <i className="far fa-circle nav-icon" />
                 <p>Error 500</p>
@@ -334,49 +292,40 @@ const Menu = () => {
                 <p>Starter Page</p>
               </a>
             </li> */}
-          </ul>
-        </li>
-        
-        <li className="nav-item">
-          <a href="/quiz-settings" className="nav-link">
-            <i className="nav-icon fas fa-th" />
-            <p>
-              Quiz Settings
-            </p>
-          </a>
-        </li>
-        <li className="nav-item">
-          <a href="/users" className="nav-link">
-            <i className="nav-icon fas fa-th" />
-            <p>
-              Users
-            </p>
-          </a>
-        </li>
-        
+                </ul>
+              </li>
 
-        <li className="nav-item">
-          <a href="/quiz-list" className="nav-link">
-            <i className="nav-icon fas fa-th" />
-            <p>
-              Take a Quiz
-            </p>
-          </a>
-        </li>
-        
-            
-             
-            
-      
-      </ul>
-    </nav>
-    {/* /.sidebar-menu */}
-  </div>
-  {/* /.sidebar */}
-</aside>
-</div>
+              {authenticatedUser.authority === "ROLE_ADMIN" && (
+                <>
+                  <li className="nav-item">
+                    <a href="/quiz-settings" className="nav-link">
+                      <i className="nav-icon fas fa-th" />
+                      <p>Quiz Settings</p>
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a href="/users" className="nav-link">
+                      <i className="nav-icon fas fa-th" />
+                      <p>Users</p>
+                    </a>
+                  </li>
+                </>
+              )}
 
-      )
+              <li className="nav-item">
+                <a href="/quiz-list" className="nav-link">
+                  <i className="nav-icon fas fa-th" />
+                  <p>Take a Quiz</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          {/* /.sidebar-menu */}
+        </div>
+        {/* /.sidebar */}
+      </aside>
+    </div>
+  );
 };
 
 export default Menu;

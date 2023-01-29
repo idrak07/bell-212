@@ -1,11 +1,27 @@
 import { Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { SERVER_URL } from '../../../constants';
+import useFetch from '../../../hooks/useFetch';
+import useLocalStorage from '../../../hooks/useLocalStorage';
+import { convertMsToDate } from '../../../util';
 import AdminLayout from '../../layouts/AdminLayout';
-import ProfileForm from './ProfileForm';
+import AddEditUserForm from '../UsersPage/AddUserPage/AddEditUserForm';
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
+  const [authenticatedUser, setAuthenticatedUser] = useLocalStorage('user');
+  
+  const { id } = authenticatedUser
+  const [{ response, error, isLoading }, doFetch] = useFetch(
+    `${SERVER_URL}/users/${id}`
+  );
+
+  useEffect(() => {
+    doFetch({
+      method: "GET",
+    });
+    console.log(response);
+  }, []);
   return (
     <AdminLayout>
 
@@ -30,7 +46,15 @@ const ProfilePage = () => {
           </Typography>
         </div>
 
-        <ProfileForm />
+        {isLoading ? (
+          "Loading profile data.."
+        ) : error ? (
+          "Error getting profile data"
+        ) : response && (
+          <AddEditUserForm isEdit={true} isProfileView={true} editData={{
+            ...response, dob: new Date(convertMsToDate(response.dob)).toISOString().slice(0, 10)
+          }} />
+        )}
       </div>
     </AdminLayout>
   )

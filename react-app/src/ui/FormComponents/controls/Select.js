@@ -3,7 +3,7 @@ import { FormControl, InputLabel, Select as MuiSelect, MenuItem, FormHelperText 
 
 export default function Select(props) {
 
-    const { name, label, value,error=null, onChange, options } = props;
+    const { name, label, value,error=null, onChange, options, ...rest } = props;
 
     return (
         <FormControl variant="outlined" style={{
@@ -13,6 +13,7 @@ export default function Select(props) {
             {...(error && {error:true})}>
             <InputLabel>{label}</InputLabel>
             <MuiSelect
+                {...rest}
                 label={label}
                 name={name}
                 value={value}
