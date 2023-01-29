@@ -22,8 +22,11 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User create(User user) {
+    public User create(User user) throws IllegalAccessException {
         user.setEmail(user.getEmail().toLowerCase());
+        if (findByEmail(user.getEmail()) != null) {
+            throw new IllegalAccessException("Already have user with this email");
+        }
         return userRepository.save(user);
     }
 
@@ -51,5 +54,9 @@ public class UserService {
 
     public User findByEmail(String email) {
         return userRepository.findUserByEmail(email);
+    }
+
+    public User update(User user) {
+        return userRepository.save(user);
     }
 }

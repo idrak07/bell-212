@@ -26,13 +26,17 @@ public class UserResource {
 
     @PostMapping("/users")
     public ResponseEntity<User> create(@RequestBody User user) {
-        user = userService.create(user);
+        try {
+            user = userService.create(user);
+        } catch (IllegalAccessException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PutMapping("/users")
     public ResponseEntity<User> update(@RequestBody User user) {
-        user = userService.create(user);
+        user = userService.update(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
@@ -43,7 +47,7 @@ public class UserResource {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<User> authenticate(User user) {
+    public ResponseEntity<User> authenticate(@RequestBody User user) {
         boolean authenticated = userService.authenticate(user.getEmail().toLowerCase(), user.getPassword());
         if (authenticated) {
             user = userService.findByEmail(user.getEmail());
