@@ -6,6 +6,7 @@ import com.genuinecoder.springserver.domain.enumeration.Unit;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -42,8 +43,8 @@ public class User {
 
     private String imageKey;
 
-    @Enumerated(EnumType.STRING)
-    private Authorities authority;
+    @Transient
+    private List<Authorities> authorities;
 
     public Long getId() {
         return id;
@@ -149,12 +150,12 @@ public class User {
         this.imageKey = imageKey;
     }
 
-    public Authorities getAuthority() {
-        return authority;
+    public List<Authorities> getAuthorities() {
+        return authorities;
     }
 
-    public void setAuthority(Authorities authority) {
-        this.authority = authority;
+    public void setAuthorities(List<Authorities> authorities) {
+        this.authorities = authorities;
     }
 
     @Override
@@ -173,7 +174,7 @@ public class User {
                 ", phoneNo='" + phoneNo + '\'' +
                 ", email='" + email + '\'' +
                 ", imageKey='" + imageKey + '\'' +
-                ", authority=" + authority +
+                ", authorities=" + authorities +
                 '}';
     }
 }
