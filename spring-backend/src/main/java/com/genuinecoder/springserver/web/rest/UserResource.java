@@ -57,4 +57,10 @@ public class UserResource {
         Optional<User> user  = userService.findById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
