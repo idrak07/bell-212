@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 public class QuestionResource {
     private static Logger log = LoggerFactory.getLogger(QuestionResource.class);
 
