@@ -50,7 +50,7 @@ const Menu = () => {
               <img src="" className="img-circle elevation-2" alt="" />
             </div>
             <div className="info">
-              <a href="#" className="d-block">
+              <a href="/profile" className="d-block">
                 {authenticatedUser?.firstName + " " + authenticatedUser?.lastName}
               </a>
             </div>
@@ -66,7 +66,7 @@ const Menu = () => {
               {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
               <li className="nav-item has-treeview menu-open">
-                <a href="#" className="nav-link active">
+                <a href="/auth" className="nav-link active">
                   <i className="nav-icon fas fa-tachometer-alt" />
                   <p>Dashboard</p>
                 </a>
@@ -81,7 +81,7 @@ const Menu = () => {
                 <a href="#" className="nav-link">
                   <i className="nav-icon fas fa-edit" />
                   <p>
-                    Start Tutorial
+                    Video Tutorial
                     <i className="fas fa-angle-left right" />
                   </p>
                 </a>
@@ -211,89 +211,94 @@ const Menu = () => {
             </li> */}
                 </ul>
               </li>
-              <li className="nav-item has-treeview">
-                <a href="/" className="nav-link">
-                  <i className="nav-icon far fa-plus-square" />
-                  <p>
-                    Extras
-                    <i className="fas fa-angle-left right" />
-                  </p>
-                </a>
-                <ul className="nav nav-treeview">
-                  <li className="nav-item">
-                    <a href="/qn" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Add question</p>
+              {authenticatedUser.authority === "ROLE_ADMIN" && (
+                <>
+                  <li className="nav-item has-treeview">
+                    <a href="/" className="nav-link">
+                      <i className="nav-icon far fa-plus-square" />
+                      <p>
+                        Extras
+                        <i className="fas fa-angle-left right" />
+                      </p>
                     </a>
+                    <ul className="nav nav-treeview">
+                      <li className="nav-item">
+                        <a href="/qn" className="nav-link">
+                          <i className="far fa-circle nav-icon" />
+                          <p>Add question</p>
+                        </a>
+                      </li>
+                      {/* <li className="nav-item">
+                  <a href="pages/examples/register.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Register</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/forgot-password.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Forgot Password</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/recover-password.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Recover Password</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/lockscreen.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Lockscreen</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/legacy-user-menu.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Legacy User Menu</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/language-menu.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Language Menu</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/404.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Error 404</p>
+                  </a>
+                </li> */}
+                      {/* <li className="nav-item">
+                  <a href="pages/examples/500.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Error 500</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/pace.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Pace</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="pages/examples/blank.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Blank Page</p>
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a href="starter.html" className="nav-link">
+                    <i className="far fa-circle nav-icon" />
+                    <p>Starter Page</p>
+                  </a>
+                </li> */}
+                    </ul>
                   </li>
-                  {/* <li className="nav-item">
-              <a href="pages/examples/register.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Register</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/forgot-password.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Forgot Password</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/recover-password.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Recover Password</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/lockscreen.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Lockscreen</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/legacy-user-menu.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Legacy User Menu</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/language-menu.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Language Menu</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/404.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Error 404</p>
-              </a>
-            </li> */}
-                  {/* <li className="nav-item">
-              <a href="pages/examples/500.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Error 500</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/pace.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Pace</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/examples/blank.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Blank Page</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="starter.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Starter Page</p>
-              </a>
-            </li> */}
-                </ul>
-              </li>
+                </>
+              )}
+              
 
               {authenticatedUser.authority === "ROLE_ADMIN" && (
                 <>
