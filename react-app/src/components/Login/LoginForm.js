@@ -17,6 +17,7 @@ import useFetch from "../../hooks/useFetch";
 import { SERVER_URL } from "../../constants";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
+import bell from '../image/logo.png';
 
 function Copyright(props) {
   return (
@@ -27,7 +28,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="#">
+      <Link color="inherit" href="/">
         Bell-212
       </Link>{" "}
       {new Date().getFullYear()}
@@ -87,9 +88,18 @@ export default function LoginForm({}) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
+          <Link href="/">
+          <img
+              alt=""
+              src={bell}
+              width="60"
+              height="60"
+              className="d-inline-block" style={{marginRight: '10px'}}
+          />
+          </Link>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
