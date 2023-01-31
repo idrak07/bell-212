@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import RedirectComp from "../../ui/RedirectComp";
+import { useLocation } from 'react-router-dom';
 
 export const quizTopics = [
   "Engine",
@@ -15,14 +16,22 @@ export const quizTopics = [
 
 const Menu = () => {
   const [authenticatedUser, setAuthenticatedUser] = useLocalStorage("user");
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   if (!authenticatedUser) {
     <RedirectComp to="/auth" />;
   }
+
+  const handleClose = () => {
+    localStorage.removeItem('user');
+    // props.setUserState();
+    setAnchorEl(null);
+    window.location.href = '/auth'
+  }
   
   return (
     <div>
-      <aside className="main-sidebar sidebar-dark-primary elevation-4">
+      <aside className="main-sidebar sidebar-light elevation-4">
         {/* Brand Logo */}
         <a
           href="/auth"
@@ -37,7 +46,7 @@ const Menu = () => {
             src="/bell-logo2.jpg"
             alt="AdminLTE Logo"
             style={{
-              width: "60px",
+              width: "40px",
               objectFit: "cover",
             }}
           />
@@ -45,13 +54,13 @@ const Menu = () => {
         {/* Sidebar */}
         <div className="sidebar">
           {/* Sidebar user panel (optional) */}
-          <div className="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div className="user-panel mt-3 pb-3 d-flex">
             <div className="image">
               <img src="" className="img-circle elevation-2" alt="" />
             </div>
             <div className="info">
-              <a href="/profile" className="d-block">
-                {authenticatedUser?.firstName + " " + authenticatedUser?.lastName}
+              <a href="/profile" className="d-block" style={{ textDecoration: 'none', color: 'black' }}>
+                <b>{authenticatedUser?.firstName + " " + authenticatedUser?.lastName}</b>
               </a>
             </div>
           </div>
@@ -66,7 +75,7 @@ const Menu = () => {
               {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
               <li className="nav-item has-treeview menu-open">
-                <a href="/auth" className="nav-link active">
+                <a href="/auth" className="nav-link">
                   <i className="nav-icon fas fa-tachometer-alt" />
                   <p>Dashboard</p>
                 </a>
@@ -321,6 +330,13 @@ const Menu = () => {
                 <a href="/quiz-list" className="nav-link">
                   <i className="nav-icon fas fa-th" />
                   <p>Take a Quiz</p>
+                </a>
+              </li>
+
+              <li className="nav-item">
+                <a onClick={handleClose} className="nav-link" href="#">
+                  <i className="nav-icon fas fa-th" />
+                  <p>Sign out</p>
                 </a>
               </li>
             </ul>

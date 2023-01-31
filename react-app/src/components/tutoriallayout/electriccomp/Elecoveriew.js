@@ -11,22 +11,27 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 import ElecSidebar from "./ElecSidebar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Navbars from './../../Home/Navbars';
 
 const Elecoveriew = () => {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   return (
+
     <div>
-      <Navlay></Navlay>
+      <Navbars></Navbars>
       <div>
         <Container>
+          <div className='row justify-content-center'>
+              <div className='col-12 my-5'><h2>Contents- Air frame</h2></div>
+            </div>
           <Row>
-            <Col xs={6} md={4}>
+            <Col xs={6} md={3}>
               <ElecSidebar></ElecSidebar>
             </Col>
-            <Col xs={12} md={8}>
+            <Col xs={12} md={9}>
 
-              <div className="pdf-container exra">
+            <div className="pdf-container exra">
                 <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.14.305/build/pdf.worker.min.js">
                   <Viewer
                     fileUrl={file}
@@ -40,6 +45,7 @@ const Elecoveriew = () => {
         </Container>
       </div>
     </div>
+    
   );
 };
 

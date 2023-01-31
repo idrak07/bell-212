@@ -7,6 +7,9 @@ import Typography from '@mui/material/Typography';
 
 
 export default function DashboardCardItem({subject}) {
+  const goto = (h) => {
+    window.location.href = h
+}
   return (
     <Card style={{height: '100%', display: 'grid', alignContent:'space-between'}} sx={{ minWidth: 275 }}>
       <CardContent>
@@ -19,7 +22,7 @@ export default function DashboardCardItem({subject}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <a size="small" href={subject.link}>Learn More</a>
       </CardActions>
     </Card>
   );

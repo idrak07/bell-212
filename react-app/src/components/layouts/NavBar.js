@@ -25,49 +25,50 @@ const NavBar = (props) => {
     };
 
     return (
-        <div className={classes.root}>
-            <AppBar position="static" className={classes.menubackgroud}>
-                <Toolbar>
-                    <Typography variant="h6" className={classes.title}>
+        // <div className={classes.root}>
+        //     <AppBar position="static" className={classes.menubackgroud}>
+        //         <Toolbar>
+        //             <Typography variant="h6" className={classes.title}>
                         
-                    </Typography>
-                    {auth && (
-                    <div>
-                        <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={() => setAnchorEl(null)}
-                            >
+        //             </Typography>
+        //             {auth && (
+        //             <div>
+        //                 <IconButton
+        //                     aria-label="account of current user"
+        //                     aria-controls="menu-appbar"
+        //                     aria-haspopup="true"
+        //                     onClick={handleMenu}
+        //                     color="inherit"
+        //                 >
+        //                     <AccountCircle />
+        //                 </IconButton>
+        //                     <Menu
+        //                         id="menu-appbar"
+        //                         anchorEl={anchorEl}
+        //                         anchorOrigin={{
+        //                             vertical: 'top',
+        //                             horizontal: 'right',
+        //                         }}
+        //                         keepMounted
+        //                         transformOrigin={{
+        //                             vertical: 'top',
+        //                             horizontal: 'right',
+        //                         }}
+        //                         open={open}
+        //                         onClose={() => setAnchorEl(null)}
+        //                     >
                             
-                            <Link href="/dashboard" underline="none"> Dashboard</Link>
+        //                     <Link href="/dashboard" underline="none"> Dashboard</Link>
                     
-                            <MenuItem>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
-                        </Menu>
-                    </div>
-                    )}
-                </Toolbar>
-            </AppBar>
-        </div>
+        //                     <MenuItem>Profile</MenuItem>
+        //                     <MenuItem onClick={handleClose}>Logout</MenuItem>
+        //                 </Menu>
+        //             </div>
+        //             )}
+        //         </Toolbar>
+        //     </AppBar>
+        // </div>
+        <></>
     );
 }
 
@@ -76,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1
     },
     menubackgroud: {
+        height:'70px',
         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
     }, 
     title: {

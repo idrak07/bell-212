@@ -18,59 +18,54 @@ const ElecSidebar = () => {
 
   return (
     <div>
-      
-        
-              <br />
-              <h4>Contents</h4>
-              <br />
               <ListGroup>
-                <ListGroup.Item action variant="success">
-                  <Link to="/elecoverview">Overview</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/powersupply">Power Supply System</Link>
+                <ListGroup.Item action variant="warning">
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/elecoverview">Overview</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/dcpowersupply">DC Power Supply System</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="primary">
-                  <Link to="/acpowersupply">AC Power Supply System</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="dark">
-                  <Link to="/busarng">Bus Arrangements</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="secondary">
-                  <Link to="/intlight">Interior Lighting System</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="success">
-                  <Link to="/extlight">Exterior Lighting System</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/caution">Caution & Warning System</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/powersupply">Power Supply System</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/enginecontrol">Engine Control & Accessories System</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/dcpowersupply">DC Power Supply System</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/flightcontrol">Flight Control System</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/acpowersupply">AC Power Supply System</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/heating">Heating System</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/busarng">Bus Arrangements</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/miss">Miscellaneous Electrical System</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/intlight">Interior Lighting System</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/aircond">Air-conditioning System</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/extlight">Exterior Lighting System</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/undersiling">Under Sling system</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/caution">Caution & Warning System</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/hoisting">Hoisting System</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/enginecontrol">Engine Control & Accessories System</Link>
                 </ListGroup.Item>
                 <ListGroup.Item action variant="warning">
-                  <Link to="/nite">Nite-sun SX-16</Link>
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/flightcontrol">Flight Control System</Link>
+                </ListGroup.Item>
+                <ListGroup.Item action variant="warning">
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/heating">Heating System</Link>
+                </ListGroup.Item>
+                <ListGroup.Item action variant="warning">
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/miss">Miscellaneous Electrical System</Link>
+                </ListGroup.Item>
+                <ListGroup.Item action variant="warning">
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/aircond">Air-conditioning System</Link>
+                </ListGroup.Item>
+                <ListGroup.Item action variant="warning">
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/undersiling">Under Sling system</Link>
+                </ListGroup.Item>
+                <ListGroup.Item action variant="warning">
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/hoisting">Hoisting System</Link>
+                </ListGroup.Item>
+                <ListGroup.Item action variant="warning">
+                  <Link  style={{ textDecoration: 'none'}} className="text-secondary" to="/nite">Nite-sun SX-16</Link>
                 </ListGroup.Item>
               </ListGroup>
     </div>

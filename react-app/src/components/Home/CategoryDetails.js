@@ -14,9 +14,10 @@ const CategooryDetails = () => {
     return (
         <div>
            <Navbars></Navbars>
-           <br/>
-           <br/>
            <div className="container">
+            <div className='row justify-content-center'>
+              <div className='col-12 text-center my-5'><h1>Categories</h1></div>
+            </div>
               <CardGroup>
                 <Card className='mx-2 card-hover'>
                   <Link to="/overview" style={{ textDecoration: 'none', color: 'black' }}>

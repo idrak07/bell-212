@@ -235,7 +235,7 @@ const useStyles = makeStyles((theme) => ({
         padding: '20px'
     },
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: theme.palette.common.white,
         color: theme.palette.common.white,
     },
     button: {
