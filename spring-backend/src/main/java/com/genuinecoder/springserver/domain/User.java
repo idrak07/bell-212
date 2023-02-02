@@ -36,6 +36,8 @@ public class User {
 
     private String phoneNo;
 
+    private Boolean activated = Boolean.FALSE;
+
     @Column(unique = true)
     private String email;
 
@@ -157,6 +159,14 @@ public class User {
         this.authority = authority;
     }
 
+    public Boolean getActivated() {
+        return activated;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -174,6 +184,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", imageKey='" + imageKey + '\'' +
                 ", authority=" + authority +
+                ", activated=" + activated +
                 '}';
     }
 }
