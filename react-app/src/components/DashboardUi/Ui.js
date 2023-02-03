@@ -1,15 +1,17 @@
 import React from 'react';
+// import AdminLayout from '../layouts/AdminLayout';
 import Dashboard from './Dashboard';
-import Header from './Header';
 import Menu from './Menu';
 
-const Ui = () => {
-    return (
-        <div>
 
-      <Menu/>
-      <Dashboard/>
-        </div>
+const Ui = () => {
+
+    return (
+        <>
+          <Menu />
+          <Dashboard/>
+          
+        </>
     );
 };
 

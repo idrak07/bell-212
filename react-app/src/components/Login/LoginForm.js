@@ -1,22 +1,19 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useFetch from "../../hooks/useFetch";
-import { SERVER_URL } from "../../constants";
-import { toast, ToastContainer } from "react-toastify";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
+import * as React from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { SERVER_URL } from "../../constants";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import bell from '../image/logo.png';
 
 function Copyright(props) {
@@ -39,7 +36,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function LoginForm({}) {
+export default function LoginForm({setCurrentPage}) {
   const [authenticatedUser, setAuthenticatedUser] = useLocalStorage('user');
 
 
@@ -64,9 +61,13 @@ export default function LoginForm({}) {
       if (!data) {
         throw Error("No response from server");
       }
+      if(!data.activated) {
+        toast.error("Admin haven't approved your account yet!");
+        return;
+      }
 
       setAuthenticatedUser(data);
-      window.location.reload(true);
+      window.location.href = '/dashboard'
 
     } catch (e) {
       console.log(e);
@@ -129,12 +130,20 @@ export default function LoginForm({}) {
               id="password"
               autoComplete="current-password"
             />
-            <div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
               <FormControlLabel
-                style={{ position: "relative" }}
+                style={{ position: "relative"}}
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
+
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
             </div>
             <Button
               type="submit"
@@ -144,10 +153,11 @@ export default function LoginForm({}) {
             >
               Sign In
             </Button>
-            <Grid container>
+            <Grid container textAlign={'center'}>
               <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+                Don't have an account? &nbsp;
+                <Link onClick={() => setCurrentPage('Register')} variant="body2">
+                  Sign up
                 </Link>
               </Grid>
             </Grid>

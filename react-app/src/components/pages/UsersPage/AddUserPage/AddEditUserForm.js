@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Grid, Typography, Link, Container, Paper } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import React from "react";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Form, useForm } from "../../../../ui/FormComponents/useForm";
-import Controls from "../../../../ui/FormComponents/controls/Controls";
-import fire from "../../../Login/firebase.init";
-import styles from "./UserForm.module.css";
-import useFetch from "../../../../hooks/useFetch";
-import { SERVER_URL } from "../../../../constants";
 import { useNavigate } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { SERVER_URL } from "../../../../constants";
+import useFetch from "../../../../hooks/useFetch";
+import Controls from "../../../../ui/FormComponents/controls/Controls";
+import { Form, useForm } from "../../../../ui/FormComponents/useForm";
+import styles from "./UserForm.module.css";
 
 export const allBloodGroups = [
   { id: "A_POSITIVE", title: "A-positive (A+)" },
@@ -62,12 +61,15 @@ export const userInitialFormValues = {
   password: "",
   // photo: "",
   authority: "",
+  activated: true
 };
 
 export default function AddEditUserForm({
   isEdit = false,
   isProfileView = false,
   editData,
+  isSignup = false,
+  setCurrentPage
 }) {
   const navigate = useNavigate();
   console.log(editData);
@@ -76,7 +78,7 @@ export default function AddEditUserForm({
     let temp = { ...errors };
     // check validation for all input fileds
     Object.keys(fieldValues).forEach((key) => {
-      if (fieldValues[key] || key == "imageKey") {
+      if (fieldValues[key] || key == "imageKey" || (isSignup && key=='authority')) {
         temp[key] = "";
       } else {
         temp[key] = "This field is required";
@@ -123,6 +125,16 @@ export default function AddEditUserForm({
             ...values,
           },
         });
+      } else if(isSignup) {
+        const res = await addUser({
+          method: "POST",
+          mode: "cors",
+          data: {
+            ...values,
+            authority: 'ROLE_USER',
+            activated: false
+          },
+        });
       } else {
         const res = await addUser({
           method: "POST",
@@ -138,6 +150,9 @@ export default function AddEditUserForm({
         return;
       } else if(isEdit) {
         toast.success('Profile Edited Successfully')
+      } else if(isSignup) {
+        setCurrentPage('Login')
+        return;
       } else {
         toast.success('Profile Created Successfully')
       }
@@ -305,15 +320,25 @@ export default function AddEditUserForm({
                 error={errors.photo}
               /> */}
 
-              <Controls.Select
-                name="authority"
-                label="Authority"
-                value={values.authority}
-                onChange={handleInputChange}
-                options={allRoles}
-                error={errors.authority}
-                disabled={isProfileView}
-              />
+              {!isSignup ? (
+                <Controls.Select
+                  name="authority"
+                  label="Authority"
+                  value={values.authority}
+                  onChange={handleInputChange}
+                  options={allRoles}
+                  error={errors.authority}
+                  disabled={isProfileView}
+                />
+              ) : (
+                 <Controls.Input
+                  id="hidden"
+                  type="text"
+                  style={{opacity: 0, visibility: 'hidden'}}
+                  disabled
+                />
+              )}
+              
               {/* <div style={{margin: '0 8px 8px 8px', width: '80%'}}>
 
                           <label>Upload Photo</label>

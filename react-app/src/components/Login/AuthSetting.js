@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../layouts/NavBar";
-import Login from "./SignIn";
-import SignUp from "./SignUp";
-import Customer from "../screens/Customer";
-import Ui from "../DashboardUi/Ui";
-import { Paper, makeStyles } from "@material-ui/core";
-import LoginForm from "./LoginForm";
+import { useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
 import useLocalStorage from "../../hooks/useLocalStorage";
-
-const useStyles = makeStyles((theme) => ({
-  pageContent: {
-    margin: theme.spacing(5),
-    padding: theme.spacing(3),
-  },
-}));
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
 
 const AuthSetting = () => {
+  const navigate = useNavigate();
   const [authenticatedUser, setAuthenticatedUser] = useLocalStorage('user');
   console.log(authenticatedUser)
 
+  useEffect(()=> {
+    if(authenticatedUser) {
+      navigate('/dashboard')
+    }
+  }, [])
+
+  const [currentPage, setCurrentPage] = useState('Login')
+
   return (
     <div>
-      {authenticatedUser ? (
-        <>
-          <NavBar setUserState={() => setAuthenticatedUser(null)} />
-          {/* <Customer/> */}
-          <Ui />
-        </>
+      <ToastContainer />
+      {currentPage === 'Login' ? (
+        <LoginForm setCurrentPage={setCurrentPage}  />
       ) : (
-        <>
-          <LoginForm  />
-        </>
+        <SignupForm setCurrentPage={setCurrentPage} />
       )}
+        
+
     </div>
   );
 };

@@ -1,10 +1,8 @@
-import firebase from "firebase/app";
 import "firebase/auth";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import RedirectComp from "../../ui/RedirectComp";
-import { useLocation } from 'react-router-dom';
 
 export const quizTopics = [
   "Engine",
@@ -75,16 +73,16 @@ const Menu = () => {
               {/* Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library */}
               <li className="nav-item has-treeview menu-open">
-                <a href="/auth" className="nav-link">
+                <Link className="nav-link" to={"/dashboard/"}>
                   <i className="nav-icon fas fa-tachometer-alt" />
                   <p>Dashboard</p>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/profile" className="nav-link">
+                <Link className="nav-link" to={"/profile/"}>
                   <i className="nav-icon fas fa-th" />
                   <p>My profile</p>
-                </a>
+                </Link>
               </li>
               <li className="nav-item has-treeview">
                 <a href="#" className="nav-link">
@@ -237,72 +235,6 @@ const Menu = () => {
                           <p>Add question</p>
                         </a>
                       </li>
-                      {/* <li className="nav-item">
-                  <a href="pages/examples/register.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Register</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/forgot-password.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Forgot Password</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/recover-password.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Recover Password</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/lockscreen.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Lockscreen</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/legacy-user-menu.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Legacy User Menu</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/language-menu.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Language Menu</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/404.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Error 404</p>
-                  </a>
-                </li> */}
-                      {/* <li className="nav-item">
-                  <a href="pages/examples/500.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Error 500</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/pace.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Pace</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="pages/examples/blank.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Blank Page</p>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a href="starter.html" className="nav-link">
-                    <i className="far fa-circle nav-icon" />
-                    <p>Starter Page</p>
-                  </a>
-                </li> */}
                     </ul>
                   </li>
                 </>
@@ -312,16 +244,17 @@ const Menu = () => {
               {authenticatedUser.authority === "ROLE_ADMIN" && (
                 <>
                   <li className="nav-item">
-                    <a href="/quiz-settings" className="nav-link">
+                    <Link className="nav-link" to={"/quiz-settings/"}>
                       <i className="nav-icon fas fa-th" />
                       <p>Quiz Settings</p>
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="/users" className="nav-link">
+                    <Link className="nav-link" to={"/users/"}>
+
                       <i className="nav-icon fas fa-th" />
                       <p>Users</p>
-                    </a>
+                    </Link>
                   </li>
                 </>
               )}
