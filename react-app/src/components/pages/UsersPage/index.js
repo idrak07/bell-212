@@ -25,7 +25,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [shouldRefetchUser]);
+  }, [shouldRefetchUser, setShouldRefetchUser]);
 
   return (
     <AdminLayout>

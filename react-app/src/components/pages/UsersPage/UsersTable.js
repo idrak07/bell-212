@@ -1,6 +1,9 @@
-import * as React from 'react';
-import { alpha } from '@mui/material/styles';
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Paper from '@mui/material/Paper';
+import { alpha } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,18 +14,14 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { visuallyHidden } from '@mui/utils';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router';
-import { convertMsToDate } from '../../../util';
-import { allBloodGroups, allUnitList } from './AddUserPage/AddEditUserForm';
-import { useAxiosFetch } from '../../../hooks/useAxiosFetch';
 import axios from 'axios';
-import { SERVER_URL } from '../../../constants';
+import * as React from 'react';
+import { useNavigate } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
+import { SERVER_URL } from '../../../constants';
+import { allUnitList } from './AddUserPage/AddEditUserForm';
+import { UserStatus } from './UserStatus';
 
 
 export function createData(
@@ -132,13 +131,7 @@ const headCells = [
     id: 'firstName',
     numeric: true,
     disablePadding: false,
-    label: 'First Name',
-  },
-  {
-    id: 'lastName',
-    numeric: true,
-    disablePadding: false,
-    label: 'Second Name',
+    label: 'Full Name',
   },
   {
     id: 'branch',
@@ -151,32 +144,7 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: 'Unit',
-  },
-  {
-    id: 'dob',
-    numeric: true,
-    disablePadding: false,
-    label: 'Date of Birth',
-  },
-  {
-    id: 'bloodGroup',
-    numeric: true,
-    disablePadding: false,
-    label: 'Blood Group',
-  },
-  {
-    id: 'phoneNo',
-    numeric: true,
-    disablePadding: false,
-    label: 'Phone No.',
-  },
-  {
-    id: 'email',
-    numeric: true,
-    disablePadding: false,
-    label: 'Email',
-  },
-
+  }
   
 ];
 
@@ -228,6 +196,14 @@ function EnhancedTableHead(props) {
             </TableSortLabel>
           </TableCell>
         ))}
+
+        <TableCell
+            key={'status'}
+            align={'left'}
+            padding={'normal'}
+          >
+              <span style={{whiteSpace: 'nowrap'}}> Status </span>
+          </TableCell>
 
         <TableCell
             key={'action'}
@@ -454,15 +430,14 @@ export default function UsersTable({allUsers, setShouldRefetchUser}) {
                         {row.bdNo}
                       </TableCell>
                       <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.svcNo}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.firstName}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.lastName}</TableCell>
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.firstName} {row.lastName}</TableCell>
 
                       <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.branch}</TableCell>
                       <TableCell style={{whiteSpace: 'nowrap'}} align="left">{allUnitList.find(u => u.id == row.unit).title}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{convertMsToDate(row.dob)}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{allBloodGroups.find(g => g.id == row.bloodGroup)?.title}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.phoneNo}</TableCell>
-                      <TableCell style={{whiteSpace: 'nowrap'}} align="left">{row.email}</TableCell>
+                      
+                      <TableCell style={{whiteSpace: 'nowrap'}} align="right">
+                        <UserStatus user={row} setShouldRefetchUser={setShouldRefetchUser} />
+                      </TableCell>
 
                       <TableCell style={{whiteSpace: 'nowrap', display: 'flex', gap: '6px', alignItems: 'center'}} align="left">
                         <button onClick={() => navigate(`/users/${row.id}`)} type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
