@@ -9,7 +9,6 @@ const Ui = () => {
   const [authenticatedUser, setAuthenticatedUser] = useLocalStorage("user");
   const navigate = useNavigate();
   useEffect(() => {
-    alert(JSON.stringify(authenticatedUser))
     if (!authenticatedUser) {
       navigate("/auth");
       // <RedirectComp to="/auth" />;

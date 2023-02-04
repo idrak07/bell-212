@@ -115,12 +115,12 @@ function App() {
           <Route path="/historydetail" element={<HistoryDetails />} />
           <Route path="/messagedetail" element={<MessageDetails />} />
          {/* trades detail page for each trades individually */}
-          <Route path="/tradesdetail" element={<CategooryDetails />} />
-          <Route path="/tradesdetail/engine" element={<EngineDetail />} />
-          <Route path="/tradesdetail/airframe" element={<AirframeDetail />} />
-          <Route path="/tradesdetail/radio" element={<RadioDetail />} />
-          <Route path="/tradesdetail/electrical" element={<ElectricalDetail />} />
-          <Route path="/tradesdetail/instruments" element={<InstrumentDetail />} />
+          <Route path="/trades" element={<CategooryDetails />} />
+          <Route path="/trades/engine" element={<EngineDetail />} />
+          <Route path="/trades/airframe" element={<AirframeDetail />} />
+          <Route path="/trades/radio" element={<RadioDetail />} />
+          <Route path="/trades/electrical" element={<ElectricalDetail />} />
+          <Route path="/trades/instruments" element={<InstrumentDetail />} />
 
           <Route path="/login" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />

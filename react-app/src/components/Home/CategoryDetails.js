@@ -23,7 +23,7 @@ const CategooryDetails = () => {
         <CardGroup>
           <Card className="mx-2 card-hover">
             <Link
-              to="/tradesdetail/engine" // preview link: overview
+              to="/trades/engine" // preview link: overview
               style={{ textDecoration: "none", color: "black" }}
             >
               <Card.Img variant="top" src={engine} />
@@ -39,7 +39,7 @@ const CategooryDetails = () => {
           </Card>
           <Card className="mx-2 card-hover">
             <Link
-              to="/tradesdetail/airframe" // preview link: aircond"
+              to="/trades/airframe" // preview link: aircond"
               style={{ textDecoration: "none", color: "black" }}
             >
               <Card.Img variant="top" src={airframe} />
@@ -55,7 +55,7 @@ const CategooryDetails = () => {
           </Card>
           <Card className="mx-2 card-hover">
             <Link
-              to="/tradesdetail/radio" // preview link: radoverview"
+              to="/trades/radio" // preview link: radoverview"
               style={{ textDecoration: "none", color: "black" }}
             >
               <Card.Img variant="top" src={radio} />
@@ -73,7 +73,7 @@ const CategooryDetails = () => {
         <div className="row justify-content-center mt-5">
           <Card className="mx-2 col-4 card-hover">
             <Link
-             to="/tradesdetail/electrical" // preview link: /elecoverview"
+             to="/trades/electrical" // preview link: /elecoverview"
               style={{ textDecoration: "none", color: "black" }}
             >
               <Card.Img variant="top" src={air} />
@@ -89,7 +89,7 @@ const CategooryDetails = () => {
           </Card>
           <Card className="mx-2 col-4 card-hover">
             <Link
-              to="/tradesdetail/instruments" // preview link: /instoverview"
+              to="/trades/instruments" // preview link: /instoverview"
               style={{ textDecoration: "none", color: "black" }}
             >
               <Card.Img variant="top" src={unit} />

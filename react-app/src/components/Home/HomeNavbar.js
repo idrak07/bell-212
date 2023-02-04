@@ -21,7 +21,7 @@ const navItems = [
   { title: "Home", to: "/" },
   { title: "History", to: "/historydetail" },
   { title: "Message", to: "/messageDetail" },
-  { title: "Trades", to: "/tradesdetail" },
+  { title: "Trades", to: "/trades" },
   { title: "Login", to: "/auth" },
 ];
 
@@ -113,7 +113,7 @@ function HomeNavbar(props) {
                   sx={{ color: "#fff" }}
                   style={
                     location.pathname === item.to ||
-                    (item.to === "/tradesdetail" &&
+                    (item.to === "/trades" &&
                       location.pathname.includes("/trades"))
                       ? activeClass
                       : unActiveClass
