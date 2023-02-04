@@ -2,6 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Ui from "./components/DashboardUi/Ui";
 import CategooryDetails from "./components/Home/CategoryDetails";
+import AirframeDetail from "./components/Home/CategoryDetailView/AirframeDetail";
+import ElectricalDetail from "./components/Home/CategoryDetailView/ElectricalDetail";
+import EngineDetail from "./components/Home/CategoryDetailView/EngineDetail";
+import InstrumentDetail from "./components/Home/CategoryDetailView/InstrumentDetail";
+import RadioDetail from "./components/Home/CategoryDetailView/RadioDetail";
 import HistoryDetails from "./components/Home/HistoryDetails";
 import Home from "./components/Home/Home";
 import MessageDetails from "./components/Home/MessageDetails";
@@ -91,7 +96,14 @@ function App() {
           <Route path="/dashboard" element={<Ui />} />
           <Route path="/historydetail" element={<HistoryDetails />} />
           <Route path="/messagedetail" element={<MessageDetails />} />
+         {/* trades detail page for each trades individually */}
           <Route path="/tradesdetail" element={<CategooryDetails />} />
+          <Route path="/tradesdetail/engine" element={<EngineDetail />} />
+          <Route path="/tradesdetail/airframe" element={<AirframeDetail />} />
+          <Route path="/tradesdetail/radio" element={<RadioDetail />} />
+          <Route path="/tradesdetail/electrical" element={<ElectricalDetail />} />
+          <Route path="/tradesdetail/instruments" element={<InstrumentDetail />} />
+
           <Route path="/login" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/auth" element={<AuthSetting />} />

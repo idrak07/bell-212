@@ -1,8 +1,7 @@
 import "firebase/auth";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import RedirectComp from "../../ui/RedirectComp";
 
 export const quizTopics = [
   "Engine",
@@ -15,18 +14,22 @@ export const quizTopics = [
 const Menu = () => {
   const [authenticatedUser, setAuthenticatedUser] = useLocalStorage("user");
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
 
-  if (!authenticatedUser) {
-    <RedirectComp to="/auth" />;
-  }
+  useEffect(() => {
+    if (!authenticatedUser) {
+      navigate('/auth');
+      // <RedirectComp to="/auth" />;
+    }
+  }, [authenticatedUser]);
 
   const handleClose = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     // props.setUserState();
     setAnchorEl(null);
-    window.location.href = '/auth'
-  }
-  
+    window.location.href = "/auth";
+  };
+
   return (
     <div>
       <aside className="main-sidebar sidebar-light elevation-4">
@@ -57,8 +60,16 @@ const Menu = () => {
               <img src="" className="img-circle elevation-2" alt="" />
             </div>
             <div className="info">
-              <a href="/profile" className="d-block" style={{ textDecoration: 'none', color: 'black' }}>
-                <b>{authenticatedUser?.firstName + " " + authenticatedUser?.lastName}</b>
+              <a
+                href="/profile"
+                className="d-block"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <b>
+                  {authenticatedUser?.firstName +
+                    " " +
+                    authenticatedUser?.lastName}
+                </b>
               </a>
             </div>
           </div>
@@ -239,7 +250,6 @@ const Menu = () => {
                   </li>
                 </>
               )}
-              
 
               {authenticatedUser.authority === "ROLE_ADMIN" && (
                 <>
@@ -251,7 +261,6 @@ const Menu = () => {
                   </li>
                   <li className="nav-item">
                     <Link className="nav-link" to={"/users/"}>
-
                       <i className="nav-icon fas fa-th" />
                       <p>Users</p>
                     </Link>

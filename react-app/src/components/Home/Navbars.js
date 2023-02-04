@@ -2,10 +2,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import bell from '../image/logo.png';
 
 function Navbars() {
   const location = useLocation();
+  // alert(location.pathname)
 
   const activeClass = {
     fontWeight: 'bold',
@@ -29,11 +31,11 @@ function Navbars() {
             Our Responsibilty, Our Pride
         </Navbar.Brand>
         <Nav className="justify-content-end">
-          <Nav.Link style={location.pathname === '/' ? activeClass : unActiveClass}  href="/">Home</Nav.Link>
-          <Nav.Link style={location.pathname === '/historydetail' ? activeClass : unActiveClass} href="/historydetail">History</Nav.Link>
-          <Nav.Link style={location.pathname === '/messagedetail' ? activeClass : unActiveClass}  href="/messagedetail">Message</Nav.Link>
-          <Nav.Link style={location.pathname === '/tradesdetail' ? activeClass : unActiveClass} href="/tradesdetail">Trades</Nav.Link>
-          <Nav.Link href="/auth">Login</Nav.Link>
+          <Link className='nav-link' style={location.pathname === '/' ? activeClass : unActiveClass}  to={"/"}>Home</Link>
+          <Link className='nav-link' style={location.pathname === '/historydetail' ? activeClass : unActiveClass} to={"/historydetail"}>History</Link>
+          <Link className='nav-link' style={location.pathname === '/messagedetail' ? activeClass : unActiveClass}  to={"/messagedetail"}>Message</Link>
+          <Link className='nav-link' style={location.pathname.includes('trades') ? activeClass : unActiveClass} to={"/tradesdetail"}>Trades</Link>
+          <Link className='nav-link' to={"/auth"}>Login</Link>
         </Nav>
       </Container>
     </Navbar>
