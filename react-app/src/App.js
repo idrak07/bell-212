@@ -126,16 +126,16 @@ function App() {
             <Route path="/messagedetail" element={<MessageDetails />} />
 
             {/* trades detail page for each trades individually */}
-            <Route path="/tradesdetail" element={<CategooryDetails />} />
-            <Route path="/tradesdetail/engine" element={<EngineDetail />} />
-            <Route path="/tradesdetail/airframe" element={<AirframeDetail />} />
-            <Route path="/tradesdetail/radio" element={<RadioDetail />} />
+            <Route path="/trades" element={<CategooryDetails />} />
+            <Route path="/trades/engine" element={<EngineDetail />} />
+            <Route path="/trades/airframe" element={<AirframeDetail />} />
+            <Route path="/trades/radio" element={<RadioDetail />} />
             <Route
-              path="/tradesdetail/electrical"
+              path="/trades/electrical"
               element={<ElectricalDetail />}
             />
             <Route
-              path="/tradesdetail/instruments"
+              path="/trades/instruments"
               element={<InstrumentDetail />}
             />
 
