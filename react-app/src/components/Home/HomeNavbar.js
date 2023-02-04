@@ -13,7 +13,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import bell from "../image/logo.png";
 
 const drawerWidth = 240;
@@ -31,6 +31,16 @@ function HomeNavbar(props) {
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const location = useLocation();
+  // alert(location.pathname)
+
+  const activeClass = {
+    background: "#ffffff33",
+  };
+  const unActiveClass = {
+    background: "transparent",
   };
 
   const drawer = (
@@ -98,7 +108,17 @@ function HomeNavbar(props) {
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Link to={item.to}>
-                <Button key={item.to} sx={{ color: "#fff" }}>
+                <Button
+                  key={item.to}
+                  sx={{ color: "#fff" }}
+                  style={
+                    location.pathname === item.to ||
+                    (item.to === "/tradesdetail" &&
+                      location.pathname.includes("/trades"))
+                      ? activeClass
+                      : unActiveClass
+                  }
+                >
                   {item.title}
                 </Button>
               </Link>
