@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import { ProtectedRoute } from "./common/PrivateRoute";
 import Ui from "./components/DashboardUi/Ui";
 import CategooryDetails from "./components/Home/CategoryDetails";
 import AirframeDetail from "./components/Home/CategoryDetailView/AirframeDetail";
@@ -86,6 +88,8 @@ import Vor from "./components/tutoriallayout/radio/Vor";
 import Weat from "./components/tutoriallayout/radio/Weat";
 import Weater from "./components/tutoriallayout/radio/Weater";
 import Tutoriallayout from "./components/tutoriallayout/Tutoriallayout";
+import { SidebarContext } from "./context/context.";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 // #4E66B0
 // const theme = createTheme({
@@ -105,108 +109,132 @@ import Tutoriallayout from "./components/tutoriallayout/Tutoriallayout";
 // });
 
 function App() {
+  const [inactive, setInactive] = useState(false);
+  const [authUser, _] = useLocalStorage('user');
+  const isAdmin = !!authUser && authUser.authority.includes('ROLE_ADMIN')
+
+
+
   return (
     // <ThemeProvider theme={theme}>
-    <div class="wrapper">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Ui />} />
-          <Route path="/historydetail" element={<HistoryDetails />} />
-          <Route path="/messagedetail" element={<MessageDetails />} />
-         {/* trades detail page for each trades individually */}
-          <Route path="/tradesdetail" element={<CategooryDetails />} />
-          <Route path="/tradesdetail/engine" element={<EngineDetail />} />
-          <Route path="/tradesdetail/airframe" element={<AirframeDetail />} />
-          <Route path="/tradesdetail/radio" element={<RadioDetail />} />
-          <Route path="/tradesdetail/electrical" element={<ElectricalDetail />} />
-          <Route path="/tradesdetail/instruments" element={<InstrumentDetail />} />
+    <SidebarContext.Provider value={[inactive, setInactive]}>
+      <div class="wrapper">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/historydetail" element={<HistoryDetails />} />
+            <Route path="/messagedetail" element={<MessageDetails />} />
 
-          <Route path="/login" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/auth" element={<AuthSetting />} />
-          <Route path="/layout" element={<Tutoriallayout />} />
-          <Route path="/basic" element={<Basicturbo1 />} />
-          <Route path="/cold" element={<Cold />} />
-          <Route path="/hot" element={<Hot />} />
-          <Route path="/turbine" element={<Turbine />} />
-          <Route path="/oil" element={<Oil />} />
-          <Route path="/overview" element={<Airframe />} />
-          <Route path="/states" element={<States />} />
-          <Route path="/process" element={<Process />} />
-          <Route path="/publication" element={<Publication />} />
-          <Route path="/Airworthiness" element={<Worthiness />} />
-          <Route path="/Schedule" element={<Schedule />} />
-          <Route path="/gdata" element={<Data />} />
-          <Route path="/mrotor" element={<Rotor />} />
-          <Route path="/trotor" element={<Tail />} />
-          <Route path="/Transmission" element={<Transmission />} />
-          <Route path="/Gearbox" element={<Gearbox />} />
-          <Route path="/train" element={<Train />} />
-          <Route path="/elecoverview" element={<Elecoveriew />} />
-          <Route path="/powersupply" element={<Power />} />
-          <Route path="/dcpowersupply" element={<Dc />} />
-          <Route path="/acpowersupply" element={<Ac />} />
-          <Route path="/busarng" element={<Bus />} />
-          <Route path="/intlight" element={<Inte />} />
-          <Route path="/extlight" element={<Ext />} />
-          <Route path="/caution" element={<Warn />} />
-          <Route path="/enginecontrol" element={<Econtrol />} />
-          <Route path="/flightcontrol" element={<Fcontrol />} />
-          <Route path="/heating" element={<Heat />} />
-          <Route path="/miss" element={<Miss />} />
-          <Route path="/aircond" element={<Air />} />
-          <Route path="/undersiling" element={<Under />} />
-          <Route path="/hoisting" element={<Hoist />} />
-          <Route path="/nite" element={<Nite />} />
-          <Route path="/instoverview" element={<Instover />} />
-          <Route path="/finst" element={<Finst />} />
-          <Route path="/navinst" element={<Navinst />} />
-          <Route path="/engp" element={<Engp />} />
-          <Route path="/ffi" element={<Ffi />} />
-          <Route path="/hydra" element={<Hydra />} />
-          <Route path="/radoverview" element={<Radview />} />
-          <Route path="/inter" element={<Inter />} />
-          <Route path="/vhf" element={<Vhf />} />
-          <Route path="/hf" element={<Hf />} />
-          <Route path="/hfr" element={<Hfr />} />
-          <Route path="/adf" element={<Adf />} />
-          <Route path="/adfr" element={<Adfr />} />
-          <Route path="/vor" element={<Vor />} />
-          <Route path="/mark" element={<Mark />} />
-          <Route path="/atc" element={<Atc />} />
-          <Route path="/dme" element={<Dme />} />
-          <Route path="/elt" element={<Elt />} />
-          <Route path="/eltart" element={<Eltart />} />
-          <Route path="/homer" element={<Homer />} />
-          <Route path="/radar" element={<Radar />} />
-          <Route path="/weat" element={<Weat />} />
-          <Route path="/weater" element={<Weater />} />
-          <Route path="/gps" element={<Gps />} />
-          <Route path="/qn" element={<Customer />} />
-          <Route path="/quiz/:topic" element={<ShowAdminQuizPage />} />
-          <Route path="/quiz/:topic/create" element={<CreateQuizPage />} />
-          <Route path="/quiz/:topic/:id" element={<EditQuizPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/quiz-list" element={<UserQuizLisPage />} />
-          <Route path="/test/:type/:topic" element={<GiveTestPage />} />
-          <Route path="/leaderboard/:topic" element={<LeaderBoardPage />} />
-          <Route path="/tutorial/:topic" element={<TutorialPage />} />
-          <Route path="/quiz-settings" element={<QuizSettings />} />
-          <Route
-            path="/quiz-settings/create"
-            element={<CreateQuizSettings />}
-          />
-          <Route path="/quiz-settings/:id" element={<EditQuizSettings />} />
+            {/* trades detail page for each trades individually */}
+            <Route path="/tradesdetail" element={<CategooryDetails />} />
+            <Route path="/tradesdetail/engine" element={<EngineDetail />} />
+            <Route path="/tradesdetail/airframe" element={<AirframeDetail />} />
+            <Route path="/tradesdetail/radio" element={<RadioDetail />} />
+            <Route
+              path="/tradesdetail/electrical"
+              element={<ElectricalDetail />}
+            />
+            <Route
+              path="/tradesdetail/instruments"
+              element={<InstrumentDetail />}
+            />
 
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/users/add" element={<AddUserPage />} />
-          <Route path="/users/:id" element={<EditUserPage />} />
+            {/* dashboard routes */}
+            {/* routes that admin or user can access */}
+            <Route element={<ProtectedRoute isAllowed={!!authUser}/>}>
+              <Route path="/dashboard" element={<Ui />} />
+              <Route path="/quiz/:topic" element={<ShowAdminQuizPage />} />
+              <Route path="/quiz/:topic/:id" element={<EditQuizPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/quiz-list" element={<UserQuizLisPage />} />
+              <Route path="/test/:type/:topic" element={<GiveTestPage />} />
+              <Route path="/leaderboard/:topic" element={<LeaderBoardPage />} />
+              <Route path="/tutorial/:topic" element={<TutorialPage />} />
+            </Route>
 
-          {/* <Route path="/try" element={<Try/>}/>  */}
-        </Routes>
-      </BrowserRouter>
-    </div>
+            {/* routes only admin can access */}
+            <Route element={<ProtectedRoute isAllowed={isAdmin}/>}>
+              <Route path="/quiz/:topic/create" element={<CreateQuizPage />} />
+              <Route path="/users" element={<UsersPage />} />
+              <Route path="/users/add" element={<AddUserPage />} />
+              <Route path="/users/:id" element={<EditUserPage />} />
+              <Route path="/quiz-settings/:id" element={<EditQuizSettings />} />
+              <Route
+                path="/quiz-settings/create"
+                element={<CreateQuizSettings />}
+              />
+               <Route path="/quiz-settings" element={<QuizSettings />} />
+            </Route>
+
+            <Route path="/login" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/auth" element={<AuthSetting />} />
+            <Route path="/layout" element={<Tutoriallayout />} />
+            <Route path="/basic" element={<Basicturbo1 />} />
+            <Route path="/cold" element={<Cold />} />
+            <Route path="/hot" element={<Hot />} />
+            <Route path="/turbine" element={<Turbine />} />
+            <Route path="/oil" element={<Oil />} />
+            <Route path="/overview" element={<Airframe />} />
+            <Route path="/states" element={<States />} />
+            <Route path="/process" element={<Process />} />
+            <Route path="/publication" element={<Publication />} />
+            <Route path="/Airworthiness" element={<Worthiness />} />
+            <Route path="/Schedule" element={<Schedule />} />
+            <Route path="/gdata" element={<Data />} />
+            <Route path="/mrotor" element={<Rotor />} />
+            <Route path="/trotor" element={<Tail />} />
+            <Route path="/Transmission" element={<Transmission />} />
+            <Route path="/Gearbox" element={<Gearbox />} />
+            <Route path="/train" element={<Train />} />
+            <Route path="/elecoverview" element={<Elecoveriew />} />
+            <Route path="/powersupply" element={<Power />} />
+            <Route path="/dcpowersupply" element={<Dc />} />
+            <Route path="/acpowersupply" element={<Ac />} />
+            <Route path="/busarng" element={<Bus />} />
+            <Route path="/intlight" element={<Inte />} />
+            <Route path="/extlight" element={<Ext />} />
+            <Route path="/caution" element={<Warn />} />
+            <Route path="/enginecontrol" element={<Econtrol />} />
+            <Route path="/flightcontrol" element={<Fcontrol />} />
+            <Route path="/heating" element={<Heat />} />
+            <Route path="/miss" element={<Miss />} />
+            <Route path="/aircond" element={<Air />} />
+            <Route path="/undersiling" element={<Under />} />
+            <Route path="/hoisting" element={<Hoist />} />
+            <Route path="/nite" element={<Nite />} />
+            <Route path="/instoverview" element={<Instover />} />
+            <Route path="/finst" element={<Finst />} />
+            <Route path="/navinst" element={<Navinst />} />
+            <Route path="/engp" element={<Engp />} />
+            <Route path="/ffi" element={<Ffi />} />
+            <Route path="/hydra" element={<Hydra />} />
+            <Route path="/radoverview" element={<Radview />} />
+            <Route path="/inter" element={<Inter />} />
+            <Route path="/vhf" element={<Vhf />} />
+            <Route path="/hf" element={<Hf />} />
+            <Route path="/hfr" element={<Hfr />} />
+            <Route path="/adf" element={<Adf />} />
+            <Route path="/adfr" element={<Adfr />} />
+            <Route path="/vor" element={<Vor />} />
+            <Route path="/mark" element={<Mark />} />
+            <Route path="/atc" element={<Atc />} />
+            <Route path="/dme" element={<Dme />} />
+            <Route path="/elt" element={<Elt />} />
+            <Route path="/eltart" element={<Eltart />} />
+            <Route path="/homer" element={<Homer />} />
+            <Route path="/radar" element={<Radar />} />
+            <Route path="/weat" element={<Weat />} />
+            <Route path="/weater" element={<Weater />} />
+            <Route path="/gps" element={<Gps />} />
+            <Route path="/qn" element={<Customer />} />
+
+            {/* <Route path="/try" element={<Try/>}/>  */}
+            <Route path="*" element={<p>There's nothing here: 404!</p>} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </SidebarContext.Provider>
     // </ThemeProvider>
   );
 }

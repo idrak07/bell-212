@@ -1,7 +1,9 @@
 import "firebase/auth";
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { SidebarContext } from "../../context/context.";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import DashboardSidebar from "../DashboardSidebar/DashboardSideBar";
 
 export const quizTopics = [
   "Engine",
@@ -18,7 +20,7 @@ const Menu = () => {
 
   useEffect(() => {
     if (!authenticatedUser) {
-      navigate('/auth');
+      navigate("/auth");
       // <RedirectComp to="/auth" />;
     }
   }, [authenticatedUser]);
@@ -30,10 +32,22 @@ const Menu = () => {
     window.location.href = "/auth";
   };
 
+  const x = useContext(SidebarContext)
+  console.log({x})
+  const [inactive, setInactive] = useState(false);
+
   return (
+    <>
+      <DashboardSidebar
+        onCollapse={(inactive) => {
+          console.log(inactive);
+          setInactive(inactive);
+        }}
+      />
+
+      {/* 
     <div>
       <aside className="main-sidebar sidebar-light elevation-4">
-        {/* Brand Logo */}
         <a
           href="/auth"
           className="brand-link"
@@ -52,9 +66,7 @@ const Menu = () => {
             }}
           />
         </a>
-        {/* Sidebar */}
         <div className="sidebar">
-          {/* Sidebar user panel (optional) */}
           <div className="user-panel mt-3 pb-3 d-flex">
             <div className="image">
               <img src="" className="img-circle elevation-2" alt="" />
@@ -73,7 +85,6 @@ const Menu = () => {
               </a>
             </div>
           </div>
-          {/* Sidebar Menu */}
           <nav className="mt-2">
             <ul
               className="nav nav-pills nav-sidebar flex-column"
@@ -81,8 +92,6 @@ const Menu = () => {
               role="menu"
               data-accordion="false"
             >
-              {/* Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library */}
               <li className="nav-item has-treeview menu-open">
                 <Link className="nav-link" to={"/dashboard/"}>
                   <i className="nav-icon fas fa-tachometer-alt" />
@@ -141,37 +150,7 @@ const Menu = () => {
                         </li>
                       );
                     })}
-                    {/* <li className="nav-item">
-  
-                <a href="/eq" className="nav-link">
-                  <i className="far fa-circle nav-icon" />
-                  <p>Engine</p>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/eq" className="nav-link">
-                  <i className="far fa-circle nav-icon" />
-                  <p>AirFrame</p>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/eq" className="nav-link">
-                  <i className="far fa-circle nav-icon" />
-                  <p>Electric Components</p>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/eq" className="nav-link">
-                  <i className="far fa-circle nav-icon" />
-                  <p>Instruments</p>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/eq" className="nav-link">
-                  <i className="far fa-circle nav-icon" />
-                  <p>Radio</p>
-                </a>
-              </li> */}
+                   
                   </ul>
                 </li>
               )}
@@ -197,36 +176,7 @@ const Menu = () => {
                       </li>
                     );
                   })}
-                  {/* <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Engine</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>AirFrame</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Electric Components</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Instruments</p>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="pages/forms/general.html" className="nav-link">
-                <i className="far fa-circle nav-icon" />
-                <p>Radio</p>
-              </a>
-            </li> */}
+                  
                 </ul>
               </li>
               {authenticatedUser.authority === "ROLE_ADMIN" && (
@@ -283,11 +233,11 @@ const Menu = () => {
               </li>
             </ul>
           </nav>
-          {/* /.sidebar-menu */}
         </div>
-        {/* /.sidebar */}
       </aside>
     </div>
+     */}
+    </>
   );
 };
 
