@@ -87,8 +87,26 @@ import Weat from "./components/tutoriallayout/radio/Weat";
 import Weater from "./components/tutoriallayout/radio/Weater";
 import Tutoriallayout from "./components/tutoriallayout/Tutoriallayout";
 
+// #4E66B0
+// const theme = createTheme({
+//   palette: {
+//     primary: {
+//       main: blue[400],
+//       dark: blue[400],
+//     },
+//     secondary: {
+//       main: purple[600],
+//       dark: purple[800]
+//     },
+//     light: {
+//       main: '#fff',
+//     }
+//   }
+// });
+
 function App() {
   return (
+    // <ThemeProvider theme={theme}>
     <div class="wrapper">
       <BrowserRouter>
         <Routes>
@@ -189,6 +207,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    // </ThemeProvider>
   );
 }
 

@@ -1,9 +1,5 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { useLocation } from 'react-router';
-import { Link } from 'react-router-dom';
-import bell from '../image/logo.png';
+import HomeNavbar from './HomeNavbar';
 
 function Navbars() {
   const location = useLocation();
@@ -18,7 +14,8 @@ function Navbars() {
   }
 
   return (
-    <Navbar style={{backgroundColor: '#4e66b0', color: '#fff'}} variant="dark">
+    <>
+      {/* <Navbar style={{backgroundColor: '#4e66b0', color: '#fff'}} variant="dark">
       <Container>
         <Navbar.Brand href="#home">
             <img
@@ -38,7 +35,9 @@ function Navbars() {
           <Link className='nav-link' to={"/auth"}>Login</Link>
         </Nav>
       </Container>
-    </Navbar>
+    </Navbar> */}
+    <HomeNavbar />
+    </>
   );
 }
 

@@ -1,5 +1,4 @@
-import { IconButton, ImageListItemBar } from "@material-ui/core";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { ImageListItemBar } from "@material-ui/core";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import * as React from "react";
@@ -23,22 +22,22 @@ export default function ImageGallery({ itemData }) {
               loading="lazy"
             />
             <ImageListItemBar
-              sx={{
-                background:
-                  "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
-                  "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
-              }}
+              // sx={{
+              //   background:
+              //     "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+              //     "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
+              // }}
               title={item.title}
-              position="top"
-              actionIcon={
-                <IconButton
-                  sx={{ color: "white" }}
-                  aria-label={`star ${item.title}`}
-                >
-                  <StarBorderIcon />
-                </IconButton>
-              }
-              actionPosition="left"
+              // position="top"
+              // actionIcon={
+              //   <IconButton
+              //     sx={{ color: "white" }}
+              //     aria-label={`star ${item.title}`}
+              //   >
+              //     <StarBorderIcon color="white" />
+              //   </IconButton>
+              // }
+              // actionPosition="left"
             />
           </ImageListItem>
         ))}

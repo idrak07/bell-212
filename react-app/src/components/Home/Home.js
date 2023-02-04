@@ -1,15 +1,15 @@
 import React from 'react';
-import HomeCarousel from './HomeCarousel';
 import Coursecategory from './Coursecategory';
-import Historymessage from './Historymessage';
-import Navbars from './Navbars';
-import Footer from './Footer'
+import Footer from './Footer';
 import Gallery from './Gallery';
+import Historymessage from './Historymessage';
+import HomeCarousel from './HomeCarousel';
+import Navbars from './Navbars';
 
 
 const Home = () => {
     return (
-        <div>
+        <>
            <Navbars></Navbars>
            <HomeCarousel></HomeCarousel>
            <br/><br/>
@@ -19,7 +19,7 @@ const Home = () => {
            <br/><br/>
            <Gallery/>
            <Footer></Footer>
-        </div>
+        </>
     );
 };
 
