@@ -31,7 +31,7 @@ function Navbars() {
           <Link className='nav-link' style={location.pathname === '/' ? activeClass : unActiveClass}  to={"/"}>Home</Link>
           <Link className='nav-link' style={location.pathname === '/historydetail' ? activeClass : unActiveClass} to={"/historydetail"}>History</Link>
           <Link className='nav-link' style={location.pathname === '/messagedetail' ? activeClass : unActiveClass}  to={"/messagedetail"}>Message</Link>
-          <Link className='nav-link' style={location.pathname.includes('trades') ? activeClass : unActiveClass} to={"/tradesdetail"}>Trades</Link>
+          <Link className='nav-link' style={location.pathname.includes('trades') ? activeClass : unActiveClass} to={"/trades"}>Trades</Link>
           <Link className='nav-link' to={"/auth"}>Login</Link>
         </Nav>
       </Container>
