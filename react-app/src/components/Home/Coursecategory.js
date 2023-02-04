@@ -1,15 +1,16 @@
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-import engine from '../image/engine0.png';
-import airframe from '../image/airframe.png';
-import radio from '../image/radio.jpg';
+import { Link } from "react-router-dom";
 import air from '../image/aircraft.jpg';
+import airframe from '../image/airframe.png';
+import engine from '../image/engine0.png';
+import radio from '../image/radio.jpg';
 import unit from '../image/unit.jpg';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function Coursecategory() {
   return (
     <div className="container">
+      <h2 style={{textAlign: 'center', marginBottom: '30px'}}>Trades</h2>
       <CardGroup>
         <Card className='mx-2 card-hover'>
           <Link to="/overview" style={{ textDecoration: 'none', color: 'black' }}>

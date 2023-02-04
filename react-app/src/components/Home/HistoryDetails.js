@@ -1,15 +1,14 @@
 import React from 'react';
+import Footer from './Footer';
 import Navbars from './Navbars';
-import Footer from './Footer'
-import Historymessage from './Historymessage';
-import ImgOverlayExample from './ImgOverlayExample';
 
 const HistoryDetails = () => {
     return (
         <div>
            <Navbars></Navbars>  
            <br/>
-           <Historymessage></Historymessage>
+           {/* <Historymessage></Historymessage> */}
+           <p className='container'>To be written..</p>
            <br/>
            {/* <ImgOverlayExample></ImgOverlayExample>
            <br/> */}

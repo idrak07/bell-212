@@ -91,7 +91,7 @@ function App() {
           <Route path="/dashboard" element={<Ui />} />
           <Route path="/historydetail" element={<HistoryDetails />} />
           <Route path="/messagedetail" element={<MessageDetails />} />
-          <Route path="/categorydetail" element={<CategooryDetails />} />
+          <Route path="/tradesdetail" element={<CategooryDetails />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/auth" element={<AuthSetting />} />

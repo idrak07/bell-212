@@ -1,6 +1,3 @@
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
 function Footer() {
   return (
@@ -54,7 +51,7 @@ function Footer() {
     </div> */}
 
         <div class="d-flex justify-content-between py-4 my-4 border-top">
-          <p>© 2022 Bel-212. All Rights Reserved.</p>
+          <p>© 2023 Bell-212. All Rights Reserved.</p>
           {/* <ul class="list-unstyled d-flex">
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"></svg></a></li>
         <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"></svg></a></li>

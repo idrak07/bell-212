@@ -1,9 +1,20 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { useLocation } from 'react-router';
 import bell from '../image/logo.png';
 
 function Navbars() {
+  const location = useLocation();
+
+  const activeClass = {
+    fontWeight: 'bold',
+    color: 'white'
+  }
+  const unActiveClass = {
+    fontWeight: '400'
+  }
+
   return (
     <Navbar style={{backgroundColor: '#4e66b0', color: '#fff'}} variant="dark">
       <Container>
@@ -18,10 +29,10 @@ function Navbars() {
             Our Responsibilty, Our Pride
         </Navbar.Brand>
         <Nav className="justify-content-end">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/historydetail">History</Nav.Link>
-          <Nav.Link href="/messagedetail">Message</Nav.Link>
-          <Nav.Link href="/categorydetail">Categories</Nav.Link>
+          <Nav.Link style={location.pathname === '/' ? activeClass : unActiveClass}  href="/">Home</Nav.Link>
+          <Nav.Link style={location.pathname === '/historydetail' ? activeClass : unActiveClass} href="/historydetail">History</Nav.Link>
+          <Nav.Link style={location.pathname === '/messagedetail' ? activeClass : unActiveClass}  href="/messagedetail">Message</Nav.Link>
+          <Nav.Link style={location.pathname === '/tradesdetail' ? activeClass : unActiveClass} href="/tradesdetail">Trades</Nav.Link>
           <Nav.Link href="/auth">Login</Nav.Link>
         </Nav>
       </Container>
