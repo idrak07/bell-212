@@ -17,6 +17,12 @@ const EngineDetail = () => {
       navigate("/auth");
     }
   };
+  const mystyle = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Arial"
+  };
   return (
     <div>
       <Navbars></Navbars>
@@ -91,7 +97,8 @@ const EngineDetail = () => {
               <li>Governing function.</li>
               <li>Torque limiting.</li>
               <li>Torque sharing (except 412HP/EP and Post SB5267).</li>
-            </ul>
+            </ul><br/>
+            <img src={engine} style={{display: "block", marginLeft: "auto", marginRight: "auto", width: "60%"}}/>
           </div>
           <div className="row">
             {/* learn more button */}
