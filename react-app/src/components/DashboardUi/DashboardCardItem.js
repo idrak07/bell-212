@@ -1,9 +1,9 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default function DashboardCardItem({subject}) {
@@ -22,7 +22,7 @@ export default function DashboardCardItem({subject}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <a size="small" href={subject.link}>Learn More</a>
+        <Link to={subject.link}>Learn More</Link>
       </CardActions>
     </Card>
   );

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalStorage";
 import "./DashboardSidebar.css";
 
 const SidebarItem = (props) => {
   const location = useLocation();
+  const [user, setUser] = useLocalStorage('user')
   const { name, subMenus, iconClassName, onClick, to, exact } = props;
   const [expand, setExpand] = useState(
     subMenus &&
@@ -26,6 +28,11 @@ const SidebarItem = (props) => {
         exact
         to={to ?? "#"}
         onClick={() => {
+          if(name === 'Logout') {
+            setUser(null);
+            window.location.href = '/auth'
+            return;
+          }
           if (subMenus) {
             setExpand((e) => !e);
           }
@@ -37,7 +44,7 @@ const SidebarItem = (props) => {
         </div>
         <span>{name}</span>
 
-        {!!subMenus && !to && (
+        {!!subMenus.length && !to && (
           <>
             {expand ? (
               <span style={{ position: "absolute", right: "10px" }}>

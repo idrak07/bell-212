@@ -1,5 +1,6 @@
 import { Avatar } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useLocation } from "react-router";
 import { default as logo } from "../../assets/bell-logo2.jpg";
 import { SidebarContext } from "../../context/context.";
 import useLocalStorage from "../../hooks/useLocalStorage";
@@ -18,7 +19,7 @@ export const menuItems = [
   {
     name: "Video Tutorial",
     exact: true,
-    iconClassName: "bi bi-speedometer2",
+    iconClassName: "bi bi-play-btn",
     subMenus: [
       { name: "Engine", to: "/tutorial/Engine" },
       { name: "Air Frame", to: "/tutorial/Air Frame" },
@@ -30,7 +31,8 @@ export const menuItems = [
   {
     name: "Set Quiz Questions",
     exact: true,
-    iconClassName: "bi bi-speedometer2",
+    iconClassName: "bi bi-puzzle",
+    isAdminAccess: true,
     subMenus: [
       { name: "Engine", to: "/quiz/Engine" },
       { name: "Air Frame", to: "/quiz/Air Frame" },
@@ -42,7 +44,7 @@ export const menuItems = [
   {
     name: "Leader Board",
     exact: true,
-    iconClassName: "bi bi-speedometer2",
+    iconClassName: "bi bi-clipboard-check",
     subMenus: [
       { name: "Engine", to: "/leaderboard/Engine" },
       { name: "Air Frame", to: "/leaderboard/Air Frame" },
@@ -58,17 +60,31 @@ export const menuItems = [
   {
     name: "Quiz Settings",
     to: `/quiz-settings`,
-    iconClassName: "bi bi-vector-pen",
+    iconClassName: "bi bi-gear",
+    isAdminAccess: true,
   },
-  { name: "Users", to: `/users`, iconClassName: "bi bi-vector-pen" },
-  { name: "Quizzes", to: `/quiz-list`, iconClassName: "bi bi-vector-pen" },
-  { name: "Profile", to: `/Profile`, iconClassName: "bi bi-vector-pen" },
-  { name: "Logout", to: `/logout`, iconClassName: "bi bi-vector-pen" },
+  { name: "Users", to: `/users`, iconClassName: "bi bi-people", isAdminAccess: true },
+  { name: "Quizzes", to: `/quiz-list`, iconClassName: "bi bi-card-list", isOnlyUserAccess: true },
+  { name: "Profile", to: `/Profile`, iconClassName: "bi bi-person" },
+  { name: "Logout", iconClassName: "bi bi-box-arrow-left" },
 ];
 
 const DashboardSidebar = (props) => {
-  const [inactive, setInactive] =  useContext(SidebarContext)
+  const location = useLocation();
+  const [inactive, setInactive] = useContext(SidebarContext);
   const [authUser, _] = useLocalStorage("user");
+  useEffect(() => {
+    if (location.pathname.includes("interactive-tutorial")) {
+      setInactive(true);
+    }
+  }, [location.pathname]);
+  
+  let mainMenuItems;
+  if(authUser.authority.includes('ROLE_ADMIN')) {
+    mainMenuItems = menuItems.filter(i => !i.isOnlyUserAccess)
+  } else {
+    mainMenuItems = menuItems.filter(i => !i.isAdminAccess)
+  }
 
   return (
     <div className={`side-menu ${inactive ? "inactive" : ""}`}>
@@ -89,7 +105,7 @@ const DashboardSidebar = (props) => {
 
       <div className="main-menu">
         <ul>
-          {menuItems.map((menuItem, index) => (
+          {mainMenuItems.map((menuItem, index) => (
             <SidebarItem
               key={index}
               name={menuItem.name}

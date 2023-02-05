@@ -9,16 +9,18 @@ export const ProtectedRoute = ({
   isAllowed,
 }) => {
   const location = useLocation();
-  const [inactive, setInactive] =  useContext(SidebarContext)
-  console.log('protected route')
+  const [inactive, setInactive] = useContext(SidebarContext);
+  console.log("protected route");
   useEffect(() => {
-    console.log({inactive})
+    console.log({ inactive });
 
     const c = document.querySelector(".content-wrapper");
-    if (inactive) {
-      c.classList.add("inactive");
-    } else {
-      c.classList.remove("inactive");
+    if (c) {
+      if (inactive) {
+        c.classList.add("inactive");
+      } else {
+        c.classList.remove("inactive");
+      }
     }
   }, [inactive, location.pathname]);
   if (!isAllowed) {

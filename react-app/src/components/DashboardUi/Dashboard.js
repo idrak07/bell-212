@@ -1,11 +1,5 @@
 import { Grid } from '@material-ui/core';
-import React, { Component } from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import React, { Component } from 'react';
 import './Dashboard.css';
 import DashboardCardItem from './DashboardCardItem';
 
@@ -14,19 +8,19 @@ const subjectList = [
     id: 1,
     name: 'Engine',
     description: 'An engine or motor is a machine designed to convert one form of energy into mechanical energy',
-    link: '/overview'
+    link: '/interactive-tutorial/engine/overview'
   },
   {
     id: 2,
     name: 'Airframe',
     description: 'The mechanical structure of an aircraft is known as the airframe. Includes fuselage, undercarriage, empennage and wings.',
-    link: '/aircond'
+    link: '/interactive-tutorial/airframe/overview'
   },
   {
     id: 3,
     name: 'Electric Components',
     description: 'The electrical systems, in most helicopters, reflect the increased use of sophisticated avionics and other electrical accessories.',
-    link: '/elecoverview'
+    link: '/interactive-tutorial/electric-components/overview'
   },
   {
     id: 4,
@@ -52,7 +46,7 @@ export default class Dashboard extends Component {
             <div className="container-fluid">
               <div className="row mb-2">
                 <div className="col-sm-6">
-                  <h1 className="m-0 text-dark">Subject List</h1>
+                  <h1 className="m-0 text-dark">Trades List</h1>
                 </div>{/* /.col */}
                 <div className="col-sm-6">
                   <ol className="breadcrumb float-sm-right">

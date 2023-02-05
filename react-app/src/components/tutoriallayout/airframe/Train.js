@@ -1,30 +1,14 @@
-import React, { useState, Component, useEffect } from "react";
-import Navlay from "../Navlay";
+import React, { useState } from "react";
+import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import file from "../web/docs/overhaul-schedule.pdf";
-import { StlViewer } from "react-stl-viewer";
-import view from "./models/bell212.stl";
-import { Worker } from "@react-pdf-viewer/core";
 // Import the main Viewer component
-import { Viewer } from "@react-pdf-viewer/core";
 // Import the styles
 import "@react-pdf-viewer/core/lib/styles/index.css";
 // default layout plugin
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 // Import styles of default layout plugin
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const style = {
   top: 0,
@@ -44,11 +28,11 @@ const Train = () => {
 
   return (
     <div>
-      <Navlay></Navlay>
+      {/* <Navlay></Navlay> */}
       <div>
         <Container>
           <Row>
-            <Col xs={6} md={4}>
+            {/* <Col xs={6} md={4}>
               <br />
               <h4>Contents</h4>
               <br />
@@ -107,11 +91,11 @@ const Train = () => {
                   <Link to="/train">Power Train</Link>
                 </ListGroup.Item>
               </ListGroup>
-            </Col>
-            <Col xs={12} md={8}>
+            </Col> */}
+            <Col xs={12} >
+              {/* <br />
               <br />
-              <br />
-              <br />
+              <br /> */}
 
               <div class="ui basic segment exra">
                 <div class="ui top attached pointing secondary menu">

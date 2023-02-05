@@ -1,28 +1,15 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import Engine from './engine/Engine';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
-
-
+import React from "react";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Engine from "./engine/Engine";
 
 const Sidebar = () => {
-    return (
-        <div>
-           <Container>
-      <Row>
-      <Col xs={6} md={4}>
+  return (
+    <div>
+      <Container>
+        <Row>
+          {/* <Col xs={6} md={4}>
       <br/>
       <h4>Contents</h4>
       <br/>
@@ -53,22 +40,19 @@ const Sidebar = () => {
        
       </ListGroup.Item>
     </ListGroup>
-        </Col>
-        <Col xs={12} md={8}>
+        </Col> */}
+          <Col xs={12}>
+            {/* <br/>
         <br/>
         <br/>
-        <br/>
-        <br/>
-       
-        <Engine></Engine>
-        </Col>
-        
-      </Row>
+        <br/> */}
 
-      
-    </Container> 
-        </div>
-    );
+            <Engine></Engine>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
 };
 
 export default Sidebar;

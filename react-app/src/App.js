@@ -18,6 +18,12 @@ import SignUp from "./components/Login/SignUp";
 import CreateQuizPage from "./components/pages/CreateQuizPage";
 import EditQuizPage from "./components/pages/EditQuizPage";
 import GiveTestPage from "./components/pages/GiveTestPage";
+import AirframeTutorialLayout from "./components/pages/InteractiveTutorial/Airframe/AirframeTutorialLayout";
+import ElectricComponentTutorialLayout from "./components/pages/InteractiveTutorial/ElectricComponents/ElectricComponentTutorialLayout";
+import EngineTutorialLayout from "./components/pages/InteractiveTutorial/Engine/EngineTutorialLayout";
+import InstrumentsTutorialLayout from "./components/pages/InteractiveTutorial/Instruments/InstrumentsTutorialLayout";
+import InteractiveTutorial from "./components/pages/InteractiveTutorial/InteractiveTutorial";
+import RadioTutorialLayout from "./components/pages/InteractiveTutorial/Radio/RadioTutorialLayout";
 import LeaderBoardPage from "./components/pages/LeaderBoardPage";
 import ProfilePage from "./components/pages/ProfilePage";
 import QuizSettings from "./components/pages/QuizSettings";
@@ -87,6 +93,7 @@ import Vhf from "./components/tutoriallayout/radio/Vhf";
 import Vor from "./components/tutoriallayout/radio/Vor";
 import Weat from "./components/tutoriallayout/radio/Weat";
 import Weater from "./components/tutoriallayout/radio/Weater";
+import Sidebar from "./components/tutoriallayout/Sidebar";
 import Tutoriallayout from "./components/tutoriallayout/Tutoriallayout";
 import { SidebarContext } from "./context/context.";
 import useLocalStorage from "./hooks/useLocalStorage";
@@ -110,10 +117,8 @@ import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   const [inactive, setInactive] = useState(false);
-  const [authUser, _] = useLocalStorage('user');
-  const isAdmin = !!authUser && authUser.authority.includes('ROLE_ADMIN')
-
-
+  const [authUser, _] = useLocalStorage("user");
+  const isAdmin = !!authUser && authUser.authority.includes("ROLE_ADMIN");
 
   return (
     // <ThemeProvider theme={theme}>
@@ -130,18 +135,12 @@ function App() {
             <Route path="/trades/engine" element={<EngineDetail />} />
             <Route path="/trades/airframe" element={<AirframeDetail />} />
             <Route path="/trades/radio" element={<RadioDetail />} />
-            <Route
-              path="/trades/electrical"
-              element={<ElectricalDetail />}
-            />
-            <Route
-              path="/trades/instruments"
-              element={<InstrumentDetail />}
-            />
+            <Route path="/trades/electrical" element={<ElectricalDetail />} />
+            <Route path="/trades/instruments" element={<InstrumentDetail />} />
 
             {/* dashboard routes */}
             {/* routes that admin or user can access */}
-            <Route element={<ProtectedRoute isAllowed={!!authUser}/>}>
+            <Route element={<ProtectedRoute isAllowed={!!authUser} />}>
               <Route path="/dashboard" element={<Ui />} />
               <Route path="/quiz/:topic" element={<ShowAdminQuizPage />} />
               <Route path="/quiz/:topic/:id" element={<EditQuizPage />} />
@@ -153,7 +152,7 @@ function App() {
             </Route>
 
             {/* routes only admin can access */}
-            <Route element={<ProtectedRoute isAllowed={isAdmin}/>}>
+            <Route element={<ProtectedRoute isAllowed={isAdmin} />}>
               <Route path="/quiz/:topic/create" element={<CreateQuizPage />} />
               <Route path="/users" element={<UsersPage />} />
               <Route path="/users/add" element={<AddUserPage />} />
@@ -163,7 +162,61 @@ function App() {
                 path="/quiz-settings/create"
                 element={<CreateQuizSettings />}
               />
-               <Route path="/quiz-settings" element={<QuizSettings />} />
+              <Route path="/quiz-settings" element={<QuizSettings />} />
+            </Route>
+
+            {/* routes for interactive tutorial */}
+            <Route element={<ProtectedRoute isAllowed={!!authUser} />}>
+              <Route
+                path="interactive-tutorial"
+                element={<InteractiveTutorial />}
+              >
+                {/* engine layout */}
+                <Route path="engine" element={<EngineTutorialLayout />}>
+                  <Route path="overview" element={<Sidebar />} />
+                  <Route path="basic" element={<Basicturbo1 />} />
+                  <Route path="cold" element={<Cold />} />
+                  <Route path="hot" element={<Hot />} />
+                  <Route path="turbine" element={<Turbine />} />
+                  <Route path="oil" element={<Oil />} />
+                </Route>
+
+
+                {/* airframe layout */}
+                <Route path="airframe" element={<AirframeTutorialLayout />}>
+                  <Route path="overview" element={<Airframe />} />
+                  <Route path="states" element={<States />} />
+                  <Route path="process" element={<Process />} />
+                  <Route path="publication" element={<Publication />} />
+                  <Route path="airworthiness" element={<Worthiness />} />
+                  <Route path="schedule" element={<Schedule />} />
+                  <Route path="gdata" element={<Data />} />
+                  <Route path="mrotor" element={<Rotor />} />
+                  <Route path="trotor" element={<Tail />} />
+                  <Route path="transmission" element={<Transmission />} />
+                  <Route path="gearbox" element={<Gearbox />} />
+                  <Route path="train" element={<Train />} />
+                </Route>
+
+
+                {/* electric components layout */}
+                  <Route path="electric-components" element={<ElectricComponentTutorialLayout />}>
+                  <Route path="overview" element={<Elecoveriew />} />
+                </Route>
+
+
+                {/* Instruments layout */}
+                <Route path="instruments" element={<InstrumentsTutorialLayout />}>
+                  <Route path="overview" element={<Airframe />} />
+                </Route>
+
+
+                {/* Radio layout */}
+                <Route path="instruments" element={<RadioTutorialLayout />}>
+                  <Route path="overview" element={<Airframe />} />
+                </Route>
+
+              </Route>
             </Route>
 
             <Route path="/login" element={<SignIn />} />

@@ -1,34 +1,29 @@
-import React, { useState, Component, useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import file from "../web/docs/electric.pdf";
-import { Worker } from "@react-pdf-viewer/core";
-import { Viewer } from "@react-pdf-viewer/core";
+import { Viewer, Worker } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-import ElecSidebar from "./ElecSidebar";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Navbars from './../../Home/Navbars';
+import React from "react";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import file from "../web/docs/electric.pdf";
 
 const Air = () => {
     const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   return (
     <div>
-      <Navbars></Navbars>
+      {/* <Navbars></Navbars> */}
       <div>
         <Container>
-          <div className='row justify-content-center'>
+          {/* <div className='row justify-content-center'>
               <div className='col-12 my-5'><h2>Contents- Air frame</h2></div>
-            </div>
+            </div> */}
           <Row>
-            <Col xs={6} md={3}>
+            {/* <Col xs={6} md={3}>
               <ElecSidebar></ElecSidebar>
-            </Col>
-            <Col xs={12} md={9}>
-
+            </Col> */}
+            <Col xs={12}>
               <div className="pdf-container exra">
                 <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.14.305/build/pdf.worker.min.js">
                   <Viewer
