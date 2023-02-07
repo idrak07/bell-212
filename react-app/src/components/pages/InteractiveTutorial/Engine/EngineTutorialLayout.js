@@ -11,24 +11,21 @@ const EngineTutorialLayout = () => {
       <div>
         <ListGroup>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/engine/overview">Overview</Link>
+            <Link to="/interactive-tutorial/engine/overview" style={{display: "block"}}>Overview</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/engine/basic">
+            <Link to="/interactive-tutorial/engine/basic" style={{display: "block"}}>
               Basic Turboshaft Operation
             </Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/engine/cold">Cold Section</Link>
+            <Link to="/interactive-tutorial/engine/cold" style={{display: "block"}}>Cold Section</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/engine/hot">Hot Section</Link>
+            <Link to="/interactive-tutorial/engine/hot" style={{display: "block"}}>Hot Section</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/engine/turbine">
-              {" "}
-              Compressor Turbine
-            </Link>
+            <Link to="/interactive-tutorial/engine/turbine" style={{display: "block"}}>Compressor Turbine</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
             <Link to="/interactive-tutorial/engine/oil"> Oil System</Link>

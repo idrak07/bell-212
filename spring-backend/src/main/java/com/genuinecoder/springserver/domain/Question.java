@@ -29,6 +29,10 @@ public class Question {
 
     private String correctChoice;
 
+    @ManyToOne
+    @JoinColumn(name = "quiz_id", referencedColumnName = "id")
+    private Quiz quiz;
+
     public Long getId() {
         return id;
     }
@@ -101,6 +105,14 @@ public class Question {
         this.correctChoice = correctChoice;
     }
 
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
     @Override
     public String toString() {
         return "Question{" +
@@ -113,6 +125,7 @@ public class Question {
                 ", choice3='" + choice3 + '\'' +
                 ", choice4='" + choice4 + '\'' +
                 ", correctChoice='" + correctChoice + '\'' +
+                ", quiz=" + quiz +
                 '}';
     }
 }
