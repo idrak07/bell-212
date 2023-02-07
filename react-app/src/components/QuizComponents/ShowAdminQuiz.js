@@ -82,7 +82,7 @@ const ShowAdminQuiz = () => {
             <div style={{
                 whiteSpace: 'nowrap'
             }}>
-                <Link to={`/quiz/${params?.topic}/create`}>
+                <Link to={`/mock/${params?.topic}/create`}>
                     <CustomButton type='primary'>Create Question</CustomButton>
                 </Link>
             </div>

@@ -1,11 +1,11 @@
 import React from "react";
-import QuizListTable from "./QuizListTable";
+import QuizSettingsCardList from "./QuizSettingsCardList";
 
 const QuizSettingsList = () => {
   return <div>
     <div className='tutorial' >
 
-      <QuizListTable />
+      <QuizSettingsCardList />
     </div>
   </div>;
 };

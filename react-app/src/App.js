@@ -24,7 +24,6 @@ import EngineTutorialLayout from "./components/pages/InteractiveTutorial/Engine/
 import InstrumentsTutorialLayout from "./components/pages/InteractiveTutorial/Instruments/InstrumentsTutorialLayout";
 import InteractiveTutorial from "./components/pages/InteractiveTutorial/InteractiveTutorial";
 import RadioTutorialLayout from "./components/pages/InteractiveTutorial/Radio/RadioTutorialLayout";
-import LeaderBoardPage from "./components/pages/LeaderBoardPage";
 import ProfilePage from "./components/pages/ProfilePage";
 import QuizSettings from "./components/pages/QuizSettings";
 import CreateQuizSettings from "./components/pages/QuizSettings/CreateQuizSettings";
@@ -142,18 +141,17 @@ function App() {
             {/* routes that admin or user can access */}
             <Route element={<ProtectedRoute isAllowed={!!authUser} />}>
               <Route path="/dashboard" element={<Ui />} />
-              <Route path="/quiz/:topic" element={<ShowAdminQuizPage />} />
-              <Route path="/quiz/:topic/:id" element={<EditQuizPage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/quiz-list" element={<UserQuizLisPage />} />
               <Route path="/test/:type/:topic" element={<GiveTestPage />} />
-              <Route path="/leaderboard/:topic" element={<LeaderBoardPage />} />
               <Route path="/tutorial/:topic" element={<TutorialPage />} />
             </Route>
 
             {/* routes only admin can access */}
             <Route element={<ProtectedRoute isAllowed={isAdmin} />}>
-              <Route path="/quiz/:topic/create" element={<CreateQuizPage />} />
+              <Route path="/mock/:topic" element={<ShowAdminQuizPage />} />
+              <Route path="/mock/:topic/:id" element={<EditQuizPage />} />
+              <Route path="/mock/:topic/create" element={<CreateQuizPage />} />
               <Route path="/users" element={<UsersPage />} />
               <Route path="/users/add" element={<AddUserPage />} />
               <Route path="/users/:id" element={<EditUserPage />} />

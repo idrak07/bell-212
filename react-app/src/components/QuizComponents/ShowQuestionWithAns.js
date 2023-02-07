@@ -103,7 +103,7 @@ const ShowQuestionWithAns = ({ question, handleDeleteQuestion, showActionButton 
                   marginTop: '15px'
                 }}>
                   <CustomButton onClick={() => {
-                    navigation(`/quiz/${params?.topic}/${question.id}`)
+                    navigation(`/mock/${params?.topic}/${question.id}`)
                   }} style={{
                     fontSize: '0.9rem',
                     height: '38px'

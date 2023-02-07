@@ -77,7 +77,7 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
         alert('Error editing question');
         return;
       }
-      window.location.href=`/quiz/${params?.topic}`
+      window.location.href=`/mock/${params?.topic}`
     } else {
       doFetch({
         method: 'POST',
@@ -89,7 +89,7 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
         alert('Error creating question');
         return;
       }
-      window.location.href=`/quiz/${params?.topic}`
+      window.location.href=`/mock/${params?.topic}`
       
     }
   }

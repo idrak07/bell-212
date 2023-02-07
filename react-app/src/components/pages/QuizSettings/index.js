@@ -1,9 +1,9 @@
 import { Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router";
+import CustomButton from '../../../ui/CustomButton';
 import AdminLayout from "../../layouts/AdminLayout";
 import QuizSettingsList from "./QuizSettingsList";
-import CustomButton from '../../../ui/CustomButton'
-import { useNavigate } from "react-router";
 
 const QuizSettings = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const QuizSettings = () => {
             id="tableTitle"
             component="div"
           >
-            Quiz Settings
+            Quizzes
           </Typography>
 
           <div>
@@ -40,8 +40,6 @@ const QuizSettings = () => {
         <div style={{
             fontSize: '1.4rem',
             // borderBottom: '1px solid lightgrey',
-            paddingBottom: '10px',
-            borderBottom: '1px solid lightgrey',
             paddingBottom: '8px',
             marginBottom: '10px',
           }}></div>
