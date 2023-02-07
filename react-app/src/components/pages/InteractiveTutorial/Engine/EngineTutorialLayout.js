@@ -28,7 +28,7 @@ const EngineTutorialLayout = () => {
             <Link to="/interactive-tutorial/engine/turbine" style={{display: "block"}}>Compressor Turbine</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/engine/oil"> Oil System</Link>
+            <Link to="/interactive-tutorial/engine/oil" style={{display: "block"}}> Oil System</Link>
           </ListGroup.Item>
         </ListGroup>
       </div>
