@@ -2,11 +2,12 @@
   margin: 0;
   padding: 0;
 }
-ul {
+
+.main-menu ul {
   padding: 0;
   margin: 0;
 }
-li {
+.main-menu ul li {
   list-style: none;
 }
 
