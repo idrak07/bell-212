@@ -1,0 +1,26 @@
+
+
+
+QuizAssignee:
+id: number
+quiz: Quiz
+user: User
+points: number
+
+
+Quiz: 
+id: number
+title: string
+startTime: LocalDateTime
+endTime : LocalDateTime
+points: number
+topic: Topic
+questions[]: Questions[]
+assigneeList[]: QuizAssignee[]
+
+
+topic
+QuestionType
+quiz:Quiz
+
+

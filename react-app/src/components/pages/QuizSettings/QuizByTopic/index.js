@@ -1,12 +1,14 @@
 import { Typography } from "@mui/material";
-import React from "react";
-import { useNavigate } from "react-router";
-import CustomButton from "../../../ui/CustomButton";
-import AdminLayout from "../../layouts/AdminLayout";
-import QuizSettingsList from "./QuizSettingsList";
+import { useNavigate, useParams } from "react-router";
+import CustomButton from "../../../../ui/CustomButton";
+import AdminLayout from "../../../layouts/AdminLayout";
+import QuizListByTopic from "./QuizListByTopic";
 
-const QuizSettings = () => {
+const QuizByTopic = () => {
   const navigate = useNavigate();
+
+  const params = useParams();
+
   return (
     <AdminLayout>
       <div
@@ -25,13 +27,13 @@ const QuizSettings = () => {
           }}
         >
           <Typography variant="h4" id="tableTitle" component="div">
-            Quizzes List
+            Quiz: {params?.topic}
           </Typography>
 
           <div>
             <CustomButton
               onClick={() => {
-                navigate("/quiz-settings/create");
+                navigate(`/quiz-settings/${params?.topic}/create`);
               }}
               style={{
                 padding: "8px 22px",
@@ -51,10 +53,10 @@ const QuizSettings = () => {
           }}
         ></div>
 
-        <QuizSettingsList />
+        <QuizListByTopic />
       </div>
     </AdminLayout>
   );
 };
 
-export default QuizSettings;
+export default QuizByTopic;
