@@ -4,8 +4,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { Link } from "react-router-dom";
+import CustomButton from "../../ui/CustomButton";
 
-export default function DashboardCardItem({ subject }) {
+export default function DashboardCardItem({ subject, isQuiz=false }) {
   const goto = (h) => {
     window.location.href = h;
   };
@@ -35,7 +36,13 @@ export default function DashboardCardItem({ subject }) {
         <Typography variant="body2">{subject.description}</Typography>
       </CardContent>
       <CardActions style={{margin: '0 0 10px 10px'}}>
-        <Link to={subject.link}>Learn More</Link>
+        {!isQuiz ? (
+          <Link to={subject.link}>Learn More</Link>
+        ) : (
+          <CustomButton variant="primary" style={{padding: '6px 18px', fontSize: '16px'}}>
+              <Link style={{color: 'white'}} to={subject.link}>See Quizzes</Link>
+          </CustomButton>
+        )}
       </CardActions>
     </Card>
   );

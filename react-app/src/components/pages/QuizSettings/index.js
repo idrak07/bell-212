@@ -8,10 +8,11 @@ import QuizSettingsList from "./QuizSettingsList";
 const QuizSettings = () => {
   const navigate = useNavigate();
   return (
+    
     <AdminLayout>
       <div style={{
-        padding: '18px',
-        marginLeft: '15px',
+        padding: '8px',
+        marginLeft: '8px',
         display: 'flex',
         flexDirection: 'column',
       }}>
@@ -20,12 +21,12 @@ const QuizSettings = () => {
           justifyContent: 'space-between',
           alignItems: 'center'
         }}>
-          <Typography
-            variant="h5"
+            <Typography
+            variant="h4"
             id="tableTitle"
             component="div"
           >
-            Quizzes
+            Quizzes List
           </Typography>
 
           <div>
