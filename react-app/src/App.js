@@ -161,6 +161,9 @@ function App() {
                 element={<CreateQuizSettings />}
               />
               <Route path="/quiz-settings" element={<QuizSettings />} />
+              <Route path="/quiz-settings/:topic" element={<QuizSettings />} />
+
+              
             </Route>
 
             {/* routes for interactive tutorial */}
