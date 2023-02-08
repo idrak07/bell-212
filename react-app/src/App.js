@@ -239,7 +239,24 @@ function App() {
 
                 {/* Radio layout */}
                 <Route path="radio" element={<RadioTutorialLayout />}>
-                  <Route path="overview" element={<Airframe />} />
+                  <Route path="overview" element={<Radview />} />
+                  <Route path="inter" element={<Inter />} />
+                  <Route path="vhf" element={<Vhf />} />
+                  <Route path="hf" element={<Hf />} />
+                  <Route path="hfr" element={<Hfr />} />
+                  <Route path="adf" element={<Adf />} />
+                  <Route path="adfr" element={<Adfr />} />
+                  <Route path="vor" element={<Vor />} />
+                  <Route path="mark" element={<Mark />} />
+                  <Route path="atc" element={<Atc />} />
+                  <Route path="dme" element={<Dme />} />
+                  <Route path="elt" element={<Elt />} />
+                  <Route path="eltart" element={<Eltart />} />
+                  <Route path="homer" element={<Homer />} />
+                  <Route path="radar" element={<Radar />} />
+                  <Route path="weat" element={<Weat />} />
+                  <Route path="weater" element={<Weater />} />
+                  <Route path="gps" element={<Gps />} />
                 </Route>
 
               </Route>

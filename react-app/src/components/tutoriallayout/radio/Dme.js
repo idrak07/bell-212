@@ -17,15 +17,10 @@ const Dme = () => {
 
   return (
     <div>
-      <Navlay></Navlay>
       <div>
         <Container>
           <Row>
-            <Col xs={6} md={4}>
-            <Radside></Radside>
-            </Col>
-            <Col xs={12} md={8}>
-
+            <Col xs={12}>
               <div className="pdf-container exra">
                 <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.14.305/build/pdf.worker.min.js">
                   <Viewer
