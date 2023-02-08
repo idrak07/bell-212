@@ -19,78 +19,13 @@ const Publication = () => {
 
   return (
     <div>
-      {/* <Navlay></Navlay> */}
       <div>
         <Container>
           <Row>
-            {/* <Col xs={6} md={4}>
-              <br />
-              <h4>Contents</h4>
-              <br />
-              <ListGroup>
-                <ListGroup.Item action variant="secondary">
-                  <Box sx={{ minWidth: 70 }}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Introduction to Airframe
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                      >
-                        <MenuItem value={10}>
-                          <Link to="/overview">Overview</Link>
-                        </MenuItem>
-                        <MenuItem value={20}>
-                          <Link to="/States">States of Overhauling</Link>
-                        </MenuItem>
-                        <MenuItem value={30}>
-                          <Link to="/process">Process of Overhauling</Link>
-                        </MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="success">
-                  <Link to="/publication">Publication</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/Airworthiness">Airworthiness</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="warning">
-                  <Link to="/Schedule">Components Overhaul Schedule</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="primary">
-                  <Link to="/gdata">General Data</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="dark">
-                  <Link to="/mrotor"> Main Rotor</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="secondary">
-                  <Link to="/trotor">Tail Rotor</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="success">
-                  <Link to="/Transmission">Transmission Assembly</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/Gearbox">Gearbox</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="warning">
-                  <Link to="/train">Power Train</Link>
-                </ListGroup.Item>
-              </ListGroup>
-            </Col> */}
             <Col xs={12}>
-              {/* <br />
-              <br />
-              <br />
-              <br /> */}
 
-              <div class="ui basic padded segment exra">
-                <h1 class="ui header">
+              <div class="ui basic padded segment exra px-5">
+                <h1 class="ui header mt-3 mb-5">
                   Publications & Bulletin Of Bell- 212 Helicopter
                 </h1>
 
@@ -101,31 +36,31 @@ const Publication = () => {
                 </p>
 
                 <ol class="ui list">
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Maintainance Manual (MM): It contains the following-
-                    <ol>
-                      <li>
+                    <ul>
+                      <li className="mt-3 mb-3" style={{textAlign: "justify"}}>
                         Index of chapter with subject and revision chapter.
                       </li>
-                      <li>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         List of mandatory airworthiness limited life components.
                       </li>
-                      <li>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         Scheduled inspection after operating helicopter
                         (Hours/Calender)
                       </li>
-                      <li>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         List of components to be overhauled (Hours/Calender)
                       </li>
-                      <li>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         Procedure of components removal, disassembly,
                         inspection, rectification, replacement of parts,
                         reassembly and reinstallation in the helicopter.
                       </li>
-                      <li>Trouble shooting of different defects.</li>
-                    </ol>
+                      <li className="mb-3" style={{textAlign: "justify"}}>Trouble shooting of different defects.</li>
+                    </ul>
                   </li>
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Component Repair & Overhaul Manual (CR&O): It provides the
                     procedure to disassembly, inspection, data(range) for repair
                     and reassembly of components.
@@ -134,38 +69,38 @@ const Publication = () => {
                     both maintenance manual and component repair & overhaul
                     manual.
                   </li>
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Ilustrated Parts Breakdown (IPB): It provides the part
                     number quantity of item required for maintenance, repair or
                     overhaul of helicopter components or single item including
                     hardware as per helicopter serial number.
                   </li>
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Aircraft Record (Log Book): This is used to enter helicopter
                     flying hrs, landings, major components replacement, ASB or
                     TB compliance and inspection carried out.
                   </li>
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Historical Service Record (Log Card): It is used for life or
                     major components to enter time since new, time since
                     overhaul, frequency of overhaul (Operating hrs/Calendar),
                     date & helicopter ser number installed and reason for
                     removal.
                   </li>
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Service Instruction (SI): This publication covers kits to be
                     installed on the aircraft which are not the part of basic
                     helicopter. The procedure for installation & removal, parts
                     breakdown, operation and maintenance are illustrated.
                   </li>
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Structural Repair Manual (SRM): This manual is used to
                     repair structure of helicopter.
                   </li>
-                  <li>
+                  <li className="mb-3" style={{textAlign: "justify"}}>
                     Bulletin-
-                    <ol>
-                      <li>
+                    <ul>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         Technical Bulletin (TB): This used to provide operators
                         with information of technical nature but does not affect
                         flight safety. The TB is optional for compliance.
@@ -174,26 +109,26 @@ const Publication = () => {
                         increase in time between inspection or overhaul and
                         increase of service or retirement life of component.
                       </li>
-                      <li>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         Alert Service Bulletin (ASB): This is approved by safety
                         Board of Federal Aviation Administration (FAA) to notify
                         the Bell helicopter operators of safety matters. It is
                         mandatory and become inactive when it is complied and
                         included in maintenance Manual.
                       </li>
-                      <li>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         Operation Safety Notice (OSN): This is used to advise
                         operators of safety condition that has come to
                         manufacturer attention. Normally, technical compliance
                         is not published. It is approved by Safety Board prior
                         to release.
                       </li>
-                      <li>
+                      <li className="mb-3" style={{textAlign: "justify"}}>
                         Information Letter (IL): This document deals with
                         non-technical in nature and inform the customer such as
                         warranty procedure, property return etc.
                       </li>
-                    </ol>
+                    </ul>
                   </li>
                 </ol>
               </div>

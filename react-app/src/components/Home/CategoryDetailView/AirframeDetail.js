@@ -12,7 +12,7 @@ const AirframeDetail = () => {
   const [authUser, setAuthUser] = useLocalStorage("user");
   const handleClick = () => {
     if (authUser) {
-      navigate("/aircond");
+      navigate("/interactive-tutorial/airframe/overview");
     } else {
       navigate("/auth");
     }

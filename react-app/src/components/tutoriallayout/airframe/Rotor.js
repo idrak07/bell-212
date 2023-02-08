@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-// Import the main Viewer component
-// Import the styles
+import { StlViewer } from "react-stl-viewer";
+import view from "./models/rotor0.STL";
+import view1 from "./models/rotor1.STL";
+import view2 from "./models/rotor2.STL";
+import view3 from "./models/rotor3.STL";
 import "@react-pdf-viewer/core/lib/styles/index.css";
-// default layout plugin
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-// Import styles of default layout plugin
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import ThreeDTabs from "../../pages/InteractiveTutorial/ThreeDTabs/TheeDTabs";
 
 const style = {
   top: 0,
@@ -26,133 +25,87 @@ const Rotor = () => {
     setAge(event.target.value);
   };
 
+  const NormalComp = () => (
+    <div
+      class="ui bottom attached active basic tab segment"
+      data-tab="first" className="px-5"
+      >
+      <p style={{textAlign: "justify", lineHeight: "30px"}}>
+          Main rotor system is used to move the helicopter to forward,
+          backward, sidewise, upward & downward. It consists of main
+          rotor hub assembly- two grips with two pitch horn, yoke with
+          Trunnion & pillow blocks, stabilizer bar, swash plate
+          assembly, collective sleeve & scissors assembly, two tension
+          torsion strap, two adjustable drag brace and two main rotor
+          blades assembly.
+      </p>
+      <p style={{textAlign: "justify", lineHeight: "30px"}}>
+          The Swash plate& support assembly along with collective
+          sleeve & scissors assembly are installed on the transmission
+          assembly over the mast.The trunnion is attached with yoke
+          assembly in conjunction with two pillow blocks to allow the
+          main rotor to flap.Two tension torsion straps are installed
+          inside two spindles of the yoke to counteract the
+          aerodynamic forces which tend to change the blade pitch
+          angle. Two main rotor grips with two horns are installed on
+          both sides of the yoke spindles to install two main rotor
+          blades. Two drag brace assemblies are installed at the
+          trailing edge of the blade for blades alignment.After main
+          rotor blade and hub assembly alignment & balancing it is
+          installed on the mast assembly above the swash plate.
+          Non-rotating part of the swash plate is connected with two
+          hydraulic actuator (cyclic controls) and collective lever
+          with collective hydraulic actuator. Stabilizer bar is
+          assembly is installed over the yoke with the trunnion for
+          better stability at all flight attitudes. Both pitch links
+          are attached with both pitch horns and both control tubes
+          attached with both scissors assembly.
+      </p>
+    </div>
+  );
+
+  const ThreeDComp = () => (
+    <div className="container">
+      <div className="row">
+        <div className="col-10 offset-1 text-center">
+          <p>
+            [Mouse Click to rotate, Scroll to zoom in and out, Shift + Click to move
+            the model]
+          </p>
+          <div class="border px-auto  my-5" style={style}>
+            <StlViewer style={style} orbitControls shadows url={view} />
+            <figcaption class="figure-caption">3D model - 1</figcaption>
+          </div>
+
+          <div class="border px-auto  my-5" style={style}>
+            <StlViewer style={style} orbitControls shadows url={view1} />
+            <figcaption class="figure-caption">3D model - 2</figcaption>
+          </div>
+          
+          <div class="border px-auto my-5" style={style}>
+            <StlViewer style={style} orbitControls shadows url={view2} />
+            <figcaption class="figure-caption">3D model - 3</figcaption>
+          </div>
+          
+          <div class="border px-auto  my-5" style={style}>
+            <StlViewer style={style} orbitControls shadows url={view3} />
+            <figcaption class="figure-caption">3D model - 4</figcaption>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  );
+
+
   return (
     <div>
-      {/* <Navlay></Navlay> */}
-      <div>
-        <Container>
-          <Row>
-            {/* <Col xs={6} md={4}>
-              <br />
-              <h4>Contents</h4>
-              <br />
-              <ListGroup>
-                <ListGroup.Item action variant="secondary">
-                  <Box sx={{ minWidth: 70 }}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Introduction to Airframe
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                      >
-                        <MenuItem value={10}>
-                          <Link to="/overview">Overview</Link>
-                        </MenuItem>
-                        <MenuItem value={20}>
-                          <Link to="/States">States of Overhauling</Link>
-                        </MenuItem>
-                        <MenuItem value={30}>
-                          <Link to="/process">Process of Overhauling</Link>
-                        </MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="success">
-                  <Link to="/publication">Publication</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/Airworthiness">Airworthiness</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="warning">
-                  <Link to="/Schedule">Components Overhaul Schedule</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="primary">
-                  <Link to="/gdata">General Data</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="dark">
-                  <Link to="/mrotor"> Main Rotor</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="secondary">
-                  <Link to="/trotor">Tail Rotor</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="success">
-                  <Link to="/Transmission">Transmission Assembly</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/Gearbox">Gearbox</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="warning">
-                  <Link to="/train">Power Train</Link>
-                </ListGroup.Item>
-              </ListGroup>
-            </Col> */}
-            <Col xs={12} >
-              {/* <br />
-              <br />
-              <br /> */}
-
-              <div class="ui basic segment exra">
-                <div class="ui top attached pointing secondary menu">
-                  <a class="active item" data-tab="first">
-                    Main Rotor System
-                  </a>
-                  <a class="item" data-tab="second">
-                    3D Models
-                  </a>
-                </div>
-                <div
-                  class="ui bottom attached active basic tab segment"
-                  data-tab="first"
-                >
-                  <p>
-                    Main rotor system is used to move the helicopter to forward,
-                    backward, sidewise, upward & downward. It consists of main
-                    rotor hub assembly- two grips with two pitch horn, yoke with
-                    Trunnion & pillow blocks, stabilizer bar, swash plate
-                    assembly, collective sleeve & scissors assembly, two tension
-                    torsion strap, two adjustable drag brace and two main rotor
-                    blades assembly.
-                  </p>
-                  <p>
-                    The Swash plate& support assembly along with collective
-                    sleeve & scissors assembly are installed on the transmission
-                    assembly over the mast.The trunnion is attached with yoke
-                    assembly in conjunction with two pillow blocks to allow the
-                    main rotor to flap.Two tension torsion straps are installed
-                    inside two spindles of the yoke to counteract the
-                    aerodynamic forces which tend to change the blade pitch
-                    angle. Two main rotor grips with two horns are installed on
-                    both sides of the yoke spindles to install two main rotor
-                    blades. Two drag brace assemblies are installed at the
-                    trailing edge of the blade for blades alignment.After main
-                    rotor blade and hub assembly alignment & balancing it is
-                    installed on the mast assembly above the swash plate.
-                    Non-rotating part of the swash plate is connected with two
-                    hydraulic actuator (cyclic controls) and collective lever
-                    with collective hydraulic actuator. Stabilizer bar is
-                    assembly is installed over the yoke with the trunnion for
-                    better stability at all flight attitudes. Both pitch links
-                    are attached with both pitch horns and both control tubes
-                    attached with both scissors assembly.
-                  </p>
-                </div>
-                <div
-                  class="ui bottom attached basic tab segment"
-                  data-tab="second"
-                >
-                  {/* <iframe id="canvas" src="models/rotor3D.html" style="height: 80vh; width: 100%; border: 0px" scrolling="no">
-    </iframe> */}
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+      <div class="ui basic padded segment exra">
+        <ThreeDTabs
+          tabs={["Main Rotor System", "3D Model"]}
+          normalComp={<NormalComp />}
+          threeDComp={<ThreeDComp />}
+        />
       </div>
     </div>
   );

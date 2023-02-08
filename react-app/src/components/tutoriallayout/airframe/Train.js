@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-// Import the main Viewer component
-// Import the styles
+import ThreeDTabs from "../../pages/InteractiveTutorial/ThreeDTabs/TheeDTabs";
+import { StlViewer } from "react-stl-viewer";
+import view from "./models/power0.STL";
+import view1 from "./models/power1.STL";
+
 import "@react-pdf-viewer/core/lib/styles/index.css";
-// default layout plugin
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-// Import styles of default layout plugin
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 const style = {
@@ -26,139 +24,81 @@ const Train = () => {
     setAge(event.target.value);
   };
 
+  const NormalComp = () => (
+    <div
+       class="ui bottom attached active basic tab segment"
+       data-tab="first"
+       >
+       <p>
+          To operate the Bell 212 Helicopter, twin engine is used as
+          the power source. The twin engine power is combined in
+          combining gearbox (CGB) it also called reduction gearbox
+          (RGB). From the CGB output shaft (6600 RPM) the power is
+          transmitted to transmission through the main driveshaft to
+          the transmission input quill (input drive gear). Inside the
+          transmission the input drive gear is attached with bevel
+          gear(attached with vertical shaft) where reduction takes
+          place 2.138: l ratio ie 6600 RPM to 3087 RPM and this is the
+          first stage reduction. With vertical shaft upper side lower
+          sun gear is attached and lower planetary gear is attached
+          with it and reduction takes place 3.087:1 ie 3087 RPM to
+          1000 RPM and this is the 2nd stage reduction. Lower
+          planetary gear upper side is attached with upper sun gear
+          upper side is attached with upper planetary gear where
+          reduction takes place 3.087:1 ie 1000 RPM to 324 RPM and
+          this is the 3rd stage reduction. Mast adapter is attached
+          with upper planetary gear and the mast is installed on the
+          mast adapter. Main Rotor hub and blade assembly is installed
+          on the mast upper side. So, when the mast rotates the main
+          rotor also rotate at 324 RPM. The total reduction from
+          engine to main rotor is 20.37:1 ie 6600 RPM to 324 RPM.
+       </p>
+       <p>
+          Again, in the sump case (transmission lower side) tail rotor
+          drive gear is installed which rotates at 4300 RPM. Tail
+          rotor driveshaft are installed with tail rotor drive gear
+          which are also rotate at 4300 RPM transmit the power to the
+          tail rotor gearbox input quill through intermediate gear box
+          (42 degree gear box). Tail rotor gearbox output shaft RPM is
+          1660 RPMie reduction ratio is 2.59:1. The tail rotor hub and
+          blade assembly is installed on output shaft of tail rotor
+          gearbox. So, tail rotor rotate at 1660 RPM and the total
+          reduction is 3.975:1 ie 6600 RPM to 1660 RPM.
+       </p>
+    </div>
+  );
+
+  const ThreeDComp = () => (
+    <div className="container">
+      <div className="row">
+        <div className="col-10 offset-1 text-center">
+          <p>
+            [Mouse Click to rotate, Scroll to zoom in and out, Shift + Click to move
+            the model]
+          </p>
+          <div class="border px-auto  my-5" style={style}>
+            <StlViewer style={style} orbitControls shadows url={view} />
+            <figcaption class="figure-caption">3D model- 1</figcaption>
+          </div>
+
+          <div class="border px-auto  my-5" style={style}>
+            <StlViewer style={style} orbitControls shadows url={view1} />
+            <figcaption class="figure-caption">3D model- 2</figcaption>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div>
-      {/* <Navlay></Navlay> */}
-      <div>
-        <Container>
-          <Row>
-            {/* <Col xs={6} md={4}>
-              <br />
-              <h4>Contents</h4>
-              <br />
-              <ListGroup>
-                <ListGroup.Item action variant="secondary">
-                  <Box sx={{ minWidth: 70 }}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Introduction to Airframe
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={age}
-                        label="Age"
-                        onChange={handleChange}
-                      >
-                        <MenuItem value={10}>
-                          <Link to="/overview">Overview</Link>
-                        </MenuItem>
-                        <MenuItem value={20}>
-                          <Link to="/States">States of Overhauling</Link>
-                        </MenuItem>
-                        <MenuItem value={30}>
-                          <Link to="/process">Process of Overhauling</Link>
-                        </MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="success">
-                  <Link to="/publication">Publication</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/Airworthiness">Airworthiness</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="warning">
-                  <Link to="/Schedule">Components Overhaul Schedule</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="primary">
-                  <Link to="/gdata">General Data</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="dark">
-                  <Link to="/mrotor"> Main Rotor</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="secondary">
-                  <Link to="/trotor">Tail Rotor</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="success">
-                  <Link to="/Transmission">Transmission Assembly</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="danger">
-                  <Link to="/Gearbox">Gearbox</Link>
-                </ListGroup.Item>
-                <ListGroup.Item action variant="warning">
-                  <Link to="/train">Power Train</Link>
-                </ListGroup.Item>
-              </ListGroup>
-            </Col> */}
-            <Col xs={12} >
-              {/* <br />
-              <br />
-              <br /> */}
-
-              <div class="ui basic segment exra">
-                <div class="ui top attached pointing secondary menu">
-                  <a class="active item" data-tab="first">
-                    Powertrain
-                  </a>
-                  <a class="item" data-tab="second">
-                    3D Models
-                  </a>
-                </div>
-                <div
-                  class="ui bottom attached active basic tab segment"
-                  data-tab="first"
-                >
-                  <p>
-                    To operate the Bell 212 Helicopter, twin engine is used as
-                    the power source. The twin engine power is combined in
-                    combining gearbox (CGB) it also called reduction gearbox
-                    (RGB). From the CGB output shaft (6600 RPM) the power is
-                    transmitted to transmission through the main driveshaft to
-                    the transmission input quill (input drive gear). Inside the
-                    transmission the input drive gear is attached with bevel
-                    gear(attached with vertical shaft) where reduction takes
-                    place 2.138: l ratio ie 6600 RPM to 3087 RPM and this is the
-                    first stage reduction. With vertical shaft upper side lower
-                    sun gear is attached and lower planetary gear is attached
-                    with it and reduction takes place 3.087:1 ie 3087 RPM to
-                    1000 RPM and this is the 2nd stage reduction. Lower
-                    planetary gear upper side is attached with upper sun gear
-                    upper side is attached with upper planetary gear where
-                    reduction takes place 3.087:1 ie 1000 RPM to 324 RPM and
-                    this is the 3rd stage reduction. Mast adapter is attached
-                    with upper planetary gear and the mast is installed on the
-                    mast adapter. Main Rotor hub and blade assembly is installed
-                    on the mast upper side. So, when the mast rotates the main
-                    rotor also rotate at 324 RPM. The total reduction from
-                    engine to main rotor is 20.37:1 ie 6600 RPM to 324 RPM.
-                  </p>
-
-                  <p>
-                    Again, in the sump case (transmission lower side) tail rotor
-                    drive gear is installed which rotates at 4300 RPM. Tail
-                    rotor driveshaft are installed with tail rotor drive gear
-                    which are also rotate at 4300 RPM transmit the power to the
-                    tail rotor gearbox input quill through intermediate gear box
-                    (42 degree gear box). Tail rotor gearbox output shaft RPM is
-                    1660 RPMie reduction ratio is 2.59:1. The tail rotor hub and
-                    blade assembly is installed on output shaft of tail rotor
-                    gearbox. So, tail rotor rotate at 1660 RPM and the total
-                    reduction is 3.975:1 ie 6600 RPM to 1660 RPM.
-                  </p>
-                </div>
-                <div
-                  class="ui bottom attached basic tab segment"
-                  data-tab="second"
-                >
-                  {/* <iframe id="canvas" src="models/powertrain.html" style="height: 80vh; width: 100%; border: 0px" scrolling="no">
-    </iframe> */}
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
+      <div class="ui basic padded segment exra">
+        <ThreeDTabs
+          tabs={["Power train", "3D Model"]}
+          normalComp={<NormalComp />}
+          threeDComp={<ThreeDComp />}
+        />
       </div>
     </div>
   );

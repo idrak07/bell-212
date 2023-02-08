@@ -35,45 +35,45 @@ const AirframeTutorialLayout = () => {
                   label="Age"
                   onChange={handleChange}
                 >
-                  <MenuItem value={10}>
-                    <Link to="/interactive-tutorial/airframe/overview">Overview</Link>
+                  <MenuItem value={10} style={{display: "block"}}>
+                    <Link to="/interactive-tutorial/airframe/overview" style={{display: "block"}}>Overview</Link>
                   </MenuItem>
-                  <MenuItem value={20}>
-                    <Link to="/interactive-tutorial/airframe/states">States of Overhauling</Link>
+                  <MenuItem value={20} style={{display: "block"}}>
+                    <Link to="/interactive-tutorial/airframe/states" style={{display: "block"}}>States of Overhauling</Link>
                   </MenuItem>
-                  <MenuItem value={30}>
-                    <Link to="/interactive-tutorial/airframe/process">Process of Overhauling</Link>
+                  <MenuItem value={30} style={{display: "block"}}>
+                    <Link to="/interactive-tutorial/airframe/process" style={{display: "block"}}>Process of Overhauling</Link>
                   </MenuItem>
                 </Select>
               </FormControl>
             </Box>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/publication">Publication</Link>
+            <Link to="/interactive-tutorial/airframe/publication" style={{display: "block"}}>Publication</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/Airworthiness">Airworthiness</Link>
+            <Link to="/interactive-tutorial/airframe/Airworthiness" style={{display: "block"}}>Airworthiness</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/Schedule">Components Overhaul Schedule</Link>
+            <Link to="/interactive-tutorial/airframe/Schedule" style={{display: "block"}}>Components Overhaul Schedule</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/gdata">General Data</Link>
+            <Link to="/interactive-tutorial/airframe/gdata" style={{display: "block"}}>General Data</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/mrotor"> Main Rotor</Link>
+            <Link to="/interactive-tutorial/airframe/mrotor" style={{display: "block"}}> Main Rotor</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/trotor">Tail Rotor</Link>
+            <Link to="/interactive-tutorial/airframe/trotor" style={{display: "block"}}>Tail Rotor</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/Transmission">Transmission Assembly</Link>
+            <Link to="/interactive-tutorial/airframe/Transmission" style={{display: "block"}}>Transmission Assembly</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/Gearbox">Gearbox</Link>
+            <Link to="/interactive-tutorial/airframe/Gearbox" style={{display: "block"}}>Gearbox</Link>
           </ListGroup.Item>
           <ListGroup.Item action variant="light">
-            <Link to="/interactive-tutorial/airframe/train">Power Train</Link>
+            <Link to="/interactive-tutorial/airframe/train" style={{display: "block"}}>Power Train</Link>
           </ListGroup.Item>
         </ListGroup>
       </div>
