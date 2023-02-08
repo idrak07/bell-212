@@ -11,7 +11,7 @@ const RadioDetail = () => {
   const [authUser, setAuthUser] = useLocalStorage("user");
   const handleClick = () => {
     if (authUser) {
-      navigate("/radoverview");
+      navigate("/interactive-tutorial/radio/overview");
     } else {
       navigate("/auth");
     }

@@ -11,7 +11,7 @@ const ElectricalDetail = () => {
   const [authUser, setAuthUser] = useLocalStorage("user");
   const handleClick = () => {
     if (authUser) {
-      navigate("/dashboard");
+      navigate("/interactive-tutorial/electric-components/overview");
     } else {
       navigate("/auth");
     }

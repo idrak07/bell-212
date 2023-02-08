@@ -75,6 +75,7 @@ import Ffi from "./components/tutoriallayout/intruments/Ffi";
 import Finst from "./components/tutoriallayout/intruments/Finst";
 import Hydra from "./components/tutoriallayout/intruments/Hydra";
 import Instover from "./components/tutoriallayout/intruments/Instover";
+import Missibt from "./components/tutoriallayout/intruments/Missibt";
 import Navinst from "./components/tutoriallayout/intruments/Navinst";
 import Adf from "./components/tutoriallayout/radio/Adf";
 import Adfr from "./components/tutoriallayout/radio/Adfr";
@@ -226,12 +227,18 @@ function App() {
 
                 {/* Instruments layout */}
                 <Route path="instruments" element={<InstrumentsTutorialLayout />}>
-                  <Route path="overview" element={<Airframe />} />
+                  <Route path="overview" element={<Instover />} />
+                  <Route path="finst" element={<Finst />} />
+                  <Route path="navinst" element={<Navinst />} />
+                  <Route path="engp" element={<Engp />} />
+                  <Route path="ffi" element={<Ffi />} />
+                  <Route path="hydra" element={<Hydra />} />
+                  <Route path="missint" element={<Missibt />} />
                 </Route>
 
 
                 {/* Radio layout */}
-                <Route path="instruments" element={<RadioTutorialLayout />}>
+                <Route path="radio" element={<RadioTutorialLayout />}>
                   <Route path="overview" element={<Airframe />} />
                 </Route>
 

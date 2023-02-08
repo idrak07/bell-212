@@ -36,8 +36,8 @@ export const menuItems = [
       { name: "Engine", to: "/interactive-tutorial/engine/overview" },
       { name: "Air Frame", to: "/interactive-tutorial/airframe/overview" },
       { name: "Electronic Components", to: "/interactive-tutorial/electric-components/overview" },
-      { name: "Instruments", to: "/instoverview" },
-      { name: "Radio", to: "/radoverview" },
+      { name: "Instruments", to: "/interactive-tutorial/instruments/overview" },
+      { name: "Radio", to: "/interactive-tutorial/radio/overview" },
     ],
   },
   {

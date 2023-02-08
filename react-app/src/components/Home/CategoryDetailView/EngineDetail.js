@@ -12,7 +12,7 @@ const EngineDetail = () => {
   const [authUser, setAuthUser] = useLocalStorage("user");
   const handleClick = () => {
     if (authUser) {
-      navigate("/overview");
+      navigate("/interactive-tutorial/engine/overview");
     } else {
       navigate("/auth");
     }
