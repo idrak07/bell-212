@@ -19,8 +19,8 @@ const style = {
       class="ui bottom attached active basic tab segment"
       data-tab="first" className="px-5"
       >
-      <h4 class="ui header">Transmission Assembly</h4>
-      <p>
+      <h4 class="ui header my-3">Transmission Assembly</h4>
+      <p style={{textAlign: "justify", lineHeight: "30px"}}>
           This component is used to transmit power from the engine
           through the main driveshaft to drive the main rotor, tail
           rotor and all other accessory driven components. It is
@@ -33,8 +33,8 @@ const style = {
           techo generator quill, transmission pump quill and tail
           rotor drive quill.
       </p>
-      <h4 class="ui header">Transmission Oil System</h4>
-      <p>
+      <h4 class="ui header my-3">Transmission Oil System</h4>
+      <p style={{textAlign: "justify", lineHeight: "30px"}}>
           Specified oil is used for lubricating the transmission
           assembly. Transmission sump case is used as the oil
           reservoir and two oil level gauge one indicates low level
@@ -59,7 +59,7 @@ const style = {
           three chip detector to indicate the metal chip.
       </p>
       <h4 class="ui header">Mast Assembly</h4>
-      <p>
+      <p style={{textAlign: "justify", lineHeight: "30px"}}>
           The mast assembly is installed on the transmission mast
           adapter to transmit power with reduced RPM of 324 to the
           main rotor hub & blade assembly and to rotate with the same

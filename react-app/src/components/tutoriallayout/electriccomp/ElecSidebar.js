@@ -7,145 +7,129 @@ const ElecSidebar = () => {
     <div>
       <ListGroup>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/elecoverview"
+            to="/interactive-tutorial/electric-components/overview" 
           >
             Overview
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/powersupply"
+            to="/interactive-tutorial/electric-components/powersupply"
           >
             Power Supply System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/dcpowersupply"
+            to="/interactive-tutorial/electric-components/dcpowersupply"
           >
             DC Power Supply System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/acpowersupply"
+            to="/interactive-tutorial/electric-components/acpowersupply"
           >
             AC Power Supply System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/busarng"
+            to="/interactive-tutorial/electric-components/busarng"
           >
             Bus Arrangements
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/intlight"
+            to="/interactive-tutorial/electric-components/intlight"
           >
             Interior Lighting System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
-            className="text-secondary"
-            to="/extlight"
+          <Link  style={{display: "block", textDecoration: "none"}}
+          className="text-secondary"
+            to="/interactive-tutorial/electric-components/extlight"
           >
             Exterior Lighting System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/caution"
+            to="/interactive-tutorial/electric-components/caution"
           >
             Caution & light System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/enginecontrol"
+            to="/interactive-tutorial/electric-components/enginecontrol"
           >
             Engine Control & Accessories System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/flightcontrol"
+            to="/interactive-tutorial/electric-components/flightcontrol"
           >
             Flight Control System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/heating"
+            to="/interactive-tutorial/electric-components/heating"
           >
             Heating System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/miss"
+            to="/interactive-tutorial/electric-components/miss"
           >
             Miscellaneous Electrical System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/aircond"
+            to="/interactive-tutorial/electric-components/aircond"
           >
             Air-conditioning System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/undersiling"
+            to="/interactive-tutorial/electric-components/undersiling"
           >
             Under Sling system
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/hoisting"
+            to="/interactive-tutorial/electric-components/hoisting"
           >
             Hoisting System
           </Link>
         </ListGroup.Item>
         <ListGroup.Item action variant="light">
-          <Link
-            style={{ textDecoration: "none" }}
+          <Link  style={{display: "block", textDecoration: "none"}}
             className="text-secondary"
-            to="/nite"
+            to="/interactive-tutorial/electric-components/nite"
           >
             Nite-sun SX-16
           </Link>

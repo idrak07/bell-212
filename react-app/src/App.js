@@ -204,8 +204,23 @@ function App() {
 
 
                 {/* electric components layout */}
-                  <Route path="electric-components" element={<ElectricComponentTutorialLayout />}>
+                <Route path="electric-components" element={<ElectricComponentTutorialLayout />}>
                   <Route path="overview" element={<Elecoveriew />} />
+                  <Route path="powersupply" element={<Power />} />
+                  <Route path="dcpowersupply" element={<Dc />} />
+                  <Route path="acpowersupply" element={<Ac />} />
+                  <Route path="busarng" element={<Bus />} />
+                  <Route path="intlight" element={<Inte />} />
+                  <Route path="extlight" element={<Ext />} />
+                  <Route path="caution" element={<Warn />} />
+                  <Route path="enginecontrol" element={<Econtrol />} />
+                  <Route path="flightcontrol" element={<Fcontrol />} />
+                  <Route path="heating" element={<Heat />} />
+                  <Route path="miss" element={<Miss />} />
+                  <Route path="aircond" element={<Air />} />
+                  <Route path="undersiling" element={<Under />} />
+                  <Route path="hoisting" element={<Hoist />} />
+                  <Route path="nite" element={<Nite />} />
                 </Route>
 
 

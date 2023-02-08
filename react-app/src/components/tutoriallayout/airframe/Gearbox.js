@@ -30,8 +30,8 @@ const Gearbox = () => {
        class="ui bottom attached active basic tab segment"
        data-tab="first" className="px-5"
        >
-       <h4 class="ui header">Intermediate gear box (42 degree)</h4>
-       <p>
+       <h4 class="ui header my-3">Intermediate gear box (42 degree)</h4>
+       <p style={{textAlign: "justify", lineHeight: "30px"}}>
           This component is used to transmit the power taken from the
           transmission to the tail rotor gearbox through the tail
           rotor driveshaft by changing the direction of route to 42
@@ -39,10 +39,10 @@ const Gearbox = () => {
           degree. In this gear box RPM remains the same i.e 4300 which
           was taken from transmission.
        </p>
-       <h4 class="ui header">
+       <h4 class="ui header my-3">
           Tail rotor gearbox (90 degree gearbox)
        </h4>
-       <p>
+       <p style={{textAlign: "justify", lineHeight: "30px"}}>
           This component is installed on the top of vertical fin. The
           output RPM of 4300 from the 42 degree gearbox enter into the
           90 degree gearbox and it’s output provides reduced RPM to

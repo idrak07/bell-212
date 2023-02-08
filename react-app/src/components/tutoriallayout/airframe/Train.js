@@ -27,9 +27,9 @@ const Train = () => {
   const NormalComp = () => (
     <div
        class="ui bottom attached active basic tab segment"
-       data-tab="first"
+       data-tab="first" className="px-5"
        >
-       <p>
+       <p className="mt-5" style={{textAlign: "justify", lineHeight: "30px"}}>
           To operate the Bell 212 Helicopter, twin engine is used as
           the power source. The twin engine power is combined in
           combining gearbox (CGB) it also called reduction gearbox
@@ -53,7 +53,7 @@ const Train = () => {
           rotor also rotate at 324 RPM. The total reduction from
           engine to main rotor is 20.37:1 ie 6600 RPM to 324 RPM.
        </p>
-       <p>
+       <p style={{textAlign: "justify", lineHeight: "30px"}}>
           Again, in the sump case (transmission lower side) tail rotor
           drive gear is installed which rotates at 4300 RPM. Tail
           rotor driveshaft are installed with tail rotor drive gear
