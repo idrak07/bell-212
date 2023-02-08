@@ -1,46 +1,92 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import QuestionPopupContent from './QuestionPopupContent';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import * as React from "react";
+import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
+import { SERVER_URL } from "../../../../../constants";
+import useFetch from "../../../../../hooks/useFetch";
+import QuestionPopupContent from "./QuestionPopupContent";
 // import { v4 as uuid } from 'uuid';
 
 export const initialQuestion = {
-    id: 1,
+  id: 1,
+  questionType: "ORIGINAL",
+  quiz: "",
+  topic: "",
+  question: {
     description: "",
     choice1: "",
     choice2: "",
     choice3: "",
     choice4: "",
     correctChoice: "",
-}
+    questionType: "ORIGINAL",
+    topic: "",
+    quiz: "",
+  },
+};
 
+export default function AddQuestionPopup({ quiz, open, setOpen }) {
+  const params = useParams();
+  const navigate = useNavigate();
+  const { topic } = params;
+  const [allQuestions, setAllQuestions] = React.useState(
+    quiz.questions.length
+      ? JSON.parse(JSON.stringify(quiz.assigneeList))
+      : [
+          {
+            ...initialQuestion,
+            topic: topic.toUpperCase()?.replace(" ", "_"),
+            quiz: quiz.id,
+          },
+        ]
+  );
 
-export default function AddQuestionPopup({open, setOpen}) {
-  const [allQuestions, setAllQuestions] = React.useState([initialQuestion]);
-
-
-  const [scroll, setScroll] = React.useState('paper');
+  const [scroll, setScroll] = React.useState("paper");
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const descriptionElementRef = React.useRef(null);
-  React.useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
+  const [{ response, error, isLoading }, updatequiz] = useFetch(
+    `${SERVER_URL}/quiz`
+  );
+
+  const handleSaveQuestions = async () => {
+    const allQuestionList = !allQuestions.length ? [] : allQuestions.map(ques => {
+      return {
+        ...ques,
+        question: {
+          ...ques.question,
+          topic: topic.toUpperCase()?.replace(" ", "_"),
+          quiz: quiz.id,
+        }
       }
+    })
+    try {
+      const res = await updatequiz({
+        method: "PUT",
+        data: {
+          ...quiz,
+          questions: allQuestionList,
+        },
+      });
+      console.log(res);
+      toast.success("Successfully question saved");
+    } catch (e) {
+      console.log(e);
+      toast.error("Couldn't save questions");
     }
-  }, [open]);
+  };
+
+  const descriptionElementRef = React.useRef(null);
 
   return (
-    <div >
+    <div>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -49,19 +95,24 @@ export default function AddQuestionPopup({open, setOpen}) {
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle id="scroll-dialog-title">Questions</DialogTitle>
-        <DialogContent dividers={scroll === 'paper'}>
+        <DialogContent dividers={scroll === "paper"}>
           <DialogContentText
             id="scroll-dialog-description"
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-           <QuestionPopupContent allQuestions={allQuestions} setAllQuestions={setAllQuestions} />
-
+            <QuestionPopupContent
+              allQuestions={allQuestions}
+              setAllQuestions={setAllQuestions}
+              quiz={quiz}
+            />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant='contained' onClick={handleClose}>Save</Button>
+          <Button variant="contained" onClick={handleSaveQuestions}>
+            Save
+          </Button>
         </DialogActions>
       </Dialog>
     </div>

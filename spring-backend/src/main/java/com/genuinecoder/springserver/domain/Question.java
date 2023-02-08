@@ -1,5 +1,6 @@
 package com.genuinecoder.springserver.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genuinecoder.springserver.domain.enumeration.QuestionType;
 import com.genuinecoder.springserver.domain.enumeration.Topic;
 
@@ -31,6 +32,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "quiz_id", referencedColumnName = "id")
+    @JsonIgnore
     private Quiz quiz;
 
     public Long getId() {

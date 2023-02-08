@@ -2,7 +2,7 @@ import React from "react";
 import ShowQuestionWithAns from "../../../../QuizComponents/ShowQuestionWithAns";
 import { dummyQuestions } from "../../../GiveTestPage/GiveTestDetail";
 
-const QuestionList = () => {
+const QuestionList = ({questions}) => {
   return (
     <div>
       {

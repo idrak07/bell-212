@@ -9,7 +9,7 @@ const StudentsArea = ({quiz}) => {
   return (
     <div>
       {quiz.assigneeList.length !== 0 && (
-        <StudentList />
+        <StudentList students={quiz.assigneeList} />
       )}
 
       {quiz.assigneeList.length === 0 ? (
@@ -29,7 +29,7 @@ const StudentsArea = ({quiz}) => {
       )}
 
       {open && (
-        <AddStudentPopup open={open} setOpen={setOpen}/>
+        <AddStudentPopup quiz={quiz} open={open} setOpen={setOpen}/>
       )}
 
   </div>

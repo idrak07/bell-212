@@ -9,7 +9,7 @@ const QuestionArea = ({quiz}) => {
     <div>
 
       {quiz.questions.length !== 0 && (
-        <QuestionList />
+        <QuestionList questions={quiz.questions} />
       )}
 
 
@@ -30,7 +30,7 @@ const QuestionArea = ({quiz}) => {
       )}
 
       {open && (
-        <AddQuestionPopup open={open} setOpen={setOpen} />
+        <AddQuestionPopup quiz={quiz} open={open} setOpen={setOpen} />
       )}
 
     </div>
