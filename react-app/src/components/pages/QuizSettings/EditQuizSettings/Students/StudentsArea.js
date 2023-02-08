@@ -3,17 +3,16 @@ import Controls from "../../../../../ui/FormComponents/controls/Controls";
 import AddStudentPopup from "./AddStudentPopup";
 import StudentList from "./StudentList";
 
-const StudentsArea = () => {
+const StudentsArea = ({quiz}) => {
   const [open, setOpen] = React.useState(false);
 
-  const studentCount = 5;
   return (
     <div>
-      {studentCount !== 0 && (
+      {quiz.assigneeList.length !== 0 && (
         <StudentList />
       )}
 
-      {studentCount == 0 ? (
+      {quiz.assigneeList.length === 0 ? (
         <Controls.Button
           type="button"
           text="Add Students" 

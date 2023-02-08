@@ -5,6 +5,7 @@ import com.genuinecoder.springserver.domain.enumeration.Topic;
 import com.genuinecoder.springserver.service.QuizService;
 import com.genuinecoder.springserver.service.errors.NotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class QuizResource {
         this.quizService = quizService;
     }
 
-    @PostMapping("/quiz")
+    @PostMapping(path = "/quiz", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Quiz> create(@RequestBody Quiz quiz) {
         quiz = quizService.save(quiz);
         return new ResponseEntity<>(quiz, HttpStatus.CREATED);

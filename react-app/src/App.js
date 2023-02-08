@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import { ProtectedRoute } from "./common/PrivateRoute";
 import Ui from "./components/DashboardUi/Ui";
@@ -124,6 +125,7 @@ function App() {
     // <ThemeProvider theme={theme}>
     <SidebarContext.Provider value={[inactive, setInactive]}>
       <div class="wrapper">
+        <ToastContainer />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />

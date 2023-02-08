@@ -12,3 +12,7 @@ export function formatDate(date) {
   var strTime = hours + ':' + minutes + ' ' + ampm;
   return date.getDate() + "/" + (date.getMonth()+1)  + "/" + date.getFullYear() + "  " + strTime;
 }
+
+export function arrayToDate(data) {
+  
+}

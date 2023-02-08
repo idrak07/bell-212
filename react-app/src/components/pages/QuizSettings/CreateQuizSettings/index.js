@@ -1,15 +1,16 @@
 
 import { Typography } from "@mui/material";
 import React from "react";
-import CustomButton from '../../../../ui/CustomButton'
 import { useNavigate } from "react-router";
-import CreateQuizSettingsForm from "./CreateQuizSettingsForm";
+import CustomButton from '../../../../ui/CustomButton';
 import AdminLayout from "../../../layouts/AdminLayout";
+import CreateQuizSettingsForm from "./CreateQuizSettingsForm";
 
 const CreateQuizSettings = () => {
   const navigate = useNavigate();
   return (
     <AdminLayout>
+
       <div style={{
         padding: '18px',
         marginLeft: '15px',

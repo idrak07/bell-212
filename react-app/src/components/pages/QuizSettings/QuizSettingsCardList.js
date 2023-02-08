@@ -13,16 +13,16 @@ export const quizTopicLists = [
   },
   {
     id: 2,
-    name: 'Airframe',
+    name: 'Air Frame',
     description: 'The mechanical structure of an aircraft is known as the airframe. Includes fuselage, undercarriage, empennage and wings.',
-    link: '/quiz-settings/Airframe',
+    link: '/quiz-settings/Air Frame',
     iconComp: <AirplaneIcon />
   },
   {
     id: 3,
-    name: 'Electric Components',
+    name: 'Electronic Components',
     description: 'The electrical systems, in most helicopters, reflect the increased use of sophisticated avionics and other electrical accessories.',
-    link: '/quiz-settings/Electric Components',
+    link: '/quiz-settings/Electronic Components',
     icon: 'bi bi-lightning-charge'
   },
   {

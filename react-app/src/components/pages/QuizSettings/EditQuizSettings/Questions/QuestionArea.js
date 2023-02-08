@@ -1,21 +1,19 @@
-import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import Controls from "../../../../../ui/FormComponents/controls/Controls";
 import AddQuestionPopup from "./AddQuestionPopup";
 import QuestionList from "./QuestionList";
 
-const QuestionArea = () => {
+const QuestionArea = ({quiz}) => {
   const [open, setOpen] = useState(false)
-  const questionCount = 5;
   return (
     <div>
 
-      {questionCount !== 0 && (
+      {quiz.questions.length !== 0 && (
         <QuestionList />
       )}
 
 
-      {questionCount == 0 ? (
+      {quiz.questions.length === 0 ? (
         <Controls.Button
           type="button"
           text="Add Questions"

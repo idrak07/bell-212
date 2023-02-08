@@ -1,9 +1,9 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Typography from '@mui/material/Typography';
+import PropTypes from 'prop-types';
+import * as React from 'react';
 import QuestionArea from './Questions/QuestionArea';
 import StudentsArea from './Students/StudentsArea';
 
@@ -40,7 +40,7 @@ function a11yProps(index) {
   };
 }
 
-export default function QuestionStudentList() {
+export default function QuestionStudentList({quiz}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -57,12 +57,12 @@ export default function QuestionStudentList() {
       </Box>
       <TabPanel value={value} index={0}>
         {value == 0 && (
-          <QuestionArea />
+          <QuestionArea quiz={quiz} />
         )}
       </TabPanel>
       <TabPanel value={value} index={1}>
         {value == 1 && (
-          <StudentsArea />
+          <StudentsArea quiz={quiz} />
         )}
       </TabPanel>
     </Box>
