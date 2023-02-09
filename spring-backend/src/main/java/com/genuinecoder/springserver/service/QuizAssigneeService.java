@@ -1,5 +1,6 @@
 package com.genuinecoder.springserver.service;
 
+import com.genuinecoder.springserver.domain.Quiz;
 import com.genuinecoder.springserver.domain.QuizAssignee;
 import com.genuinecoder.springserver.domain.User;
 import com.genuinecoder.springserver.repository.QuizAssigneeRepository;
@@ -19,9 +20,12 @@ public class QuizAssigneeService {
 
     private final UserService userService;
 
-    public QuizAssigneeService(QuizAssigneeRepository quizAssigneeRepository, UserService userService) {
+    private final QuizService quizService;
+
+    public QuizAssigneeService(QuizAssigneeRepository quizAssigneeRepository, UserService userService, QuizService quizService) {
         this.quizAssigneeRepository = quizAssigneeRepository;
         this.userService = userService;
+        this.quizService = quizService;
     }
 
     public QuizAssignee save(QuizAssignee quizAssignee) {
@@ -69,5 +73,13 @@ public class QuizAssigneeService {
             QuizAssignee quizAssignee = quizAssigneeRepository.findByQuizIdAndUserId(quizId, userId);
             quizAssigneeRepository.delete(quizAssignee);
         });
+    }
+
+    public List<Quiz> getQuizzesForUser(Long userId) {
+        List<QuizAssignee> quizAssignees = quizAssigneeRepository.findAllByUserId(userId);
+        List<Long> quizIds = quizAssignees.stream()
+                .map(QuizAssignee::getQuizId).collect(Collectors.toList());
+
+        return quizService.findAllQUizzesEndLater(quizIds);
     }
 }

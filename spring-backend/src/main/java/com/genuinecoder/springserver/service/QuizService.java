@@ -6,6 +6,7 @@ import com.genuinecoder.springserver.repository.QuizRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,5 +33,10 @@ public class QuizService {
 
     public void delete(Long id) {
         quizRepository.deleteById(id);
+    }
+
+    public List<Quiz> findAllQUizzesEndLater(List<Long> quizIds) {
+        List<Quiz> quizzes = quizRepository.findAllById(quizIds);
+        return quizzes.stream().filter(quiz -> quiz.getEndTime().isAfter(LocalDateTime.now())).toList();
     }
 }

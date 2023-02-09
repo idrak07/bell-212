@@ -1,5 +1,6 @@
 package com.genuinecoder.springserver.web.rest;
 
+import com.genuinecoder.springserver.domain.Quiz;
 import com.genuinecoder.springserver.service.QuizAssigneeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,5 +28,11 @@ public class QuizAssigneeResource {
     public ResponseEntity<Void> saveAllAssignedUser(@PathVariable Long quizId, @RequestBody List<Long> userIds) {
         quizAssigneeService.saveAllUsersForQuiz(userIds, quizId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/quizAssignees/{userId}")
+    public ResponseEntity<List<Quiz>> getUsersActiveQuiz(@PathVariable Long userId) {
+        List<Quiz> quizzes = quizAssigneeService.getQuizzesForUser(userId);
+        return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
 }
