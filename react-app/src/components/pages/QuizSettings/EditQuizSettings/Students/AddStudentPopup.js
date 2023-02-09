@@ -38,7 +38,7 @@ export default function ScrollDialog({quiz, open, setOpen}) {
       return {
         id: user.id,
         user: {...user},
-        quiz: {id: quiz},
+        quiz: quiz,
         points: null,
       }
     })

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 import { SERVER_URL } from '../../../constants'
 import useFetch from '../../../hooks/useFetch'
 import useLocalStorage from '../../../hooks/useLocalStorage'
@@ -57,6 +57,7 @@ const TutorialVideo = () => {
   const [selectedChapter, setSelectedChapter] = useState('CHAPTER_1')
 
   const { topic } = params;
+  const location = useLocation();
 
   // api call
   const [{ response, error, isLoading }, doFetch] = useFetch(`${SERVER_URL}/tutorials`);
@@ -70,7 +71,7 @@ const TutorialVideo = () => {
       }
     })
     console.log({response})
-  }, [selectedChapter, isCreate, isEdit]);
+  }, [selectedChapter, isCreate, isEdit,location.pathname ]);
 
   return (
     <div className='tutorial' style={{
