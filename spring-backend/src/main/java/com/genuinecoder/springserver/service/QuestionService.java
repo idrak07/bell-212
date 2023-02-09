@@ -42,12 +42,16 @@ public class QuestionService {
         return questionRepository.findALlByTopic(topic);
     }
 
-    public List<Question> getQuestionsForQuiz(Topic topic, QuestionType questionType, Long limit) {
+    public List<Question> getQuestionsForMockQuiz(Topic topic, QuestionType questionType, Long limit) {
         List<Question> questions = questionRepository.findAllByTopicAndQuestionType(topic, questionType);
         if(!questions.isEmpty()) {
             Collections.shuffle(questions);
             return questions.subList(0,questions.size() > limit ? limit.intValue()  : questions.size());
         }
         return new ArrayList<>();
+    }
+
+    public List<Question> getQuestionsForQuiz(Long quizId) {
+        return questionRepository.findAllByQuizId(quizId);
     }
 }
