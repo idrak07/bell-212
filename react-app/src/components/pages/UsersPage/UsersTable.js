@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Paper from '@mui/material/Paper';
@@ -276,7 +275,7 @@ function EnhancedTableToolbar(props) {
         >
           User Lists
         </Typography>
-        <Button onClick={() => navigate('/users/add')} variant="contained">Add User</Button>
+        {/* <Button onClick={() => navigate('/users/add')} variant="contained">Add User</Button> */}
       </div>
     </Toolbar>
   );

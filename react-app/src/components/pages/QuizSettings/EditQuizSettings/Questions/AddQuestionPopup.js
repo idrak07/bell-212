@@ -30,13 +30,13 @@ export const initialQuestion = {
   },
 };
 
-export default function AddQuestionPopup({ quiz, open, setOpen }) {
+export default function AddQuestionPopup({questions, quiz, open, setOpen }) {
   const params = useParams();
   const navigate = useNavigate();
   const { topic } = params;
   const [allQuestions, setAllQuestions] = React.useState(
-    quiz.questions.length
-      ? JSON.parse(JSON.stringify(quiz.assigneeList))
+    questions?.length
+      ? JSON.parse(JSON.stringify(questions))
       : [
           {
             ...initialQuestion,

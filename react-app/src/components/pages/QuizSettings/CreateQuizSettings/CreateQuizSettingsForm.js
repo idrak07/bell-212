@@ -41,6 +41,8 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
     useForm(isEdit ? {title: editQuiz.title, startTime: editQuiz.startTime, endTime: editQuiz.endTime} : userInitialFormValues, true, validate);
 
+    console.log('edit quiz',editQuiz)
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(values);

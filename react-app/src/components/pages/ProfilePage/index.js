@@ -1,6 +1,5 @@
 import { Typography } from '@mui/material';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import { SERVER_URL } from '../../../constants';
 import useFetch from '../../../hooks/useFetch';
 import useLocalStorage from '../../../hooks/useLocalStorage';
@@ -51,7 +50,7 @@ const ProfilePage = () => {
         ) : error ? (
           "Error getting profile data"
         ) : response && (
-          <AddEditUserForm isEdit={true} isProfileView={true} editData={{
+          <AddEditUserForm isEdit={true} isProfileView={authenticatedUser.authority !== 'ROLE_ADMIN'} editData={{
             ...response, dob: new Date(convertMsToDate(response.dob)).toISOString().slice(0, 10)
           }} />
         )}

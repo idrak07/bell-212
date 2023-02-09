@@ -1,13 +1,14 @@
 
 import { Typography } from "@mui/material";
 import React from "react";
-import CustomButton from '../../../../ui/CustomButton'
 import { useNavigate } from "react-router";
+import CustomButton from '../../../../ui/CustomButton';
 import AdminLayout from "../../../layouts/AdminLayout";
 import EditQuizSettingsView from "./EditQuizSettingsView";
 
 const EditQuizSettings = () => {
   const navigate = useNavigate();
+
   return (
     <AdminLayout>
       <div style={{
@@ -26,7 +27,7 @@ const EditQuizSettings = () => {
             id="tableTitle"
             component="div"
           >
-            Edit Quiz
+            Quiz: {localStorage.getItem('editQuiz') ?? ''}
           </Typography>
           <div>
 

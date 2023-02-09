@@ -13,6 +13,9 @@ export function formatDate(date) {
   return date.getDate() + "/" + (date.getMonth()+1)  + "/" + date.getFullYear() + "  " + strTime;
 }
 
-export function arrayToDate(data) {
-  
+export function arrayToDate(arrayDate) {
+  const [year, month, day, hour, minute] = arrayDate
+  const convertedDate = new Date(year, month-1, day, hour, minute);
+
+  return convertedDate;
 }

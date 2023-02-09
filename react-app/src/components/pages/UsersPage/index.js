@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import { SERVER_URL } from "../../../constants";
 import AdminLayout from "../../layouts/AdminLayout";
 import UsersTable from "./UsersTable";
@@ -9,6 +10,7 @@ const UsersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [response, setResponse] = useState(null);
+  const location = useLocation();
 
   const fetchUser = async () => {
     try {
@@ -25,7 +27,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [shouldRefetchUser, setShouldRefetchUser]);
+  }, [shouldRefetchUser, setShouldRefetchUser, location.pathname]);
 
   return (
     <AdminLayout>
@@ -43,7 +45,7 @@ const UsersPage = () => {
           "Error getting users"
         ) : response && response?.length === 0 ? (
           <div>
-            <p>No tutorials found</p>
+            <p>No users found</p>
           </div>
         ) : (
           <UsersTable allUsers={response} setShouldRefetchUser={setShouldRefetchUser} />

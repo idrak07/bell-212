@@ -9,20 +9,20 @@ import * as React from "react";
 import { stringAvatar } from "../../../../../util/string";
 
 export default function StudentList({ students }) {
+  console.log(students)
   return (
     <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
-      {students?.map((currentStudent) => {
-        const student = currentStudent.user;
+      {students?.map((student) => {
         return (
           <>
             <ListItem alignItems="flex-start">
               <ListItemAvatar>
                 <Avatar
-                  {...stringAvatar(`${student.firstName} ${student.lastName}`)}
+                  {...stringAvatar(`${student?.firstName} ${student?.lastName}`)}
                 />
               </ListItemAvatar>
               <ListItemText
-                primary={`${student.firstName} ${student.secondName} (BD NO: ${student.bdNo} | SVC ID: ${student.svcNo})`}
+                primary={`${student?.firstName} ${student?.lastName} (BD NO: ${student?.bdNo} | SVC ID: ${student?.svcNo})`}
                 secondary={
                   <React.Fragment>
                     <Typography
@@ -31,9 +31,9 @@ export default function StudentList({ students }) {
                       variant="body2"
                       color="text.primary"
                     >
-                      Branch: {student.branch}, Unit: {student.unit} &nbsp;
+                      Branch: {student?.branch}, Unit: {student?.unit} &nbsp;
                     </Typography>
-                    - Email: {student.email}, Mobile: {student.phoneNo}
+                    {/* - Email: {student?.email}, Mobile: {student?.phoneNo} */}
                   </React.Fragment>
                 }
               />

@@ -12,7 +12,7 @@ import useFetch from "../../../../../hooks/useFetch";
 import { stringAvatar } from "../../../../../util/string";
 
 export default function StudentPopupContent({ quiz, allUsers, setAllUsers }) {
-  const [checked, setChecked] = React.useState(allUsers?.map((u) => u?.user?.id));
+  const [checked, setChecked] = React.useState(allUsers?.map((u) => u?.userId));
 
   // api call
   const [{ response, error, isLoading }, doFetch] = useFetch(
@@ -37,24 +37,24 @@ export default function StudentPopupContent({ quiz, allUsers, setAllUsers }) {
     }
 
     setChecked(newChecked);
+    setAllUsers(newChecked)
   };
 
-  React.useEffect(() => {
-    if (response) {
-      const updatedAllUsers = response.filter(
-        (user) => checked.indexOf(user.id) !== -1
-      );
-      const usersWithQuizInfo = updatedAllUsers.map((user) => {
-        return {
-          ...user,
-          quiz: quiz.id,
-          points: null,
-        };
-      });
-      setAllUsers(usersWithQuizInfo);
-      console.log(allUsers);
-    }
-  }, [checked]);
+  // React.useEffect(() => {
+  //   if (response) {
+  //     const updatedAllUsers = response.filter(
+  //       (user) => checked.indexOf(user.id) !== -1
+  //     );
+  //     const usersWithQuizInfo = updatedAllUsers.map((user) => {
+  //       return {
+  //         ...user,
+  //         quiz: quiz.id,
+  //         points: null,
+  //       };
+  //     });
+  //     setAllUsers(updatedAllUsers);
+  //   }
+  // }, [checked]);
 
   return (
     <List sx={{ width: "100%", maxWidth: "100%", bgcolor: "background.paper" }}>
@@ -92,7 +92,7 @@ export default function StudentPopupContent({ quiz, allUsers, setAllUsers }) {
                     <div className="avatar"></div>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={`${student.firstName} ${student.lastName} (BD NO: ${student.bdNo} | SVC ID: ${student.svcNo})`}
+                    primary={`${student.firstName} ${student.lastName} (BD NO: ${student?.bdNo} | SVC ID: ${student?.svcNo})`}
                     secondary={
                       <React.Fragment>
                         <Typography
@@ -101,9 +101,9 @@ export default function StudentPopupContent({ quiz, allUsers, setAllUsers }) {
                           variant="body2"
                           color="text.primary"
                         >
-                          Branch: {student.branch}, Unit: {student.unit} &nbsp;
+                          Branch: {student?.branch}, Unit: {student?.unit} &nbsp;
                         </Typography>
-                        - Email: {student.email}, Mobile: {student.phoneNo}
+                        - Email: {student?.email}, Mobile: {student?.phoneNo}
                       </React.Fragment>
                     }
                   />

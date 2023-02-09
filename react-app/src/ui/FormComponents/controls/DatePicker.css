@@ -1,7 +1,6 @@
-
 .material-textfield {
-  position: relative;  
-  width: 100%
+  position: relative;
+  width: 100%;
 }
 
 .label {
@@ -14,33 +13,33 @@
   color: gray;
   padding: 0 0.3rem;
   margin: 0 0.5rem;
-  transition: .1s ease-out;
+  transition: 0.1s ease-out;
   transform-origin: left top;
   pointer-events: none;
 }
-input{
+input {
   width: 100%;
   font-size: 1rem;
   outline: none;
   border: 1px solid gray;
-  border-radius: 5px;  
+  border-radius: 5px;
   padding: 1rem 0.7rem;
   color: gray;
   transition: 0.1s ease-out;
 }
 input:focus {
-  border-color: #6200EE;  
+  border-color: #6200ee;
 }
 input:focus + label {
-  color: #6200EE;
+  color: #6200ee;
   top: 0;
-  transform: translateY(-50%) scale(.9);
+  transform: translateY(-50%) scale(0.9);
 }
 input:not(:placeholder-shown) + label {
   top: 0;
-  transform: translateY(-50%) scale(.9);
+  transform: translateY(-50%) scale(0.9);
 }
 
-input:disabled{
-  background-color: #d3d3d326;
+input:disabled {
+  background-color: #d3d3d37a;
 }

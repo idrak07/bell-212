@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { SERVER_URL } from "../../../../constants";
 import useFetch from "../../../../hooks/useFetch";
+import { arrayToDate } from "../../../../util";
 import CreateQuizSettingsForm from "../CreateQuizSettings/CreateQuizSettingsForm";
 import QuestionStudentList from "./QuestionStudentList";
 
@@ -19,6 +20,10 @@ const EditQuizSettingsView = () => {
       method: "GET",
     });
     console.log({ response });
+
+    if(!isLoading && !error && response) {
+      localStorage.setItem('editQuiz', response?.title)
+    }
   }, []);
 
   return (
@@ -29,10 +34,23 @@ const EditQuizSettingsView = () => {
         ? "Error getting quiz details"
         : response && (
             <>
-              <CreateQuizSettingsForm isEdit={true} editQuiz={response} />
+              <CreateQuizSettingsForm
+                isEdit={true}
+                editQuiz={{
+                  ...response,
+                  startTime: arrayToDate(response.startTime),
+                  endTime: arrayToDate(response.endTime),
+                }}
+              />
 
               <Paper style={{ padding: "25px 15px", marginTop: "1rem" }}>
-                <QuestionStudentList quiz={response}/>
+                <QuestionStudentList
+                  quiz={{
+                    ...response,
+                    startTime: arrayToDate(response.startTime),
+                    endTime: arrayToDate(response.endTime),
+                  }}
+                />
               </Paper>
             </>
           )}

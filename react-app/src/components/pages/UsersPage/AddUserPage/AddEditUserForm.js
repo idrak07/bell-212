@@ -61,7 +61,7 @@ export const userInitialFormValues = {
   password: "",
   // photo: "",
   authority: "",
-  activated: true
+  activated: true,
 };
 
 export default function AddEditUserForm({
@@ -69,7 +69,7 @@ export default function AddEditUserForm({
   isProfileView = false,
   editData,
   isSignup = false,
-  setCurrentPage
+  setCurrentPage,
 }) {
   const navigate = useNavigate();
   console.log(editData);
@@ -78,7 +78,11 @@ export default function AddEditUserForm({
     let temp = { ...errors };
     // check validation for all input fileds
     Object.keys(fieldValues).forEach((key) => {
-      if (fieldValues[key] || key == "imageKey" || (isSignup && key=='authority')) {
+      if (
+        fieldValues[key] ||
+        key == "imageKey" ||
+        (isSignup && key == "authority")
+      ) {
         temp[key] = "";
       } else {
         temp[key] = "This field is required";
@@ -125,14 +129,14 @@ export default function AddEditUserForm({
             ...values,
           },
         });
-      } else if(isSignup) {
+      } else if (isSignup) {
         const res = await addUser({
           method: "POST",
           mode: "cors",
           data: {
             ...values,
-            authority: 'ROLE_USER',
-            activated: false
+            authority: "ROLE_USER",
+            activated: false,
           },
         });
       } else {
@@ -145,16 +149,16 @@ export default function AddEditUserForm({
         });
       }
       resetForm();
-      if(isProfileView) {
-        toast.success('Profile updated successfully')
+      if (isProfileView) {
+        toast.success("Profile updated successfully");
         return;
-      } else if(isEdit) {
-        toast.success('Profile Edited Successfully')
-      } else if(isSignup) {
-        setCurrentPage('Login')
+      } else if (isEdit) {
+        toast.success("Profile Edited Successfully");
+      } else if (isSignup) {
+        setCurrentPage("Login");
         return;
       } else {
-        toast.success('Profile Created Successfully')
+        toast.success("Profile Created Successfully");
       }
       navigate("/users");
     } catch (e) {
@@ -300,16 +304,19 @@ export default function AddEditUserForm({
                 onChange={handleInputChange}
                 error={errors.email}
               />
-              <Controls.Input
-                id="password"
-                type="text"
-                placeholder={"Enter second name"}
-                name="password"
-                label="Password"
-                value={values.password}
-                onChange={handleInputChange}
-                error={errors.password}
-              />
+              {!isEdit && (
+                <Controls.Input
+                  id="password"
+                  type="text"
+                  placeholder={"Enter second name"}
+                  name="password"
+                  label="Password"
+                  value={values.password}
+                  onChange={handleInputChange}
+                  error={errors.password}
+                />
+              )}
+
               {/* <Controls.Input
                 id="photo"
                 type="file"
@@ -331,14 +338,14 @@ export default function AddEditUserForm({
                   disabled={isProfileView}
                 />
               ) : (
-                 <Controls.Input
+                <Controls.Input
                   id="hidden"
                   type="text"
-                  style={{opacity: 0, visibility: 'hidden'}}
+                  style={{ opacity: 0, visibility: "hidden" }}
                   disabled
                 />
               )}
-              
+
               {/* <div style={{margin: '0 8px 8px 8px', width: '80%'}}>
 
                           <label>Upload Photo</label>
@@ -359,11 +366,13 @@ export default function AddEditUserForm({
               type="submit"
               text={`${isProfileView ? "Update Profile" : "Submit"}`}
             />
-            {
-              !isProfileView && (
-                <Controls.Button text="Reset" color="default" onClick={resetForm} />
-              )
-            }
+            {!isProfileView && (
+              <Controls.Button
+                text="Reset"
+                color="default"
+                onClick={resetForm}
+              />
+            )}
           </div>
         </Paper>
       </Form>

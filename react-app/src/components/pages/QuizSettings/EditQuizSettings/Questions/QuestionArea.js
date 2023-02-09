@@ -5,15 +5,26 @@ import QuestionList from "./QuestionList";
 
 const QuestionArea = ({quiz}) => {
   const [open, setOpen] = useState(false)
+  // const [{ response, error, isLoading }, doFetch] = useFetch(
+  //   `${SERVER_URL}/quizQuestions/questions/${quiz.id}`
+  // );
+
+  // useEffect(() => {
+  //   doFetch({
+  //     method: "GET",
+  //   });
+  //   console.log({ response });
+  // }, []);
+  const response = []
   return (
     <div>
-
-      {quiz.questions.length !== 0 && (
-        <QuestionList questions={quiz.questions} />
+      {/* paused */}
+      {response.length !== 0 && (
+        <QuestionList questions={response} />
       )}
 
 
-      {quiz.questions.length === 0 ? (
+      {response.length === 0 ? (
         <Controls.Button
           type="button"
           text="Add Questions"
@@ -30,7 +41,7 @@ const QuestionArea = ({quiz}) => {
       )}
 
       {open && (
-        <AddQuestionPopup quiz={quiz} open={open} setOpen={setOpen} />
+        <AddQuestionPopup questions={response} quiz={quiz} open={open} setOpen={setOpen} />
       )}
 
     </div>

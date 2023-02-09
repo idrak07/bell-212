@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useNavigate, useParams } from "react-router";
+import { arrayToDate, formatDate } from "../../../../util";
 
 export default function QuizListItemByTopic({quiz}) {
   const navigate = useNavigate();
@@ -30,9 +31,9 @@ export default function QuizListItemByTopic({quiz}) {
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
             </Typography>
             <Typography variant="body2">
-              Start Time: {quiz?.startTime.join(' ')} 
+              Start Time: {formatDate(arrayToDate(quiz?.startTime))} 
               <br />
-              End Time: {quiz?.endTime.join(' ')} 
+              End Time: {formatDate(arrayToDate(quiz?.endTime))} 
             </Typography>
           </CardContent>
           <CardActions style={{margin: '0 0 10px 10px'}}>
