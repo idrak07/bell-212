@@ -2,6 +2,8 @@ package com.genuinecoder.springserver.web.rest;
 
 import com.genuinecoder.springserver.domain.Quiz;
 import com.genuinecoder.springserver.service.QuizAssigneeService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.List;
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:3000")
 public class QuizAssigneeResource {
+
+    Logger log = LoggerFactory.getLogger(QuizAssigneeResource.class);
     private final QuizAssigneeService quizAssigneeService;
 
     public QuizAssigneeResource(QuizAssigneeService quizAssigneeService) {
@@ -26,6 +30,7 @@ public class QuizAssigneeResource {
 
     @PostMapping("/quizAssignees/users/{quizId}")
     public ResponseEntity<Void> saveAllAssignedUser(@PathVariable Long quizId, @RequestBody List<Long> userIds) {
+        log.info("UserIds: {}", userIds);
         quizAssigneeService.saveAllUsersForQuiz(userIds, quizId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
