@@ -18,19 +18,19 @@ public class QuizAssigneeResource {
         this.quizAssigneeService = quizAssigneeService;
     }
 
-    @GetMapping("/quizAssignees/{quizId}")
+    @GetMapping("/quizAssignees/users/{quizId}")
     public ResponseEntity<List<QuizAssigneeDTO>> getAssigneesByQuizId(@PathVariable Long quizId) {
         List<QuizAssigneeDTO> quizAssigneeDTOS = quizAssigneeService.findAllAssigneesByQuizId(quizId);
         return new ResponseEntity<>(quizAssigneeDTOS, HttpStatus.OK);
     }
 
-    @PostMapping("/quizAssignees/{quizId}")
+    @PostMapping("/quizAssignees/users/{quizId}")
     public ResponseEntity<Void> saveAllAssignedUser(@PathVariable Long quizId, @RequestBody List<Long> userIds) {
         quizAssigneeService.saveAllUsersForQuiz(userIds, quizId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/quizAssignees/{userId}")
+    @GetMapping("/quizAssignees/quizzes/{userId}")
     public ResponseEntity<List<Quiz>> getUsersActiveQuiz(@PathVariable Long userId) {
         List<Quiz> quizzes = quizAssigneeService.getQuizzesForUser(userId);
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
