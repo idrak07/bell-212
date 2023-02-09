@@ -53,10 +53,10 @@ public class QuestionResource {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/quiz")
-    public ResponseEntity<List<Question>> getQuestionsForQuiz(@RequestParam(name = "topic") Topic topic, @RequestParam(name = "questionType")QuestionType questionType, @RequestParam(name = "limit")Long limit) {
-        List<Question> questions = questionService.getQuestionsForQuiz(topic, questionType, limit);
-        return new ResponseEntity<>(questions, HttpStatus.OK);
-    }
+//    @GetMapping("/quiz")
+//    public ResponseEntity<List<Question>> getQuestionsForQuiz(@RequestParam(name = "topic") Topic topic, @RequestParam(name = "questionType")QuestionType questionType, @RequestParam(name = "limit")Long limit) {
+//        List<Question> questions = questionService.getQuestionsForQuiz(topic, questionType, limit);
+//        return new ResponseEntity<>(questions, HttpStatus.OK);
+//    }
 
 }
