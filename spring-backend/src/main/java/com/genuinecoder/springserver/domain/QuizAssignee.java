@@ -1,9 +1,10 @@
 package com.genuinecoder.springserver.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class QuizAssignee {
+public class QuizAssignee implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;

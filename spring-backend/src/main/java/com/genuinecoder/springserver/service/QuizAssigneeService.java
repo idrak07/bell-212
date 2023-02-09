@@ -5,7 +5,8 @@ import com.genuinecoder.springserver.domain.QuizAssignee;
 import com.genuinecoder.springserver.domain.User;
 import com.genuinecoder.springserver.repository.QuizAssigneeRepository;
 import com.genuinecoder.springserver.web.rest.QuizAssigneeDTO;
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +22,8 @@ public class QuizAssigneeService {
     private final UserService userService;
 
     private final QuizService quizService;
+
+    Logger log = LoggerFactory.getLogger(QuizAssigneeService.class);
 
     public QuizAssigneeService(QuizAssigneeRepository quizAssigneeRepository, UserService userService, QuizService quizService) {
         this.quizAssigneeRepository = quizAssigneeRepository;
@@ -53,6 +56,7 @@ public class QuizAssigneeService {
         quizAssigneeDTO.setId(quizAssignee.getId());
         quizAssigneeDTO.setQuizId(quizAssignee.getQuizId());
         quizAssigneeDTO.setUserId(quizAssignee.getUserId());
+        quizAssigneeDTO.setPoints(quizAssignee.getPoints());
         return quizAssigneeDTO;
     }
 
@@ -60,16 +64,21 @@ public class QuizAssigneeService {
         List<QuizAssignee> quizAssignees = quizAssigneeRepository.findAllByQuizId(quizId);
         List<Long> allAssignees = quizAssignees.stream()
                 .map(QuizAssignee::getUserId).collect(Collectors.toList());
+        log.info("ÄllAssignees: {}", allAssignees);
         List<Long> newAssignedIds = userIds.stream().filter(userid -> !allAssignees.contains(userid)).toList();
+        log.info("newAssignedIds: {}", newAssignedIds);
         newAssignedIds.forEach(userId -> {
             QuizAssignee quizAssignee = new QuizAssignee();
             quizAssignee.setUserId(userId);
             quizAssignee.setQuizId(quizId);
-            quizAssigneeRepository.save(quizAssignee);
+            quizAssignee.setPoints(0L);
+            log.info("QuizAssignee: {}", quizAssignee);
+            quizAssignee = quizAssigneeRepository.save(quizAssignee);
+            log.info("QuizAssignee: {}", quizAssignee);
         });
 
         List<Long> deletedIds = allAssignees.stream().filter(userid -> !userIds.contains(userid)).toList();
-        newAssignedIds.forEach(userId -> {
+        deletedIds.forEach(userId -> {
             QuizAssignee quizAssignee = quizAssigneeRepository.findByQuizIdAndUserId(quizId, userId);
             quizAssigneeRepository.delete(quizAssignee);
         });
