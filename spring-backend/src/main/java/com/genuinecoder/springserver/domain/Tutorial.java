@@ -3,7 +3,6 @@ package com.genuinecoder.springserver.domain;
 import com.genuinecoder.springserver.domain.enumeration.Chapter;
 import com.genuinecoder.springserver.domain.enumeration.Topic;
 import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 
@@ -66,5 +65,16 @@ public class Tutorial {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public String toString() {
+        return "Tutorial{" +
+                "id=" + id +
+                ", topic=" + topic +
+                ", chapter=" + chapter +
+                ", subject='" + subject + '\'' +
+                ", link='" + link + '\'' +
+                '}';
     }
 }

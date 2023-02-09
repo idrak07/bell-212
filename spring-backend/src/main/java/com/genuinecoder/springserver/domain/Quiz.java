@@ -6,8 +6,6 @@ import com.genuinecoder.springserver.domain.enumeration.Topic;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Quiz implements Serializable {
@@ -22,14 +20,6 @@ public class Quiz implements Serializable {
     private LocalDateTime endTime;
 
     private Long points;
-
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<QuizAssignee> assigneeList;
-
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Question> questions;
-
-
 
     @Enumerated(EnumType.STRING)
     private Topic topic;
@@ -91,22 +81,6 @@ public class Quiz implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public List<QuizAssignee> getAssigneeList() {
-        return assigneeList;
-    }
-
-    public void setAssigneeList(List<QuizAssignee> assigneeList) {
-        this.assigneeList = assigneeList;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
     }
 
     @Override

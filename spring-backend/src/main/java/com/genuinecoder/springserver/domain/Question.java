@@ -1,6 +1,5 @@
 package com.genuinecoder.springserver.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.genuinecoder.springserver.domain.enumeration.QuestionType;
 import com.genuinecoder.springserver.domain.enumeration.Topic;
 
@@ -9,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -30,10 +29,7 @@ public class Question {
 
     private String correctChoice;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id", referencedColumnName = "id")
-    @JsonIgnore
-    private Quiz quiz;
+    private Long quizId;
 
     public Long getId() {
         return id;
@@ -107,12 +103,12 @@ public class Question {
         this.correctChoice = correctChoice;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
+    public Long getQuizId() {
+        return quizId;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public void setQuizId(Long quizId) {
+        this.quizId = quizId;
     }
 
     @Override
@@ -127,7 +123,7 @@ public class Question {
                 ", choice3='" + choice3 + '\'' +
                 ", choice4='" + choice4 + '\'' +
                 ", correctChoice='" + correctChoice + '\'' +
-                ", quiz=" + quiz +
+                ", quizId=" + quizId +
                 '}';
     }
 }

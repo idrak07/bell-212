@@ -1,7 +1,5 @@
 package com.genuinecoder.springserver.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,14 +8,9 @@ public class QuizAssignee {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "quiz_id")
-    @JsonIgnore
-    private Quiz quiz;
+    private Long quizId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Long userId;
 
     private Long points;
 
@@ -29,20 +22,20 @@ public class QuizAssignee {
         return id;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
+    public Long getQuizId() {
+        return quizId;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
+    public void setQuizId(Long quizId) {
+        this.quizId = quizId;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getPoints() {
@@ -57,8 +50,8 @@ public class QuizAssignee {
     public String toString() {
         return "QuizAssignee{" +
                 "id=" + id +
-                ", quiz=" + quiz +
-                ", user=" + user +
+                ", quizId=" + quizId +
+                ", userId=" + userId +
                 ", points=" + points +
                 '}';
     }

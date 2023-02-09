@@ -34,7 +34,7 @@ public class QuizResource {
     }
 
     @GetMapping("/quizzes/by-topic")
-    public ResponseEntity<List<Quiz>> getQuizzesByType(@RequestParam(name = "topic") Topic topic) {
+    public ResponseEntity<List<Quiz>> getQuizzesByTopic(@RequestParam(name = "topic") Topic topic) {
         List<Quiz> quizzes = quizService.findByTopic(topic);
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
