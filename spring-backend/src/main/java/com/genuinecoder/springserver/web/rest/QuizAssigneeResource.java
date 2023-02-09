@@ -22,4 +22,10 @@ public class QuizAssigneeResource {
         List<QuizAssigneeDTO> quizAssigneeDTOS = quizAssigneeService.findAllAssigneesByQuizId(quizId);
         return new ResponseEntity<>(quizAssigneeDTOS, HttpStatus.OK);
     }
+
+    @PostMapping("/quizAssignees/{quizId}")
+    public ResponseEntity<Void> saveAllAssignedUser(@PathVariable Long quizId, @RequestBody List<Long> userIds) {
+        quizAssigneeService.saveAllUsersForQuiz(userIds, quizId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -48,6 +49,25 @@ public class QuizAssigneeService {
         quizAssigneeDTO.setId(quizAssignee.getId());
         quizAssigneeDTO.setQuizId(quizAssignee.getQuizId());
         quizAssigneeDTO.setUserId(quizAssignee.getUserId());
-        return quizAssignee;
+        return quizAssigneeDTO;
+    }
+
+    public void saveAllUsersForQuiz(List<Long> userIds, Long quizId) {
+        List<QuizAssignee> quizAssignees = quizAssigneeRepository.findAllByQuizId(quizId);
+        List<Long> allAssignees = quizAssignees.stream()
+                .map(QuizAssignee::getUserId).collect(Collectors.toList());
+        List<Long> newAssignedIds = userIds.stream().filter(userid -> !allAssignees.contains(userid)).toList();
+        newAssignedIds.forEach(userId -> {
+            QuizAssignee quizAssignee = new QuizAssignee();
+            quizAssignee.setUserId(userId);
+            quizAssignee.setQuizId(quizId);
+            quizAssigneeRepository.save(quizAssignee);
+        });
+
+        List<Long> deletedIds = allAssignees.stream().filter(userid -> !userIds.contains(userid)).toList();
+        newAssignedIds.forEach(userId -> {
+            QuizAssignee quizAssignee = quizAssigneeRepository.findByQuizIdAndUserId(quizId, userId);
+            quizAssigneeRepository.delete(quizAssignee);
+        });
     }
 }
