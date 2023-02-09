@@ -43,7 +43,14 @@ const StudentsArea = ({ quiz }) => {
         />
       )}
 
-      {open && <AddStudentPopup students={response} quiz={quiz} open={open} setOpen={setOpen} />}
+      {open && (
+        <AddStudentPopup
+          students={response}
+          quiz={quiz}
+          open={open}
+          setOpen={setOpen}
+        />
+      )}
     </div>
   );
 };

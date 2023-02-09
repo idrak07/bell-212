@@ -103,7 +103,7 @@ export default function StudentPopupContent({ quiz, allUsers, setAllUsers }) {
                         >
                           Branch: {student?.branch}, Unit: {student?.unit} &nbsp;
                         </Typography>
-                        - Email: {student?.email}, Mobile: {student?.phoneNo}
+                        {/* - Email: {student?.email}, Mobile: {student?.phoneNo} */}
                       </React.Fragment>
                     }
                   />

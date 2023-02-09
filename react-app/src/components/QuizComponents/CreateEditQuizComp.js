@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
+import { toast } from 'react-toastify'
 import { SERVER_URL } from '../../constants'
 import useFetch from '../../hooks/useFetch'
 
@@ -11,7 +12,7 @@ import QuestionComp from './QuestionComp'
 
 const questionInitialValue = {
     topic: "",
-    questionType: "ORIGINAL", // MOCK or ORIGINAL
+    questionType: "MOCK", // MOCK or ORIGINAL
     description: "",
     choice1: "",
     choice2: "",
@@ -48,13 +49,15 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
     })
     
     if(errors.length) {
-      alert(errors.join(' \n'));
+      errors.forEach(e => {
+        toast.error(e)
+      })
       return false
     }
     return true
   }
 
-  const handleCreateQuestion = () => {
+  const handleCreateQuestion = async () => {
     if(!isQuizFieldValid(questionState)) {
       return;
     }
@@ -67,7 +70,7 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
       //   body: JSON.stringify(questionState)
       // }).then(res => res.json()).then(data => console.log({data})).catch(e => console.log(e));
      
-      editQ({
+      await editQ({
         method: 'PUT',
         data: {
           ...questionState
@@ -77,9 +80,9 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
         alert('Error editing question');
         return;
       }
-      window.location.href=`/mock/${params?.topic}`
+      navigate(`/mock/${params?.topic}`)
     } else {
-      doFetch({
+      await doFetch({
         method: 'POST',
         data: {
           ...questionState
@@ -89,7 +92,7 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
         alert('Error creating question');
         return;
       }
-      window.location.href=`/mock/${params?.topic}`
+      navigate(`/mock/${params?.topic}`)
       
     }
   }
@@ -158,7 +161,7 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
               </select>
             </div>
 
-            <div>
+            {/* <div>
               <label style={{
               fontWeight: 500,
               fontSize: '1rem'
@@ -179,7 +182,7 @@ const CreateEditQuizComp = ({isEdit=false, editQuestion}) => {
                 <option value="ORIGINAL">Quiz</option>
                 <option value="MOCK">Mock</option>
               </select>
-            </div>
+            </div> */}
           </div>
         </div>
                 

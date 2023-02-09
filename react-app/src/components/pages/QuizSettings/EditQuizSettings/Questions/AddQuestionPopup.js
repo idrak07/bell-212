@@ -9,41 +9,40 @@ import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { SERVER_URL } from "../../../../../constants";
 import useFetch from "../../../../../hooks/useFetch";
-import QuestionPopupContent from "./QuestionPopupContent";
+import { capitalizedFirstLetter } from "../../../../QuizComponents/CreateEditQuizComp";
+import QuestionFormItem from "./QuestionFormItem";
 // import { v4 as uuid } from 'uuid';
 
 export const initialQuestion = {
-  id: 1,
+  description: "",
+  choice1: "",
+  choice2: "",
+  choice3: "",
+  choice4: "",
+  correctChoice: "",
   questionType: "ORIGINAL",
-  quiz: "",
   topic: "",
-  question: {
-    description: "",
-    choice1: "",
-    choice2: "",
-    choice3: "",
-    choice4: "",
-    correctChoice: "",
-    questionType: "ORIGINAL",
-    topic: "",
-    quiz: "",
-  },
+  quizId: "",
 };
 
-export default function AddQuestionPopup({questions, quiz, open, setOpen }) {
+export default function AddQuestionPopup({
+  quiz,
+  open,
+  setOpen,
+  isEdit = false,
+  editQuestion,
+}) {
   const params = useParams();
   const navigate = useNavigate();
   const { topic } = params;
-  const [allQuestions, setAllQuestions] = React.useState(
-    questions?.length
-      ? JSON.parse(JSON.stringify(questions))
-      : [
-          {
-            ...initialQuestion,
-            topic: topic.toUpperCase()?.replace(" ", "_"),
-            quiz: quiz.id,
-          },
-        ]
+  const [question, setQuestion] = React.useState(
+    isEdit
+      ? editQuestion
+      : {
+          ...initialQuestion,
+          topic: topic.toUpperCase()?.replace(" ", "_"),
+          quizId: quiz.id,
+        }
   );
 
   const [scroll, setScroll] = React.useState("paper");
@@ -52,34 +51,60 @@ export default function AddQuestionPopup({questions, quiz, open, setOpen }) {
     setOpen(false);
   };
 
-  const [{ response, error, isLoading }, updatequiz] = useFetch(
-    `${SERVER_URL}/quiz`
+  const isQuizFieldValid = () => {
+    const errors = [];
+    Object.keys(question).forEach((key) => {
+      if (!question[key]) {
+        errors.push(`${capitalizedFirstLetter(key)} cannot be empty`);
+      }
+    });
+
+    if (errors.length) {
+      errors.forEach((e) => {
+        toast.error(e);
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const [{ response, error, isLoading }, createQuestion] = useFetch(
+    `${SERVER_URL}/questions`
   );
 
-  const handleSaveQuestions = async () => {
-    const allQuestionList = !allQuestions.length ? [] : allQuestions.map(ques => {
-      return {
-        ...ques,
-        question: {
-          ...ques.question,
-          topic: topic.toUpperCase()?.replace(" ", "_"),
-          quiz: quiz.id,
-        }
-      }
-    })
+  const handleSaveQuestion = async () => {
+    if (!isQuizFieldValid()) {
+      return;
+    }
+
     try {
-      const res = await updatequiz({
-        method: "PUT",
-        data: {
-          ...quiz,
-          questions: allQuestionList,
-        },
+      const res = await createQuestion({
+        method: "POST",
+        data: question,
       });
       console.log(res);
       toast.success("Successfully question saved");
     } catch (e) {
       console.log(e);
       toast.error("Couldn't save questions");
+    }
+  };
+
+  const handleEditQuestion = async () => {
+    if (!isQuizFieldValid()) {
+      return;
+    }
+
+    try {
+      const res = await createQuestion({
+        method: "PUT",
+        data: question,
+      });
+      console.log(res);
+      toast.success("Successfully question Edited");
+    } catch (e) {
+      console.log(e);
+      toast.error("Couldn't edit questions");
     }
   };
 
@@ -101,16 +126,29 @@ export default function AddQuestionPopup({questions, quiz, open, setOpen }) {
             ref={descriptionElementRef}
             tabIndex={-1}
           >
-            <QuestionPopupContent
+            {/* <QuestionPopupContent
               allQuestions={allQuestions}
               setAllQuestions={setAllQuestions}
               quiz={quiz}
+            /> */}
+            <QuestionFormItem
+              questionState={question}
+              setQuestionState={setQuestion}
             />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" onClick={handleSaveQuestions}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              if (isEdit) {
+                handleEditQuestion();
+              } else {
+                handleSaveQuestion();
+              }
+            }}
+          >
             Save
           </Button>
         </DialogActions>

@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
-import CustomButton from '../../ui/CustomButton'
 import Input from '@mui/material/Input';
-import Radio from '@mui/material/Radio';
-import styles from './CreateQuiz.module.css'
+import React, { useState } from 'react';
+import styles from './CreateQuiz.module.css';
 
 const QuestionComp = ({ questionState, setQuestionState }) => {
   const [questionChoices, setQuestionChoices] = useState([

@@ -1,17 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { SERVER_URL } from "../../../../../constants";
+import useFetch from "../../../../../hooks/useFetch";
 import ShowQuestionWithAns from "../../../../QuizComponents/ShowQuestionWithAns";
-import { dummyQuestions } from "../../../GiveTestPage/GiveTestDetail";
+import AddQuestionPopup from "./AddQuestionPopup";
 
-const QuestionList = ({questions}) => {
+const QuestionList = ({ questions }) => {
+  const [open, setOpen] = useState(false);
+  const [selectedQues, setSelectedQues] = useState(null);
+  const handleSelectQues = (ques, action) => {
+    // action = 'edit' | 'delete'
+    console.log(ques)
+    setSelectedQues(ques);
+    if (action === "edit") {
+      setOpen(true);
+    } else {
+      handleDeleteOriginalQuestion();
+    }
+  };
+
+  const [{ response, error: deleteError, isLoading: deleteLoading }, deleteQ] =
+    useFetch(`${SERVER_URL}/questions`);
+
+  const handleDeleteOriginalQuestion = async (question) => {
+    try {
+      await deleteQ({
+        method: "DELETE",
+        mode: "no-cors",
+        params: {
+          id: question.id,
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=UTF-8",
+        },
+      });
+      toast.success('Successfully question deleted')
+    } catch (e) {
+      toast.error("Couldn't delete question");
+    }
+  };
+
   return (
-    <div>
-      {
-        dummyQuestions.map((question) => (
-          <ShowQuestionWithAns key={question.id} question={question} showActionButton={false} />
-        ))
-      }
-    </div>
-  )
+    <>
+      {questions.map((question) => (
+        <ShowQuestionWithAns
+          key={question.id}
+          question={question}
+          showActionButton={true}
+          isFromOriginalQuiz={true}
+          selectForOriginal={handleSelectQues}
+        />
+      ))}
+
+      {open && selectedQues &&(
+        <AddQuestionPopup
+          open={open}
+          setOpen={setOpen}
+          isEdit={true}
+          editQuestion={selectedQues}
+        />
+      )}
+    </>
+  );
 };
 
 export default QuestionList;
