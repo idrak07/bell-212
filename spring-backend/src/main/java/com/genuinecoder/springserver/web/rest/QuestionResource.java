@@ -63,5 +63,5 @@ public class QuestionResource {
     public ResponseEntity<List<Question>> getQuestionsForQuiz(@PathVariable Long quizId) {
         List<Question> questions = questionService.getQuestionsForQuiz(quizId);
         return new ResponseEntity<>(questions, HttpStatus.OK);
-
+    }
 }
