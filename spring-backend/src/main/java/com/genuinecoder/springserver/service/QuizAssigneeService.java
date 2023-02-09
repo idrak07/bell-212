@@ -57,6 +57,10 @@ public class QuizAssigneeService {
         quizAssigneeDTO.setQuizId(quizAssignee.getQuizId());
         quizAssigneeDTO.setUserId(quizAssignee.getUserId());
         quizAssigneeDTO.setPoints(quizAssignee.getPoints());
+        quizAssigneeDTO.setBdNo(user.getBdNo());
+        quizAssigneeDTO.setSvcNo(user.getSvcNo());
+        quizAssigneeDTO.setUnit(user.getUnit());
+        quizAssigneeDTO.setPhoneNo(user.getPhoneNo());
         return quizAssigneeDTO;
     }
 
