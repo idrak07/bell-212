@@ -70,6 +70,7 @@ export default function AddEditUserForm({
   editData,
   isSignup = false,
   setCurrentPage,
+  fromProfile = false,
 }) {
   const navigate = useNavigate();
   console.log(editData);
@@ -304,7 +305,7 @@ export default function AddEditUserForm({
                 onChange={handleInputChange}
                 error={errors.email}
               />
-              {!isEdit && (
+              {(fromProfile || !isEdit) && (
                 <Controls.Input
                   id="password"
                   type="text"

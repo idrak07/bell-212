@@ -6,9 +6,7 @@ import useFetch from "../../../../hooks/useFetch";
 import CustomButton from "../../../../ui/CustomButton";
 import { convertMsToDate } from "../../../../util";
 import AdminLayout from "../../../layouts/AdminLayout";
-import AddEditUserForm, {
-  userInitialFormValues,
-} from "../AddUserPage/AddEditUserForm";
+import AddEditUserForm from "../AddUserPage/AddEditUserForm";
 
 const EditUserPage = () => {
   const navigate = useNavigate();
@@ -57,15 +55,21 @@ const EditUserPage = () => {
           </CustomButton>
         </div>
 
-        {isLoading ? (
-          "Loading user data.."
-        ) : error ? (
-          "Error getting user data"
-        ) : response && (
-          <AddEditUserForm isEdit={true} editData={{
-            ...response, dob: new Date(convertMsToDate(response.dob)).toISOString().slice(0, 10)
-          }} />
-        )}
+        {isLoading
+          ? "Loading user data.."
+          : error
+          ? "Error getting user data"
+          : response && (
+              <AddEditUserForm
+                isEdit={true}
+                editData={{
+                  ...response,
+                  dob: new Date(convertMsToDate(response.dob))
+                    .toISOString()
+                    .slice(0, 10),
+                }}
+              />
+            )}
       </div>
     </AdminLayout>
   );
