@@ -38,8 +38,8 @@ const EditQuizSettingsView = () => {
                 isEdit={true}
                 editQuiz={{
                   ...response,
-                  startTime: arrayToDate(response.startTime),
-                  endTime: arrayToDate(response.endTime),
+                  startTime: new Date(arrayToDate(response.startTime)).toISOString().replace('Z', ''),
+                  endTime: new Date(arrayToDate(response.endTime)).toISOString().replace('Z', ''),
                 }}
               />
 
