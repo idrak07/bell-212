@@ -15,6 +15,8 @@ public class QuizAssignee implements Serializable {
 
     private Long points;
 
+    private boolean attended = false;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -45,6 +47,14 @@ public class QuizAssignee implements Serializable {
 
     public void setPoints(Long points) {
         this.points = points;
+    }
+
+    public boolean isAttended() {
+        return attended;
+    }
+
+    public void setAttended(boolean attended) {
+        this.attended = attended;
     }
 
     @Override

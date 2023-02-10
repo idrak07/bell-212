@@ -95,4 +95,11 @@ public class QuizAssigneeService {
 
         return quizService.findAllQUizzesEndLater(quizIds);
     }
+
+    public void storeMarks(Long quizId, Long userId, Long point) {
+
+        QuizAssignee quizAssignee = quizAssigneeRepository.findByQuizIdAndUserId(quizId, userId);
+        quizAssignee.setPoints(point);
+        quizAssigneeRepository.save(quizAssignee);
+    }
 }

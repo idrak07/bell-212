@@ -40,4 +40,10 @@ public class QuizAssigneeResource {
         List<Quiz> quizzes = quizAssigneeService.getQuizzesForUser(userId);
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
+
+    @GetMapping("/quizAssignees/quiz/{quizId}/user/{userId}/{point}")
+    public ResponseEntity<Void> storePoints(@PathVariable Long quizId, @PathVariable Long userId, @PathVariable Long point) {
+        quizAssigneeService.storeMarks(quizId, userId, point);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
