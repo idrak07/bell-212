@@ -2,7 +2,7 @@ import React from 'react'
 import AdminLayout from '../../layouts/AdminLayout'
 import UserQuizList from '../../QuizComponents/UserQuizList'
 
-const UserQuizLisPage = () => {
+const UserMockQuizPage = () => {
   return (
     <AdminLayout>
       <div style={{
@@ -14,4 +14,4 @@ const UserQuizLisPage = () => {
   )
 }
 
-export default UserQuizLisPage
+export default UserMockQuizPage

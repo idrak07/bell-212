@@ -16,6 +16,11 @@ export function formatDate(date) {
 export function arrayToDate(arrayDate) {
   const [year, month, day, hour, minute] = arrayDate
   const convertedDate = new Date(year, month-1, day, hour, minute);
-
   return convertedDate;
 }
+
+export const getDateDiff = (date1, date2) => {
+  console.log({date1, date2})
+  const diff = date2 - date1
+  return diff;
+} 

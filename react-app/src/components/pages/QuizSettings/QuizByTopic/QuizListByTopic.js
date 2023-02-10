@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { SERVER_URL } from "../../../../constants";
 import useFetch from "../../../../hooks/useFetch";
 import QuizListItemByTopic from "./QuizListItemByTopic";
@@ -54,6 +54,7 @@ export const quizzesByTopics = [
 const QuizListByTopic = () => {
   const params = useParams();
   const { topic } = params;
+  const location = useLocation()
   // api call
   const [{ response, error, isLoading }, doFetch] = useFetch(
     `${SERVER_URL}/quizzes/by-topic`
@@ -67,7 +68,7 @@ const QuizListByTopic = () => {
       },
     });
     console.log({ response });
-  }, []);
+  }, [location.pathname]);
   return (
     <div
       style={{

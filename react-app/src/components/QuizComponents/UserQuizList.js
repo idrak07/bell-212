@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom"
-import useLocalStorage from '../../hooks/useLocalStorage'
 import CustomButton from '../../ui/CustomButton'
 
 import './Quiz.css'
@@ -38,14 +37,14 @@ const quizLists = [
 
 
 const UserQuizList = () => {
-  const [selectedType, setSelectedType] = useState('ORIGINAL');
+  const [selectedType, setSelectedType] = useState('MOCK');
   const navigate = useNavigate()
   
   
   const handleStartExam = (topic) => {
 
     if(selectedType) {
-      const time = JSON.parse(JSON.stringify(localStorage.getItem(`/test/${selectedType}/${topic}`)))
+      const time = JSON.parse(JSON.stringify(localStorage.getItem(`/mock/${selectedType}/${topic}`)))
       
       if(time) {
         console.log('inside if')
@@ -55,12 +54,12 @@ const UserQuizList = () => {
         const currentDate = new Date();
         const twentyMinutesLater = new Date(currentDate.getTime() + (20 * 60 * 1000));
         console.log(selectedType, topic)
-        localStorage.setItem(`/test/${selectedType}/${topic}`, twentyMinutesLater)
+        localStorage.setItem(`/mock/${selectedType}/${topic}`, twentyMinutesLater)
       }
       
       // /test/quiz/engine/
       // navigate(`/test/${selectedType}/${topic}`)
-      window.location.href = `/test/${selectedType}/${topic}`
+      window.location.href = `/mock/${selectedType}/${topic}`
       // window.open(`http://localhost:3000/test/${selectedType}/${topic}`, '_blank');
       // window.close()
     }
@@ -68,28 +67,6 @@ const UserQuizList = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div>
-          <h2 style={{
-            fontSize: '1.1rem'
-          }} htmlFor="question_type">
-            Select Question Type
-          </h2>
-          <div>
-            <select name="question_type" id="question_type" style={{
-              width: '100%',
-              maxWidth: '300px',
-              padding: '8px 4px',
-              borderRadius: '6px',
-              outline: 'none'
-            }}
-              value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value)}
-            >
-              <option value="ORIGINAL">Quiz</option>
-              <option value="MOCK">Mock</option>
-            </select>
-          </div>
-        </div>
 
         <div>
           <h2 style={{

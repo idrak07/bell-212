@@ -61,6 +61,7 @@ export const menuItems = [
   },
   { name: "Users", to: `/users`, iconClassName: "bi bi-people", isAdminAccess: true },
   { name: "Quizzes", to: `/quiz-list`, iconClassName: "bi bi-card-list", isOnlyUserAccess: true },
+  { name: "Mock Quizzes", to: `/mock-quiz`, iconClassName: "bi bi-card-list", isOnlyUserAccess: true },
   { name: "Profile", to: `/Profile`, iconClassName: "bi bi-person" },
   { name: "Logout", iconClassName: "bi bi-box-arrow-left" },
 ];

@@ -16,7 +16,7 @@ const StudentsArea = ({ quiz }) => {
       method: "GET",
     });
     console.log({ response });
-  }, [open, setOpen]);
+  }, [open, setOpen, doFetch]);
 
   return (
     <div>

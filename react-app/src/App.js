@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import { ProtectedRoute } from "./common/PrivateRoute";
+import QuizAccess from "./common/QuizAccess";
 import Ui from "./components/DashboardUi/Ui";
 import CategooryDetails from "./components/Home/CategoryDetails";
 import AirframeDetail from "./components/Home/CategoryDetailView/AirframeDetail";
@@ -18,6 +19,7 @@ import SignIn from "./components/Login/SignIn";
 import SignUp from "./components/Login/SignUp";
 import CreateQuizPage from "./components/pages/CreateQuizPage";
 import EditQuizPage from "./components/pages/EditQuizPage";
+import GiveOriginalQuiz from "./components/pages/GiveOriginalQuiz";
 import GiveTestPage from "./components/pages/GiveTestPage";
 import AirframeTutorialLayout from "./components/pages/InteractiveTutorial/Airframe/AirframeTutorialLayout";
 import ElectricComponentTutorialLayout from "./components/pages/InteractiveTutorial/ElectricComponents/ElectricComponentTutorialLayout";
@@ -32,7 +34,8 @@ import EditQuizSettings from "./components/pages/QuizSettings/EditQuizSettings";
 import QuizByTopic from "./components/pages/QuizSettings/QuizByTopic";
 import ShowAdminQuizPage from "./components/pages/ShowAdminQuizPage";
 import TutorialPage from "./components/pages/TutorialPage";
-import UserQuizLisPage from "./components/pages/UserQuizListPage";
+import UserOriginalQuiz from "./components/pages/UserOriginalQuiz";
+import UserMockQuizPage from "./components/pages/UserQuizListPage";
 import UsersPage from "./components/pages/UsersPage";
 import AddUserPage from "./components/pages/UsersPage/AddUserPage";
 import EditUserPage from "./components/pages/UsersPage/EditUserPage";
@@ -146,9 +149,17 @@ function App() {
             <Route element={<ProtectedRoute isAllowed={!!authUser} />}>
               <Route path="/dashboard" element={<Ui />} />
               <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/quiz-list" element={<UserQuizLisPage />} />
-              <Route path="/test/:type/:topic" element={<GiveTestPage />} />
+              <Route path="/quiz-list" element={<UserOriginalQuiz />} />
+              <Route path="/mock-quiz" element={<UserMockQuizPage />} />
+              <Route path="/mock/:type/:topic" element={<GiveTestPage />} />
               <Route path="/tutorial/:topic" element={<TutorialPage />} />
+            </Route>
+
+            {/* give quiz/test route */}
+            <Route element={<ProtectedRoute isAllowed={!!authUser} />}>
+              <Route path="quiz" element={<QuizAccess />}>
+                <Route path=":quizId" element={<GiveOriginalQuiz />} />
+              </Route>
             </Route>
 
             {/* routes only admin can access */}
@@ -159,15 +170,16 @@ function App() {
               <Route path="/users" element={<UsersPage />} />
               <Route path="/users/add" element={<AddUserPage />} />
               <Route path="/users/:id" element={<EditUserPage />} />
-              <Route path="/quiz-settings/:topic/:id" element={<EditQuizSettings />} />
+              <Route
+                path="/quiz-settings/:topic/:id"
+                element={<EditQuizSettings />}
+              />
               <Route
                 path="/quiz-settings/:topic/create"
                 element={<CreateQuizSettings />}
               />
               <Route path="/quiz-settings" element={<QuizSettings />} />
               <Route path="/quiz-settings/:topic" element={<QuizByTopic />} />
-
-              
             </Route>
 
             {/* routes for interactive tutorial */}
@@ -186,7 +198,6 @@ function App() {
                   <Route path="oil" element={<Oil />} />
                 </Route>
 
-
                 {/* airframe layout */}
                 <Route path="airframe" element={<AirframeTutorialLayout />}>
                   <Route path="overview" element={<Airframe />} />
@@ -203,9 +214,11 @@ function App() {
                   <Route path="train" element={<Train />} />
                 </Route>
 
-
                 {/* electric components layout */}
-                <Route path="electric-components" element={<ElectricComponentTutorialLayout />}>
+                <Route
+                  path="electric-components"
+                  element={<ElectricComponentTutorialLayout />}
+                >
                   <Route path="overview" element={<Elecoveriew />} />
                   <Route path="powersupply" element={<Power />} />
                   <Route path="dcpowersupply" element={<Dc />} />
@@ -224,9 +237,11 @@ function App() {
                   <Route path="nite" element={<Nite />} />
                 </Route>
 
-
                 {/* Instruments layout */}
-                <Route path="instruments" element={<InstrumentsTutorialLayout />}>
+                <Route
+                  path="instruments"
+                  element={<InstrumentsTutorialLayout />}
+                >
                   <Route path="overview" element={<Instover />} />
                   <Route path="finst" element={<Finst />} />
                   <Route path="navinst" element={<Navinst />} />
@@ -235,7 +250,6 @@ function App() {
                   <Route path="hydra" element={<Hydra />} />
                   <Route path="missint" element={<Missibt />} />
                 </Route>
-
 
                 {/* Radio layout */}
                 <Route path="radio" element={<RadioTutorialLayout />}>
@@ -258,7 +272,6 @@ function App() {
                   <Route path="weater" element={<Weater />} />
                   <Route path="gps" element={<Gps />} />
                 </Route>
-
               </Route>
             </Route>
 

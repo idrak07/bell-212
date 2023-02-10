@@ -1,47 +1,51 @@
-import { Grid } from '@material-ui/core';
-import React, { Component } from 'react';
-import AirplaneIcon from './AirplaneIcon';
-import './Dashboard.css';
-import DashboardCardItem from './DashboardCardItem';
-import RadioIcon from './RadioIcon';
+import React, { Component } from "react";
+import AirplaneIcon from "./AirplaneIcon";
+import "./Dashboard.css";
+import DashboardCardItem from "./DashboardCardItem";
+import RadioIcon from "./RadioIcon";
 
 const subjectList = [
   {
     id: 1,
-    name: 'Engine',
-    description: 'An engine or motor is a machine designed to convert one form of energy into mechanical energy',
-    link: '/interactive-tutorial/engine/overview',
-    icon: "bi bi-gear-wide-connected"
+    name: "Engine",
+    description:
+      "An engine or motor is a machine designed to convert one form of energy into mechanical energy",
+    link: "/interactive-tutorial/engine/overview",
+    icon: "bi bi-gear-wide-connected",
   },
   {
     id: 2,
-    name: 'Airframe',
-    description: 'The mechanical structure of an aircraft is known as the airframe. Includes fuselage, undercarriage, empennage and wings.',
-    link: '/interactive-tutorial/airframe/overview',
-    iconComp: <AirplaneIcon />
+    name: "Airframe",
+    description:
+      "The mechanical structure of an aircraft is known as the airframe. Includes fuselage, undercarriage, empennage and wings.",
+    link: "/interactive-tutorial/airframe/overview",
+    iconComp: <AirplaneIcon />,
   },
   {
     id: 3,
-    name: 'Electric Components',
-    description: 'The electrical systems, in most helicopters, reflect the increased use of sophisticated avionics and other electrical accessories.',
-    link: '/interactive-tutorial/electric-components/overview',
-    icon: 'bi bi-lightning-charge'
+    name: "Electric Components",
+    description:
+      "The electrical systems, in most helicopters, reflect the increased use of sophisticated avionics and other electrical accessories.",
+    link: "/interactive-tutorial/electric-components/overview",
+    icon: "bi bi-lightning-charge",
   },
   {
     id: 4,
-    name: 'Instruments',
-    description: 'The first prototype Bell 212 had an instrument flight rules (IFR) instrument kit with a large fin on the roof to change the aircraft’s turning operation.',
-    link: '/instoverview',
-    icon: 'bi bi-sim'
+    name: "Instruments",
+    description:
+      "The first prototype Bell 212 had an instrument flight rules (IFR) instrument kit with a large fin on the roof to change the aircraft’s turning operation.",
+    link: "/instoverview",
+    icon: "bi bi-sim",
   },
   {
     id: 5,
-    name: 'Radio',
-    description: 'The instrument flight rules (IFR) avionics system includes twin allied signal KTR 908 720-channel, very-high-frequency transceivers etc.',
-    link: '/radoverview',
-    iconComp: <RadioIcon />
-  }
-]
+    name: "Radio",
+    description:
+      "The instrument flight rules (IFR) avionics system includes twin allied signal KTR 908 720-channel, very-high-frequency transceivers etc.",
+    link: "/radoverview",
+    iconComp: <RadioIcon />,
+  },
+];
 
 export default class Dashboard extends Component {
   render() {
@@ -54,30 +58,38 @@ export default class Dashboard extends Component {
               <div className="row mb-2">
                 <div className="col-sm-6">
                   <h1 className="m-0 text-dark">Trades List</h1>
-                </div>{/* /.col */}
+                </div>
+                {/* /.col */}
                 <div className="col-sm-6">
                   <ol className="breadcrumb float-sm-right">
                     {/* <li className="breadcrumb-item"><a href="#">Home</a></li>
               <li className="breadcrumb-item active">Dashboard v1</li> */}
                   </ol>
-                </div>{/* /.col */}
-              </div>{/* /.row */}
-            </div>{/* /.container-fluid */}
+                </div>
+                {/* /.col */}
+              </div>
+              {/* /.row */}
+            </div>
+            {/* /.container-fluid */}
           </div>
           {/* /.content-header */}
           {/* Main content */}
           <section className="content">
             <div className="container-fluid">
               {/* Small boxes (Stat box) */}
-              <Grid container spacing={3}  columns={{ xs: 4, sm: 8, md: 12 }}>
+              <div
+                style={{
+                  display: "grid",
+                  gap: "15px",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(275px, 1fr))",
+                }}
+              >
                 {subjectList.map((subject, index) => (
-                   <Grid item xs={2} sm={4} md={4} key={index}>
-                      <DashboardCardItem subject={subject} />
-                    </Grid>
+                  <DashboardCardItem key={index} subject={subject} />
                 ))}
-              </Grid>
+              </div>
               {/*  */}
-             {/* 
+              {/* 
               <div className="row">
                 <div className="col-lg-3 col-6">
                   <div className="small-box bg-info bux">
@@ -147,15 +159,12 @@ export default class Dashboard extends Component {
               </div>
               */}
               <div className="row">
-                <section className="col-lg-7 connectedSortable">
-                </section>
-
+                <section className="col-lg-7 connectedSortable"></section>
               </div>
             </div>
           </section>
         </div>
       </div>
-
-    )
+    );
   }
 }
