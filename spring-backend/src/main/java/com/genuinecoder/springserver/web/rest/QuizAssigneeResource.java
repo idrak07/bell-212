@@ -46,4 +46,10 @@ public class QuizAssigneeResource {
         quizAssigneeService.storeMarks(quizId, userId, point);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/quizAssignees/quiz/{quizId}/user/{userId}/attend")
+    public ResponseEntity<Void> attendMark(@PathVariable Long quizId, @PathVariable Long userId) {
+        quizAssigneeService.attend(quizId, userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

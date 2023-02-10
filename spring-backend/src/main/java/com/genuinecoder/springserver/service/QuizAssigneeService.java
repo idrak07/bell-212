@@ -97,9 +97,14 @@ public class QuizAssigneeService {
     }
 
     public void storeMarks(Long quizId, Long userId, Long point) {
-
         QuizAssignee quizAssignee = quizAssigneeRepository.findByQuizIdAndUserId(quizId, userId);
         quizAssignee.setPoints(point);
+        quizAssigneeRepository.save(quizAssignee);
+    }
+
+    public void attend(Long quizId, Long userId) {
+        QuizAssignee quizAssignee = quizAssigneeRepository.findByQuizIdAndUserId(quizId, userId);
+        quizAssignee.setAttended(true);
         quizAssigneeRepository.save(quizAssignee);
     }
 }
