@@ -8,10 +8,10 @@ import * as React from "react";
 import { useNavigate, useParams } from "react-router";
 import { arrayToDate, formatDate } from "../../../../util";
 
-export default function QuizListItemByTopic({quiz}) {
+export default function QuizListItemByTopic({ quiz }) {
   const navigate = useNavigate();
   const params = useParams();
-  const {topic} = params;
+  const { topic } = params;
 
   return (
     <Box sx={{ minWidth: 275 }}>
@@ -23,21 +23,39 @@ export default function QuizListItemByTopic({quiz}) {
               color="text.secondary"
               gutterBottom
             >
-                {quiz.status}
+              {quiz.status}
             </Typography>
             <Typography variant="h5" component="div">
               {quiz.title}
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary"></Typography>
             <Typography variant="body2">
-              Start Time: {formatDate(arrayToDate(quiz?.startTime))} 
+              Start Time: {formatDate(arrayToDate(quiz?.startTime))}
               <br />
-              End Time: {formatDate(arrayToDate(quiz?.endTime))} 
+              End Time: {formatDate(arrayToDate(quiz?.endTime))}
             </Typography>
           </CardContent>
-          <CardActions style={{margin: '0 0 10px 10px'}}>
-            <Button onClick={() => navigate(`/quiz-settings/${topic}/${quiz.id}`)} size="small" variant="outlined">Edit Quiz</Button>
+          <CardActions style={{ margin: "0 0 10px 10px" }}>
+            <Button
+              onClick={() => navigate(`/quiz-settings/${topic}/${quiz.id}`)}
+              size="small"
+              variant="outlined"
+            >
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+              >
+                <i
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "14px",
+                  }}
+                  class="bi bi-eye"
+                ></i>
+                <span>View</span>
+              </span>
+            </Button>
           </CardActions>
         </React.Fragment>
       </Card>

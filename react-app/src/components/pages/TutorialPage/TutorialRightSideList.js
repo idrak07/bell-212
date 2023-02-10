@@ -10,7 +10,7 @@ const TutorialRightSideList = ({
   setSelectedTutorialItem,
   setIsShowTutorial,
   setIsEdit,
-  setShouldRefetch
+  setShouldRefetch,
 }) => {
   const [authenticatedUser, _] = useLocalStorage("user");
   const [
@@ -26,7 +26,7 @@ const TutorialRightSideList = ({
           id: item.id,
         },
       });
-      setShouldRefetch(true)
+      setShouldRefetch(true);
     } catch (e) {
       console.log(e);
     }
@@ -55,50 +55,52 @@ const TutorialRightSideList = ({
                   sx={{ mb: 1.5 }}
                   color="text.secondary"
                 ></Typography>
-                <CustomButton
-                  variant="primary"
-                  onClick={() => {
-                    setSelectedTutorialItem(item);
-                    setIsShowTutorial(true);
-                  }}
-                  style={{
-                    whiteSpace: "nowrap",
-                    padding: "4px 18px",
-                    fontSize: "15px",
-                  }}
-                >
-                  <i class="bi bi-eye"></i>
-                 
-                </CustomButton>
-              </CardContent>
-              {authenticatedUser.authority === "ROLE_ADMIN" && (
+
                 <CardActions style={{ marginTop: "auto" }}>
-                  <button
+                  <CustomButton
+                    variant="primary"
                     onClick={() => {
                       setSelectedTutorialItem(item);
-                      setIsEdit(true);
+                      setIsShowTutorial(true);
                     }}
-                    type="button"
-                    class="btn btn-success"
-                  >
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button
-                    onClick={() => {
-                      const res = window.confirm(
-                        "Are you sure, you want to delete the tutorial?"
-                      );
-                      if (res) {
-                        handleDeleteTutorial(item);
-                      }
+                    style={{
+                      whiteSpace: "nowrap",
+                      padding: "4px 18px",
+                      fontSize: "15px",
                     }}
-                    type="button"
-                    class="btn btn-danger"
                   >
-                    <i class="far fa-trash-alt"></i>
-                  </button>
+                    <i class="bi bi-eye"></i>
+                  </CustomButton>
+                  {authenticatedUser.authority === "ROLE_ADMIN" && (
+                    <>
+                      <button
+                        onClick={() => {
+                          setSelectedTutorialItem(item);
+                          setIsEdit(true);
+                        }}
+                        type="button"
+                        class="btn btn-success"
+                      >
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button
+                        onClick={() => {
+                          const res = window.confirm(
+                            "Are you sure, you want to delete the tutorial?"
+                          );
+                          if (res) {
+                            handleDeleteTutorial(item);
+                          }
+                        }}
+                        type="button"
+                        class="btn btn-danger"
+                      >
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                    </>
+                  )}
                 </CardActions>
-              )}
+              </CardContent>
             </React.Fragment>
           </Card>
         </>

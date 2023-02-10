@@ -7,6 +7,7 @@ import QuestionList from "./QuestionList";
 
 const QuestionArea = ({ quiz }) => {
   const [open, setOpen] = useState(false);
+  const [shouldRefetch, setShouldRefetch] = useState(false)
   const [{ response, error, isLoading }, doFetch] = useFetch(
     `${SERVER_URL}/quiz/${quiz.id}/questions`
   );
@@ -16,8 +17,7 @@ const QuestionArea = ({ quiz }) => {
       method: "GET",
     });
     console.log({ response });
-  }, []);
-
+  }, [open, setOpen, shouldRefetch]);
 
   return (
     <>
@@ -27,24 +27,24 @@ const QuestionArea = ({ quiz }) => {
         "Error loading questions"
       ) : response && !!response?.length ? (
         <>
-          <QuestionList questions={response} />
+          <QuestionList setShouldRefetch={setShouldRefetch} questions={response} />
+          <Controls.Button
+            type="button"
+            text="Add Question"
+            variant="outlined"
+            onClick={() => setOpen(true)}
+          />
         </>
       ) : (
         <Controls.Button
           type="button"
-          text="Add Questions"
+          text="Add Question"
           variant="outlined"
           onClick={() => setOpen(true)}
         />
       )}
 
-      {open && (
-        <AddQuestionPopup
-          quiz={quiz}
-          open={open}
-          setOpen={setOpen}
-        />
-      )}
+      {open && <AddQuestionPopup quiz={quiz} open={open} setOpen={setOpen} />}
     </>
   );
 };

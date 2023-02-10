@@ -5,7 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import * as React from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { toast } from "react-toastify";
 import { SERVER_URL } from "../../../../../constants";
 import useFetch from "../../../../../hooks/useFetch";
@@ -31,9 +31,9 @@ export default function AddQuestionPopup({
   setOpen,
   isEdit = false,
   editQuestion,
+  setShouldRefetch
 }) {
   const params = useParams();
-  const navigate = useNavigate();
   const { topic } = params;
   const [question, setQuestion] = React.useState(
     isEdit
@@ -84,6 +84,7 @@ export default function AddQuestionPopup({
       });
       console.log(res);
       toast.success("Successfully question saved");
+      handleClose()
     } catch (e) {
       console.log(e);
       toast.error("Couldn't save questions");
@@ -102,9 +103,13 @@ export default function AddQuestionPopup({
       });
       console.log(res);
       toast.success("Successfully question Edited");
+      handleClose()
     } catch (e) {
       console.log(e);
       toast.error("Couldn't edit questions");
+    } finally {
+      setShouldRefetch(true)
+      handleClose()
     }
   };
 

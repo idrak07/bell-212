@@ -34,7 +34,7 @@ const EditQuizSettings = () => {
           <CustomButton onClick={() => {navigate(-1)}} style={{
             padding: '8px 22px'
           }}>
-              Go Back
+               Back
           </CustomButton>
         </div>
         </div>

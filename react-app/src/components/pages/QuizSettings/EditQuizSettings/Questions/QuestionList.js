@@ -5,7 +5,7 @@ import useFetch from "../../../../../hooks/useFetch";
 import ShowQuestionWithAns from "../../../../QuizComponents/ShowQuestionWithAns";
 import AddQuestionPopup from "./AddQuestionPopup";
 
-const QuestionList = ({ questions }) => {
+const QuestionList = ({ questions, setShouldRefetch }) => {
   const [open, setOpen] = useState(false);
   const [selectedQues, setSelectedQues] = useState(null);
   const handleSelectQues = (ques, action) => {
@@ -15,7 +15,7 @@ const QuestionList = ({ questions }) => {
     if (action === "edit") {
       setOpen(true);
     } else {
-      handleDeleteOriginalQuestion();
+      handleDeleteOriginalQuestion(ques);
     }
   };
 
@@ -38,6 +38,8 @@ const QuestionList = ({ questions }) => {
       toast.success('Successfully question deleted')
     } catch (e) {
       toast.error("Couldn't delete question");
+    } finally {
+      setShouldRefetch(true)
     }
   };
 
@@ -59,6 +61,7 @@ const QuestionList = ({ questions }) => {
           setOpen={setOpen}
           isEdit={true}
           editQuestion={selectedQues}
+          setShouldRefetch={setShouldRefetch}
         />
       )}
     </>
