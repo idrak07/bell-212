@@ -1,3 +1,11 @@
+1. interval in quiz list of user
+2. result pdf 
+3. student row changes()
+4. update button above in question assignee
+5. auto refresh
+6. admin mock question list question serial number
+7. if start time exceeds in admin quiz list, then disable all update button
+8. if end time exceeds, show button for publication of result in pdf
 
 
 
