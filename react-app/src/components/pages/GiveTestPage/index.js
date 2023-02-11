@@ -8,7 +8,6 @@ import GiveTestDetail from './GiveTestDetail';
 const GiveTestPage = () => {
   const params = useParams();
   const {type, topic} = params;
-  const time = localStorage.getItem(`/mock/${params?.type}/${params?.topic}`)
 
   
   const [{response, error, isLoading}, doFetch] = useFetch(`${SERVER_URL}/quiz/mock`)

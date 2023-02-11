@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 
-import { useCountdown } from "../../../hooks/useCountDown";
 import CustomButton from "../../../ui/CustomButton";
-import { getDateDiff } from "../../../util";
 import "./GiveTest.css";
 import ShowQuestionComp from "./ShowQuestionComp";
 
@@ -98,8 +96,6 @@ const GiveTestDetail = ({ allQuestion }) => {
   const params = useParams();
   const [questionList, setQuestionList] = useState(allQuestion);
 
-  const time = localStorage.getItem(`/mock/${params?.type}/${params?.topic}`);
-
   const handleSubmitResult = () => {
     console.log(questionList);
     const correctWrongCount = questionList.reduce(
@@ -130,22 +126,10 @@ const GiveTestDetail = ({ allQuestion }) => {
         correctWrongCount?.totalCorrectAns || 0
       }, Total Wrong Answer: ${correctWrongCount?.totalWrongAns || 0} `
     );
-    localStorage.removeItem(`/mock/${params?.type}/${params?.topic}`);
     window.location.href = "/mock-quiz";
   };
 
-  // console.log({time})
-  const [days, hours, minutes, seconds] = useCountdown(time);
 
-  useEffect(() => {
-    if (!time) {
-      window.location.href = "/mock-quiz";
-    }
-    if (getDateDiff(new Date(time), new Date()) <= 0) {
-      window.localStorage.removeItem(`/mock/${params?.type}/${params?.topic}`);
-      window.location.href = "/mock-quiz";
-    }
-  }, [seconds]);
 
   return (
     <div className="d-container">
@@ -165,7 +149,7 @@ const GiveTestDetail = ({ allQuestion }) => {
                 fontSize: "1.05rem",
               }}
             >
-              Question Type: <strong>{params?.type}</strong>
+              Quiz Type: <strong>{params?.type}</strong>
             </p>
             <p
               style={{
@@ -174,19 +158,10 @@ const GiveTestDetail = ({ allQuestion }) => {
                 fontSize: "1.05rem",
               }}
             >
-              Question Topic: <strong>{params?.topic}</strong>
+              Quiz Topic: <strong>{params?.topic}</strong>
             </p>
           </div>
-          <div className="timer">
-            <p>Time Remaining</p>
-            <div className="times">
-              <span>{hours}</span>
-              <span>:</span>
-              <span>{minutes}</span>
-              <span>:</span>
-              <span>{seconds}</span>
-            </div>
-          </div>
+          
         </div>
 
         <div className="question-list">
