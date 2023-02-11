@@ -36,8 +36,8 @@ public class QuizAssigneeResource {
     }
 
     @GetMapping("/quizAssignees/quizzes/{userId}")
-    public ResponseEntity<List<Quiz>> getUsersActiveQuiz(@PathVariable Long userId) {
-        List<Quiz> quizzes = quizAssigneeService.getQuizzesForUser(userId);
+    public ResponseEntity<List<QuizDTO>> getUsersActiveQuiz(@PathVariable Long userId) {
+        List<QuizDTO> quizzes = quizAssigneeService.getQuizzesForUser(userId);
         return new ResponseEntity<>(quizzes, HttpStatus.OK);
     }
 

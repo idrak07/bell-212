@@ -5,8 +5,10 @@ import com.genuinecoder.springserver.domain.QuizAssignee;
 import com.genuinecoder.springserver.domain.User;
 import com.genuinecoder.springserver.repository.QuizAssigneeRepository;
 import com.genuinecoder.springserver.web.rest.QuizAssigneeDTO;
+import com.genuinecoder.springserver.web.rest.QuizDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,12 +114,21 @@ public class QuizAssigneeService {
         });
     }
 
-    public List<Quiz> getQuizzesForUser(Long userId) {
+    public List<QuizDTO> getQuizzesForUser(Long userId) {
         List<QuizAssignee> quizAssignees = quizAssigneeRepository.findAllByUserId(userId);
         List<Long> quizIds = quizAssignees.stream()
                 .map(QuizAssignee::getQuizId).collect(Collectors.toList());
 
-        return quizService.findAllQUizzesEndLater(quizIds);
+        List<QuizDTO> quizDTOS = new ArrayList<>();
+        List<Quiz> quizzes =  quizService.findAllQUizzesEndLater(quizIds);
+        log.info("quizz: {}", quizzes);
+        quizzes.forEach(quiz -> {
+            QuizDTO quizDTO = new QuizDTO();
+            BeanUtils.copyProperties(quiz, quizDTO);
+            quizDTO.setAttended(quizAssignees.stream().filter(qa -> qa.getQuizId().equals(quiz.getId())).findFirst().get().isAttended());
+            quizDTOS.add(quizDTO);
+        });
+        return quizDTOS;
     }
 
     public void storeMarks(Long quizId, Long userId, Long point) {
