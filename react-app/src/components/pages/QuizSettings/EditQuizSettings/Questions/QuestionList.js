@@ -45,10 +45,11 @@ const QuestionList = ({ questions, setShouldRefetch }) => {
 
   return (
     <>
-      {questions.map((question) => (
+      {questions.map((question, idx) => (
         <ShowQuestionWithAns
           key={question.id}
           question={question}
+          qIndex={idx+1}
           showActionButton={true}
           isFromOriginalQuiz={true}
           selectForOriginal={handleSelectQues}

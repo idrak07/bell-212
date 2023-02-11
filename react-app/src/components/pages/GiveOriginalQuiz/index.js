@@ -43,7 +43,7 @@ const GiveOriginalQuiz = () => {
         <div>
           <p>This quiz has no questions</p>
         </div>
-      ) : (
+      ) : response && quiz && (
         <>
           <GiveOriginalQuizQuestions quiz={quiz} allQuestion={response} />
         </>

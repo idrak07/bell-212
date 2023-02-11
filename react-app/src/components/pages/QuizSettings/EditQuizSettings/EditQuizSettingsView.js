@@ -20,10 +20,6 @@ const EditQuizSettingsView = () => {
       method: "GET",
     });
     console.log({ response });
-
-    if(!isLoading && !error && response) {
-      localStorage.setItem('editQuiz', response?.title)
-    }
   }, []);
 
   return (

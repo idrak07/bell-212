@@ -21,7 +21,7 @@ const GiveOriginalQuizQuestions = ({ quiz, allQuestion }) => {
   const [user, _] = useLocalStorage("user");
   const [questionList, setQuestionList] = useState(allQuestion);
 
-  const time = localStorage.getItem(`/mock/${params?.type}/${params?.topic}`);
+  const time = arrayToDate(quiz?.endTime)
 
   const handleSubmitResult = () => {
     console.log(questionList);
@@ -75,9 +75,13 @@ const GiveOriginalQuizQuestions = ({ quiz, allQuestion }) => {
   };
 
   // console.log({time})
-  const [days, hours, minutes, seconds] = useCountdown(new Date());
+  const [days, hours, minutes, seconds] = useCountdown(time);
 
   useEffect(() => {
+    if(seconds <= 0) {
+        handleSubmitResult();
+    }
+    console.log({minutes, seconds})
     // if (!time) {
     //   window.location.href = "/mock-quiz";
     // }

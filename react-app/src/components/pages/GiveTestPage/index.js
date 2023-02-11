@@ -11,7 +11,7 @@ const GiveTestPage = () => {
   const time = localStorage.getItem(`/mock/${params?.type}/${params?.topic}`)
 
   
-  const [{response, error, isLoading}, doFetch] = useFetch(`${SERVER_URL}/quiz`)
+  const [{response, error, isLoading}, doFetch] = useFetch(`${SERVER_URL}/quiz/mock`)
 
  
   useEffect(() => {

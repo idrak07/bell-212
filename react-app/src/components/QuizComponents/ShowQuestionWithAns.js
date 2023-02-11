@@ -9,6 +9,7 @@ const ShowQuestionWithAns = ({
   showActionButton = true,
   isFromOriginalQuiz = false,
   selectForOriginal,
+  qIndex
 }) => {
   const params = useParams();
   const navigation = useNavigate();
@@ -28,15 +29,6 @@ const ShowQuestionWithAns = ({
       }}
     >
       <div>
-        <div>
-          <span
-            style={{
-              fontWeight: 500,
-            }}
-          >
-            Question ID-{question.id}.
-          </span>
-        </div>
 
         <div
           style={{
@@ -59,7 +51,7 @@ const ShowQuestionWithAns = ({
                   marginRight: "5px",
                 }}
               >
-                Description:
+                {qIndex}. 
               </span>
               {question.description}
             </p>

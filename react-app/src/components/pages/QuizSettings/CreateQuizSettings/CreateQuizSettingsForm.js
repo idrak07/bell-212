@@ -1,9 +1,10 @@
 import { Paper } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { SERVER_URL } from "../../../../constants";
 import useFetch from "../../../../hooks/useFetch";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
 import Controls from "../../../../ui/FormComponents/controls/Controls";
 import { Form, useForm } from "../../../../ui/FormComponents/useForm";
 
@@ -14,7 +15,7 @@ export const userInitialFormValues = {
 };
 
 const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
-      console.log('edit quiz',editQuiz)
+  const [editQuizTitle, setEditQuizTitle] = useLocalStorage('editQuizTitle')
   const params = useParams();
   const navigate = useNavigate();
   const validate = (fieldValues = values) => {
@@ -57,6 +58,9 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
       editAQuz();
     }
   };
+  useEffect(() => {
+      setEditQuizTitle(editQuiz?.title)
+  }, [isEdit])
 
   const createAQuiz = async () => {
     try {
