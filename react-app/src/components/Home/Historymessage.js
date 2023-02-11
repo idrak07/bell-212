@@ -22,7 +22,7 @@ function Historymessage() {
         </Col>
         <Col xs={12} md={8}>
         <Card className="text-center">
-      <Card.Header className='py-3'><h3>Message From Officer Commanding</h3></Card.Header>
+      <Card.Header className='py-3'><h3>Message From CHIEF OF AIR STAFF</h3></Card.Header>
       <Card.Body>
         {/* <Card.Title>Special Command</Card.Title> */}
         <Card.Text style={{textAlign: 'justify'}} className='p-3'>
