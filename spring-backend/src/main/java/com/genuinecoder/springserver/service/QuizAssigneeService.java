@@ -7,11 +7,15 @@ import com.genuinecoder.springserver.repository.QuizAssigneeRepository;
 import com.genuinecoder.springserver.web.rest.QuizAssigneeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +26,9 @@ public class QuizAssigneeService {
     private final UserService userService;
 
     private final QuizService quizService;
+
+    @Autowired
+    private MailService mailService;
 
     Logger log = LoggerFactory.getLogger(QuizAssigneeService.class);
 
@@ -79,6 +86,23 @@ public class QuizAssigneeService {
             log.info("QuizAssignee: {}", quizAssignee);
             quizAssignee = quizAssigneeRepository.save(quizAssignee);
             log.info("QuizAssignee: {}", quizAssignee);
+            User user = userService.findById(userId).orElse(null);
+            Mail mail = new Mail();
+            mail.setTo(user.getEmail());
+            Quiz quiz = quizService.findOne(quizId);
+            mail.setSubject(quiz.getTitle());
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("name", quiz.getTitle());
+            model.put("startDate", quiz.getStartTime().format(DateTimeFormatter.ofPattern("dd MMMM, yyyy hh:mm a")));
+            model.put("endDate", quiz.getEndTime().format(DateTimeFormatter.ofPattern("dd MMMM, yyyy hh:mm a")));
+            model.put("topic", quiz.getTopic().name());
+            mail.setTemplateName("quiz");
+            mail.setVariables(model);
+            try {
+                mailService.sendEmail(mail);
+            } catch (Exception e) {
+
+            }
         });
 
         List<Long> deletedIds = allAssignees.stream().filter(userid -> !userIds.contains(userid)).toList();
