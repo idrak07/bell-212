@@ -15,6 +15,7 @@ export const userInitialFormValues = {
 };
 
 const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
+  console.log('edit quiz', editQuiz)
   const [editQuizTitle, setEditQuizTitle] = useLocalStorage('editQuizTitle')
   const params = useParams();
   const navigate = useNavigate();

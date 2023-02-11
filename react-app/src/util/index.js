@@ -24,3 +24,13 @@ export const getDateDiff = (date1, date2) => {
   const diff = date2 - date1
   return diff;
 } 
+
+export function timestampToDatetimeInputString(date) {
+    date = new Date(date.getTime() - new Date().getTimezoneOffset() * 60 * 1000)
+    var isoString = date.toISOString()
+    return isoString.substring(0, (isoString.indexOf("T")|0) + 6|0);
+  }
+  
+export function _getTimeZoneOffsetInMs() {
+    return new Date().getTimezoneOffset() * -60 * 1000;
+  }

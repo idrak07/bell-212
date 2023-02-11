@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { SERVER_URL } from "../../../../constants";
 import useFetch from "../../../../hooks/useFetch";
-import { arrayToDate } from "../../../../util";
+import { arrayToDate, timestampToDatetimeInputString } from "../../../../util";
 import CreateQuizSettingsForm from "../CreateQuizSettings/CreateQuizSettingsForm";
 import QuestionStudentList from "./QuestionStudentList";
 
@@ -34,8 +34,8 @@ const EditQuizSettingsView = () => {
                 isEdit={true}
                 editQuiz={{
                   ...response,
-                  startTime: new Date(arrayToDate(response.startTime)).toISOString().replace('Z', ''),
-                  endTime: new Date(arrayToDate(response.endTime)).toISOString().replace('Z', ''),
+                  startTime: timestampToDatetimeInputString(arrayToDate(response.startTime)),
+                  endTime: timestampToDatetimeInputString(arrayToDate(response.endTime)),
                 }}
               />
 

@@ -2,12 +2,14 @@
 import { Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
 import CustomButton from '../../../../ui/CustomButton';
 import AdminLayout from "../../../layouts/AdminLayout";
 import EditQuizSettingsView from "./EditQuizSettingsView";
 
 const EditQuizSettings = () => {
   const navigate = useNavigate();
+  const [quizTitle, _] = useLocalStorage('editQuizTitle')
 
   return (
     <AdminLayout>
@@ -27,7 +29,7 @@ const EditQuizSettings = () => {
             id="tableTitle"
             component="div"
           >
-            Quiz: {localStorage.getItem('editQuiz') ?? ''}
+            Quiz: {quizTitle ?? ''}
           </Typography>
           <div>
 

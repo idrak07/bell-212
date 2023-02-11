@@ -10,7 +10,7 @@ import {
 import { Stack } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router";
-import { arrayToDate, formatDate, getDateDiff } from "../../../util";
+import { arrayToDate, formatDate } from "../../../util";
 
 const UserOriginalQuizItem = ({ quiz }) => {
   const navigate = useNavigate();
@@ -21,17 +21,7 @@ const UserOriginalQuizItem = ({ quiz }) => {
           <CardContent>
             <Stack direction="row" spacing={1}>
               <Chip size="small" label={quiz.topic} color="default" />
-              <Chip
-                size="small"
-                label={
-                  quiz.status === "ACTIVE"
-                    ? getDateDiff(arrayToDate(quiz?.startTime), new Date()) > 0
-                      ? "Not Started"
-                      : quiz.status
-                    : quiz.status
-                }
-                color="default"
-              />
+              <Chip size="small" label={quiz.status} color="default" />
             </Stack>
             <Typography color="text.secondary" gutterBottom></Typography>
             <Typography variant="h5" component="div">
@@ -45,9 +35,11 @@ const UserOriginalQuizItem = ({ quiz }) => {
             </Typography>
           </CardContent>
           <CardActions style={{ margin: "0 0 10px 10px" }}>
-            {quiz.status === "ACTIVE" && getDateDiff(arrayToDate(quiz?.startTime), new Date()) > 0 && (
+            {!quiz?.attended ? (
               <Button
-                onClick={() => navigate(`/quiz/${quiz.id}`)}
+                onClick={() => {
+                  navigate(`/quiz/${quiz.id}`);
+                }}
                 size="small"
                 variant="outlined"
                 style={{ background: "#4E66B0" }}
@@ -68,9 +60,14 @@ const UserOriginalQuizItem = ({ quiz }) => {
                   <span style={{ color: "#fff" }}>Start</span>
                 </span>
               </Button>
+            ) : (
+              <Chip
+                color="success"
+                label="Completed"
+                size="small"
+                style={{ background: "#ED6C02", color: "#fff" }}
+              />
             )}
-
-            {getDateDiff(arrayToDate(quiz?.endTime) - arrayToDate(quiz?.startTime)) > 0}
           </CardActions>
         </React.Fragment>
       </Card>
