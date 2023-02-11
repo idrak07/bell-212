@@ -52,6 +52,8 @@ public class QuestionService {
     }
 
     public List<Question> getQuestionsForQuiz(Long quizId) {
-        return questionRepository.findAllByQuizId(quizId);
+        List<Question> questions = questionRepository.findAllByQuizId(quizId);
+        Collections.shuffle(questions);
+        return questions;
     }
 }
