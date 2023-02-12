@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Outlet, useParams } from 'react-router';
 import { SERVER_URL } from '../constants';
 import useLocalStorage from '../hooks/useLocalStorage';
+import { arrayToDate, getDateDiff } from '../util';
 import QuizError from './QuizError';
 
 const QuizAccess = ({
@@ -25,6 +26,8 @@ const QuizAccess = ({
         setErrMsg("You don't have access to this quiz!")
       } else if(findQuiz?.attended) {
         setErrMsg('You have already attended this quiz!')
+      } else if(getDateDiff(new Date(), arrayToDate(findQuiz.startTime)) >= 0) {
+        setErrMsg('This exam not yet started!')
       }
     } catch(e) {
       console.log(e)

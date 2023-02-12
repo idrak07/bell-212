@@ -6,20 +6,13 @@ import CreateEditQuizComp from '../../QuizComponents/CreateEditQuizComp';
 
 const EditQuiz = () => {
   const params = useParams()
-  const {type, topic, id} = params;
+  const {id} = params;
 
-  const [{response, error, isLoading},doFetch] = useFetch(`${SERVER_URL}/questions/${id}`)
+  const [{response, error, isLoading},fetchQuestionDetail] = useFetch(`${SERVER_URL}/questions/${id}`)
 
-  // const { data, loading, error } = useAxiosFetch({
-  //   method: "GET",
-  //   mode: 'no-cors',
-  //   url: '/questions',
-  //   params: {
-  //     topic: topic.toUpperCase()?.replace(' ', '_'),
-  //   },
-  // });
+
   useEffect(() => {
-    doFetch()
+    fetchQuestionDetail()
   }, [])
 
   console.log({response,isLoading})
@@ -29,7 +22,7 @@ const EditQuiz = () => {
       {isLoading ? (
         <div>Loading Questions</div>
       ) : error ? (
-        <div> Error While Getting Questions </div>
+        <div> Error While Getting Question detail </div>
       ) : response && (
         <>
           <CreateEditQuizComp isEdit={true} editQuestion={response}  />

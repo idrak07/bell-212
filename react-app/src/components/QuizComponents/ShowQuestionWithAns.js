@@ -128,7 +128,7 @@ const ShowQuestionWithAns = ({
                     if (isFromOriginalQuiz) {
                       selectForOriginal(question, 'edit');
                     } else {
-                      navigation(`/mock/${params?.topic}/${question.id}`);
+                      navigation(`/mock/${params?.topic}/edit/${question.id}`);
                     }
                   }}
                   style={{

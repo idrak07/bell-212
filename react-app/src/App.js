@@ -165,7 +165,7 @@ function App() {
             {/* routes only admin can access */}
             <Route element={<ProtectedRoute isAllowed={isAdmin} />}>
               <Route path="/mock/:topic" element={<ShowAdminMockQuizPage />} />
-              <Route path="/mock/:topic/:id" element={<EditQuizPage />} />
+              <Route path="/mock/:topic/edit/:id" element={<EditQuizPage />} />
               <Route path="/mock/:topic/create" element={<CreateQuizPage />} />
               <Route path="/users" element={<UsersPage />} />
               <Route path="/users/add" element={<AddUserPage />} />

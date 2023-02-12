@@ -10,7 +10,7 @@ import {
 import { Stack } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router";
-import { arrayToDate, formatDate } from "../../../util";
+import { arrayToDate, formatDate, getDateDiff } from "../../../util";
 
 const UserOriginalQuizItem = ({ quiz }) => {
   const navigate = useNavigate();
@@ -35,7 +35,14 @@ const UserOriginalQuizItem = ({ quiz }) => {
             </Typography>
           </CardContent>
           <CardActions style={{ margin: "0 0 10px 10px" }}>
-            {!quiz?.attended ? (
+            {getDateDiff(new Date(), arrayToDate(quiz.startTime)) >= 0 ? (
+              <Chip
+                color="secondary"
+                label="Not Started"
+                size="small"
+                style={{ background: "#8f8f8f", color: "#fff" }}
+              />
+            ) : !quiz?.attended ? (
               <Button
                 onClick={() => {
                   navigate(`/quiz/${quiz.id}`);

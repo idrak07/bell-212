@@ -21,9 +21,6 @@ const ShowAdminMockQuiz = () => {
   ] = useFetch(`${SERVER_URL}/quiz/mock`);
   const {topic} = params;
 
-  
- 
-
 
   const [{ response, error: deleteError, isLoading: deleteLoading }, deleteQ] =
     useFetch(`${SERVER_URL}/questions`);
