@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { getDateDiff } from "../../../../util";
-import PdfResult from "../PDF";
+import MainPdfResult from "../PDF/MainPdfResult";
 import QuestionArea from "./Questions/QuestionArea";
 import StudentsArea from "./Students/StudentsArea";
 function TabPanel(props) {
@@ -72,7 +72,7 @@ export default function QuestionStudentList({ quiz }) {
       <TabPanel value={value} index={2}>
         {value == 2 && (
           <>
-            <PdfResult />
+            <MainPdfResult quiz={quiz}/>
           </>
         )}
       </TabPanel>
