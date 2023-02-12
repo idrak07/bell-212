@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router";
+import CustomButton from "../../../../ui/CustomButton";
 import AdminLayout from "../../../layouts/AdminLayout";
 import QuizListByTopic from "./QuizListByTopic";
 
@@ -29,7 +30,7 @@ const QuizByTopic = () => {
             Quiz: {params?.topic}
           </Typography>
 
-          {/* <div>
+          <div>
             <CustomButton
               onClick={() => {
                 navigate(`/quiz-settings/${params?.topic}/create`);
@@ -40,7 +41,7 @@ const QuizByTopic = () => {
             >
               Create Quiz
             </CustomButton>
-          </div> */}
+          </div>
         </div>
 
         <div
