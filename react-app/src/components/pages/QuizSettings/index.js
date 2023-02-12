@@ -29,7 +29,7 @@ const QuizSettings = () => {
           </Typography>
 
           <div>
-            <CustomButton
+            {/* <CustomButton
               onClick={() => {
                 navigate("/quiz-settings/create");
               }}
@@ -38,7 +38,7 @@ const QuizSettings = () => {
               }}
             >
               Create Quiz
-            </CustomButton>
+            </CustomButton> */}
           </div>
         </div>
 
