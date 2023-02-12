@@ -1,7 +1,7 @@
 import AdminLayout from '../../layouts/AdminLayout';
-import ShowAdminQuiz from '../../QuizComponents/ShowAdminQuiz';
+import ShowAdminMockQuiz from '../../QuizComponents/ShowAdminQuiz';
 
-const ShowAdminQuizPage = () => {
+const ShowAdminMockQuizPage = () => {
  
 
   return (
@@ -9,10 +9,10 @@ const ShowAdminQuizPage = () => {
       <div style={{
         padding: '18px'
       }}>
-        <ShowAdminQuiz />
+        <ShowAdminMockQuiz />
       </div>
     </AdminLayout>
   )
 }
 
-export default ShowAdminQuizPage
+export default ShowAdminMockQuizPage

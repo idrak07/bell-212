@@ -6,7 +6,7 @@ import CustomButton from "../../ui/CustomButton";
 import QuestionPaginate from "./QuestionPaginate";
 import ShowQuestionWithAns from "./ShowQuestionWithAns";
 
-const ShowAdminQuiz = () => {
+const ShowAdminMockQuiz = () => {
   const params = useParams();
   const location = useLocation();
   const [questions, setQuestions] = useState(null);
@@ -18,7 +18,12 @@ const ShowAdminQuiz = () => {
       isLoading: questionLoading,
     },
     doFetch,
-  ] = useFetch(`${SERVER_URL}/questions`);
+  ] = useFetch(`${SERVER_URL}/quiz/mock`);
+  const {topic} = params;
+
+  
+ 
+
 
   const [{ response, error: deleteError, isLoading: deleteLoading }, deleteQ] =
     useFetch(`${SERVER_URL}/questions`);
@@ -39,12 +44,14 @@ const ShowAdminQuiz = () => {
 
   useEffect(() => {
     doFetch({
-      method: "GET",
+      method: 'GET',
       params: {
-        topic: params?.topic.toUpperCase()?.replace(" ", "_"),
+        topic: topic.toUpperCase()?.replace(' ', '_'),
+        questionType: 'MOCK',
+        limit: 500
       },
     });
-  }, [params?.topic, deleteLoading, location.pathname]);
+  }, [params?.topic, deleteLoading, location.pathname])
 
   // new pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -119,8 +126,9 @@ const ShowAdminQuiz = () => {
               <p>No Question found</p>
             </div>
           ) : (
-            currentData?.map((ques) => (
+            currentData?.map((ques,idx) => (
               <ShowQuestionWithAns
+                qIndex={idx+1}
                 key={ques.id}
                 question={ques}
                 handleDeleteQuestion={handleDeleteQuestion}
@@ -151,4 +159,4 @@ const ShowAdminQuiz = () => {
   );
 };
 
-export default ShowAdminQuiz;
+export default ShowAdminMockQuiz;

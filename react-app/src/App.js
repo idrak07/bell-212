@@ -32,7 +32,7 @@ import QuizSettings from "./components/pages/QuizSettings";
 import CreateQuizSettings from "./components/pages/QuizSettings/CreateQuizSettings";
 import EditQuizSettings from "./components/pages/QuizSettings/EditQuizSettings";
 import QuizByTopic from "./components/pages/QuizSettings/QuizByTopic";
-import ShowAdminQuizPage from "./components/pages/ShowAdminQuizPage";
+import ShowAdminMockQuizPage from "./components/pages/ShowAdminQuizPage";
 import TutorialPage from "./components/pages/TutorialPage";
 import UserOriginalQuiz from "./components/pages/UserOriginalQuiz";
 import UserMockQuizPage from "./components/pages/UserQuizListPage";
@@ -164,7 +164,7 @@ function App() {
 
             {/* routes only admin can access */}
             <Route element={<ProtectedRoute isAllowed={isAdmin} />}>
-              <Route path="/mock/:topic" element={<ShowAdminQuizPage />} />
+              <Route path="/mock/:topic" element={<ShowAdminMockQuizPage />} />
               <Route path="/mock/:topic/:id" element={<EditQuizPage />} />
               <Route path="/mock/:topic/create" element={<CreateQuizPage />} />
               <Route path="/users" element={<UsersPage />} />

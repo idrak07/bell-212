@@ -75,6 +75,7 @@ const QuizListByTopic = () => {
         display: "grid",
         gap: "15px",
         gridTemplateColumns: "repeat(auto-fit, minmax(275px, 1fr))",
+        gridTemplateRows: '1fr'
       }}
     >
       {isLoading
