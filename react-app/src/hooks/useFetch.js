@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useFetch = (url) => {
   const [response, setResponse] = useState(null);
@@ -7,11 +7,11 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
   const [options, setOptions] = useState({});
   console.log("useFetch started");
-  const doFetch = useCallback((options = {}) => {
+  const doFetch = (options = {}) => {
     console.log("do fetch");
     setOptions(options);
     setIsLoading(true);
-  }, []);
+  };
 
   useEffect(() => {
     if (!isLoading) {

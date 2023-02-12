@@ -24,7 +24,6 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
     ? getDateDiff(new Date(editQuiz.startTime), new Date()) >= 0
     : false;
 
-  console.log({isDisabled}, 'time diff', getDateDiff(new Date(editQuiz.startTime), new Date()))
 
   const validate = (fieldValues = values) => {
     console.log(fieldValues);

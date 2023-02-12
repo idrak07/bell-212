@@ -16,7 +16,7 @@ const StudentsArea = ({ quiz, isDisabled = false }) => {
       method: "GET",
     });
     console.log({ response });
-  }, [open, setOpen, doFetch]);
+  }, [open, setOpen]);
 
   return (
     <div>
