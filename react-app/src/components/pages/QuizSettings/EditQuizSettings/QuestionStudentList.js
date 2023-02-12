@@ -42,7 +42,7 @@ function a11yProps(index) {
 }
 
 export default function QuestionStudentList({ quiz }) {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
   const isDisabled = getDateDiff(new Date(quiz.startTime), new Date()) >= 0;
 
   const handleChange = (event, newValue) => {

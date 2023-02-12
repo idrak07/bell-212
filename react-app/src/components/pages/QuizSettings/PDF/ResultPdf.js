@@ -12,8 +12,8 @@ const ResultPdf = ({ data, quiz }) => {
       width: "100%",
       padding: "0px",
       margin: "0px",
-      fontSize: "11px",
-      lineHeight: "1.4",
+      fontSize: "15px",
+      lineHeight: "1.5",
     },
     cellBorder: {
       border: "1px solid lightgray",

@@ -111,7 +111,9 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
       });
       console.log(res);
       toast.success("Successfully quiz edited");
-      navigate(-1);
+        if(!isLoading) {
+        navigate(-1);
+      }
     } catch (e) {
       console.log(e);
       toast.error("Couldn't edit quiz");
