@@ -87,7 +87,9 @@ const DashboardSidebar = (props) => {
     <div className={`side-menu ${inactive ? "inactive" : ""}`}>
       <div className="top-section">
         <div className="logo">
+          <a href="/">
           <img src={logo} alt="bell-212" />
+          </a>
         </div>
         <div onClick={() => setInactive(!inactive)} className="toggle-menu-btn">
           {inactive ? (
