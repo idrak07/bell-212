@@ -5,7 +5,7 @@ import Controls from "../../../../../ui/FormComponents/controls/Controls";
 import AddQuestionPopup from "./AddQuestionPopup";
 import QuestionList from "./QuestionList";
 
-const QuestionArea = ({ quiz }) => {
+const QuestionArea = ({ quiz, isDisabled = false }) => {
   const [open, setOpen] = useState(false);
   const [shouldRefetch, setShouldRefetch] = useState(false);
   const [{ response, error, isLoading }, doFetch] = useFetch(
@@ -27,6 +27,24 @@ const QuestionArea = ({ quiz }) => {
         "Error loading questions"
       ) : response && !!response?.length ? (
         <>
+          {!isDisabled && (
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <Controls.Button
+                type="button"
+                text="Add Question"
+                variant="outlined"
+                onClick={() => setOpen(true)}
+              />
+            </div>
+          )}
+
+          <QuestionList
+            setShouldRefetch={setShouldRefetch}
+            questions={response}
+          />
+        </>
+      ) : (
+        !isDisabled && (
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <Controls.Button
               type="button"
@@ -35,20 +53,7 @@ const QuestionArea = ({ quiz }) => {
               onClick={() => setOpen(true)}
             />
           </div>
-          <QuestionList
-            setShouldRefetch={setShouldRefetch}
-            questions={response}
-          />
-        </>
-      ) : (
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Controls.Button
-            type="button"
-            text="Add Question"
-            variant="outlined"
-            onClick={() => setOpen(true)}
-          />
-        </div>
+        )
       )}
 
       {open && <AddQuestionPopup quiz={quiz} open={open} setOpen={setOpen} />}

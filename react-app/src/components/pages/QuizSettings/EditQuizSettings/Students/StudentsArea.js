@@ -5,7 +5,7 @@ import Controls from "../../../../../ui/FormComponents/controls/Controls";
 import AddStudentPopup from "./AddStudentPopup";
 import StudentList from "./StudentList";
 
-const StudentsArea = ({ quiz }) => {
+const StudentsArea = ({ quiz, isDisabled = false }) => {
   const [open, setOpen] = React.useState(false);
   const [{ response, error, isLoading }, doFetch] = useFetch(
     `${SERVER_URL}/quizAssignees/users/${quiz.id}`
@@ -26,21 +26,29 @@ const StudentsArea = ({ quiz }) => {
         "Error loading students"
       ) : response && !!response?.length ? (
         <>
+          {!isDisabled && (
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <Controls.Button
+                type="button"
+                text="Update Students"
+                variant="outlined"
+                onClick={() => setOpen(true)}
+              />
+            </div>
+          )}
           <StudentList students={response} />
-          <Controls.Button
-            type="button"
-            text="Update Students"
-            variant="outlined"
-            onClick={() => setOpen(true)}
-          />
         </>
       ) : (
-        <Controls.Button
-          type="button"
-          text="Add Students"
-          variant="outlined"
-          onClick={() => setOpen(true)}
-        />
+        !isDisabled && (
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Controls.Button
+              type="button"
+              text="Add Students"
+              variant="outlined"
+              onClick={() => setOpen(true)}
+            />
+          </div>
+        )
       )}
 
       {open && (

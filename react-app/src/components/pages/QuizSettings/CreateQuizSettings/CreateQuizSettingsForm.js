@@ -7,6 +7,7 @@ import useFetch from "../../../../hooks/useFetch";
 import useLocalStorage from "../../../../hooks/useLocalStorage";
 import Controls from "../../../../ui/FormComponents/controls/Controls";
 import { Form, useForm } from "../../../../ui/FormComponents/useForm";
+import { getDateDiff } from "../../../../util";
 
 export const userInitialFormValues = {
   title: "",
@@ -15,10 +16,16 @@ export const userInitialFormValues = {
 };
 
 const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
-  console.log('edit quiz', editQuiz)
-  const [editQuizTitle, setEditQuizTitle] = useLocalStorage('editQuizTitle')
+  console.log("edit quiz", editQuiz);
+  const [editQuizTitle, setEditQuizTitle] = useLocalStorage("editQuizTitle");
   const params = useParams();
   const navigate = useNavigate();
+  const isDisabled = isEdit
+    ? getDateDiff(new Date(editQuiz.startTime), new Date()) >= 0
+    : false;
+
+  console.log({isDisabled}, 'time diff', getDateDiff(new Date(editQuiz.startTime), new Date()))
+
   const validate = (fieldValues = values) => {
     console.log(fieldValues);
     let temp = { ...errors };
@@ -42,8 +49,17 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
   );
 
   const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
-    useForm(isEdit ? {title: editQuiz.title, startTime: editQuiz.startTime, endTime: editQuiz.endTime} : userInitialFormValues, true, validate);
-
+    useForm(
+      isEdit
+        ? {
+            title: editQuiz.title,
+            startTime: editQuiz.startTime,
+            endTime: editQuiz.endTime,
+          }
+        : userInitialFormValues,
+      true,
+      validate
+    );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,8 +76,8 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
     }
   };
   useEffect(() => {
-      setEditQuizTitle(editQuiz?.title)
-  }, [isEdit])
+    setEditQuizTitle(editQuiz?.title);
+  }, [isEdit]);
 
   const createAQuiz = async () => {
     try {
@@ -123,6 +139,7 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
               value={values.title}
               onChange={handleInputChange}
               error={errors.title}
+              disabled={isDisabled}
             />
             <Controls.Input
               id="startTime"
@@ -133,6 +150,7 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
               value={values.startTime}
               onChange={handleInputChange}
               error={errors.startTime}
+              disabled={isDisabled}
             />
             <Controls.Input
               id="endTime"
@@ -143,6 +161,8 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
               value={values.endTime}
               onChange={handleInputChange}
               error={errors.endTime}
+              disabled={isDisabled}
+
             />
           </div>
 
@@ -153,10 +173,12 @@ const CreateQuizSettingsForm = ({ isEdit = false, editQuiz }) => {
               marginTop: "8px",
             }}
           >
-            <Controls.Button
-              type={"Submit"}
-              text={`${isEdit ? "Update" : "Create"}`}
-            />
+            {!isDisabled && (
+              <Controls.Button
+                type={"Submit"}
+                text={`${isEdit ? "Update" : "Create"}`}
+              />
+            )}
           </div>
         </Paper>
       </Form>

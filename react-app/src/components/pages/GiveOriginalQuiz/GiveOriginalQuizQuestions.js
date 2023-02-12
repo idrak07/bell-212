@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
 import { SERVER_URL } from "../../../constants";
-import { useCountdown } from "../../../hooks/useCountDown";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import CustomButton from "../../../ui/CustomButton";
-import { arrayToDate, formatDate } from "../../../util";
+import { arrayToDate } from "../../../util";
 import ShowQuestionComp from "../GiveTestPage/ShowQuestionComp";
+import CountDownArea from "./CountDownArea";
 
 const callApi = async (url) => {
   const res = await axios.get(url);
@@ -21,7 +21,39 @@ const GiveOriginalQuizQuestions = ({ quiz, allQuestion }) => {
   const [user, _] = useLocalStorage("user");
   const [questionList, setQuestionList] = useState(allQuestion);
 
-  const time = arrayToDate(quiz?.endTime)
+  const time = arrayToDate(quiz?.endTime);
+  const url2 = `${SERVER_URL}/quizAssignees/quiz/${quizId}/user/${user.id}/attend`;
+
+  useEffect(() => {
+    // setAttended()
+  }, []);
+
+//    useEffect(() => {
+//     window.addEventListener('beforeunload', alertUser)
+//     window.addEventListener('unload', handleSubmitWhenTabClose)
+//     return () => {
+//       window.removeEventListener('beforeunload', alertUser)
+//       window.removeEventListener('unload', handleSubmitWhenTabClose)
+//       handleSubmitWhenTabClose()
+//     }
+//   }, [])
+  
+//   const alertUser = e => {
+//     e.preventDefault()
+//     e.returnValue = ''
+//   }
+
+//   const handleSubmitWhenTabClose = async () => {
+//     await handleSubmitPoint(5)
+//   }
+
+  const setAttended = async () => {
+    try {
+      await callApi(url2);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const handleSubmitResult = () => {
     console.log(questionList);
@@ -63,8 +95,6 @@ const GiveOriginalQuizQuestions = ({ quiz, allQuestion }) => {
     try {
       const url1 = `${SERVER_URL}/quizAssignees/quiz/${quizId}/user/${user.id}/${point}`;
 
-      const url2 = `${SERVER_URL}/quizAssignees/quiz/${quizId}/user/${user.id}/attend`;
-
       const result = await Promise.all([callApi(url1), callApi(url2)]);
       console.log({ result });
       window.location.href = "/quiz-list";
@@ -75,21 +105,6 @@ const GiveOriginalQuizQuestions = ({ quiz, allQuestion }) => {
   };
 
   // console.log({time})
-  const [days, hours, minutes, seconds] = useCountdown(time);
-
-  useEffect(() => {
-    if(seconds <= 0) {
-        handleSubmitResult();
-    }
-    console.log({minutes, seconds})
-    // if (!time) {
-    //   window.location.href = "/mock-quiz";
-    // }
-    // if (getDateDiff(new Date(time), new Date()) <= 0) {
-    //   window.localStorage.removeItem(`/mock/${params?.type}/${params?.topic}`);
-    //   window.location.href = "/mock-quiz";
-    // }
-  }, [seconds]);
 
   return (
     <div className="d-container">
@@ -100,68 +115,11 @@ const GiveOriginalQuizQuestions = ({ quiz, allQuestion }) => {
         }}
       >
         {/* countdown */}
-        <div className="countdown">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              columnGap: "3px",
-            }}
-          >
-            <p
-              style={{
-                textTransform: "capitalize",
-                margin: "5px 0",
-                fontSize: "14px",
-              }}
-            >
-              Quiz: <strong>{quiz?.title}</strong>
-            </p>
-            <p
-              style={{
-                textTransform: "capitalize",
-                margin: "5px 0",
-                fontSize: "14px",
-              }}
-            >
-              Topic: <strong>{quiz?.topic}</strong>
-            </p>
-            <p
-              style={{
-                textTransform: "capitalize",
-                margin: "5px 0",
-                fontSize: "14px",
-              }}
-            >
-              Start Time:{" "}
-              <strong>
-                {quiz?.startTime && formatDate(arrayToDate(quiz?.startTime))}
-              </strong>
-            </p>
-            <p
-              style={{
-                textTransform: "capitalize",
-                margin: "5px 0",
-                fontSize: "14px",
-              }}
-            >
-              Start Time:{" "}
-              <strong>
-                {quiz?.endTime && formatDate(arrayToDate(quiz?.endTime))}
-              </strong>
-            </p>
-          </div>
-          <div className="timer">
-            <p>Time Remaining</p>
-            <div className="times">
-              <span>{hours}</span>
-              <span>:</span>
-              <span>{minutes}</span>
-              <span>:</span>
-              <span>{seconds}</span>
-            </div>
-          </div>
-        </div>
+        <CountDownArea
+          quiz={quiz}
+          time={time}
+          handleSubmitResult={handleSubmitResult}
+        />
 
         <div className="question-list">
           {questionList?.map((question, idx) => (
