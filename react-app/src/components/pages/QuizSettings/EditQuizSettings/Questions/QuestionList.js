@@ -39,7 +39,9 @@ const QuestionList = ({ questions, setShouldRefetch }) => {
     } catch (e) {
       toast.error("Couldn't delete question");
     } finally {
-      setShouldRefetch(true)
+      if(!deleteLoading) {
+        setShouldRefetch(true)
+      }
     }
   };
 
