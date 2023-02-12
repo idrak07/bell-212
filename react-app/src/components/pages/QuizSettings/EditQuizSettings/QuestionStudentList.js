@@ -1,4 +1,3 @@
-import { Button } from "@material-ui/core";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -6,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import * as React from "react";
 import { getDateDiff } from "../../../../util";
+import PdfResult from "../PDF";
 import QuestionArea from "./Questions/QuestionArea";
 import StudentsArea from "./Students/StudentsArea";
 function TabPanel(props) {
@@ -42,7 +42,7 @@ function a11yProps(index) {
 }
 
 export default function QuestionStudentList({ quiz }) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(2);
   const isDisabled = getDateDiff(new Date(quiz.startTime), new Date()) >= 0;
 
   const handleChange = (event, newValue) => {
@@ -72,7 +72,7 @@ export default function QuestionStudentList({ quiz }) {
       <TabPanel value={value} index={2}>
         {value == 2 && (
           <>
-            <Button variant="outlined">Download Result</Button>
+            <PdfResult />
           </>
         )}
       </TabPanel>
