@@ -22,13 +22,13 @@ const PdfResult = () => {
   };
   return (
     <>
-        <div>
-      <Button variant="outlined">Download Result</Button>
-      <br />
-      <div ref={resultPdfRef}>
-        <ResultPdf resultPdfRef={resultPdfRef} />
+      <div>
+        <Button onClick={handleGeneratePdf} variant="outlined">Download Result</Button>
+        <br />
+        <div ref={resultPdfRef}>
+          <ResultPdf resultPdfRef={resultPdfRef} />
+        </div>
       </div>
-    </div>
     </>
   );
 };
