@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router";
-import CustomButton from "../../../ui/CustomButton";
 import AdminLayout from "../../layouts/AdminLayout";
 import QuizSettingsList from "./QuizSettingsList";
 

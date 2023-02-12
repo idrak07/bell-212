@@ -4,6 +4,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import axios from "axios";
 import * as React from "react";
 import { useParams } from "react-router";
 import { toast } from "react-toastify";
@@ -78,16 +79,19 @@ export default function AddQuestionPopup({
     }
 
     try {
-      const res = await createQuestion({
+      const res = await axios({
+        url: `${SERVER_URL}/questions`,
         method: "POST",
         data: question,
       });
       console.log(res);
       toast.success("Successfully question saved");
-      handleClose()
+      
     } catch (e) {
       console.log(e);
       toast.error("Couldn't save questions");
+    }finally {
+        handleClose()
     }
   };
 
@@ -97,19 +101,19 @@ export default function AddQuestionPopup({
     }
 
     try {
-      const res = await createQuestion({
+      const res = await axios({
+        url: `${SERVER_URL}/questions`,
         method: "PUT",
         data: question,
       });
       console.log(res);
       toast.success("Successfully question Edited");
-      handleClose()
     } catch (e) {
       console.log(e);
       toast.error("Couldn't edit questions");
     } finally {
-      setShouldRefetch(true)
-      handleClose()
+        handleClose()
+        setShouldRefetch(true)
     }
   };
 
